@@ -2,6 +2,18 @@
 layout: archive
 ---
 
+<h1>📚 Categories</h1>
+<ul>
+  {% assign categories_list = site.categories %}
+  {% for category in categories_list %}
+    <li>
+      <a href="{{ site.baseurl }}/categories/{{ category[0] | slugify }}/">
+        {{ category[0] }} ({{ category[1].size }})
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+
 {{ content }}
 
 {% include posts-taxonomy.html taxonomies=site.categories %}
