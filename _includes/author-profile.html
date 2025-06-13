@@ -20,6 +20,10 @@
         {{ author.bio | markdownify }}
       </div>
     {% endif %}
+    
+    {% if site.author.company %}
+    <p class="author__company">{{ site.author.company }}</p>
+    {% endif %}
   </div>
 
   <div class="author__urls-wrapper">
