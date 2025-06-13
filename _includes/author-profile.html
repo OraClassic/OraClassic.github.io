@@ -22,7 +22,9 @@
     {% endif %}
     
     {% if site.author.company %}
-    <p class="author__company">{{ site.author.company }}</p>
+      <div class="author__company">
+        <i class="fas fa-building" aria-hidden="true"></i> {{ site.author.company }}
+      </div>
     {% endif %}
   </div>
 
