@@ -7,7 +7,11 @@
 }
 
 .author__company {
-  display: block;
-  margin-bottom: 0.75em; // 회사명과 위치 사이에 간격 줌
-  font-weight: 500;
+  margin-top: 0.5em;
+  color: $muted-text-color;
+  font-size: 0.9em;
+
+  i {
+    margin-right: 5px;
+  }
 }
