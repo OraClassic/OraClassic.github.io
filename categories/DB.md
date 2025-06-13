@@ -4,8 +4,11 @@ layout: categories
 permalink: /categories/DB/
 ---
 
-## Oracle 관련 글
+## Oracle
 [Oracle 글 보기](/categories/Oracle/)
 
-## MySQL 관련 글
+## MySQL
+[MySQL 글 보기](/categories/MySQL/)
+
+## MariaDB
 [MySQL 글 보기](/categories/MySQL/)
