@@ -117,6 +117,7 @@ author:
   avatar           : "assets/Image/profileImage.jpg"
   bio              : "00년생 DBA<br>내추럴 프로 지망생<br>공룡 유전자 호소 빌더"
   company          : "Littlefox"
+  company_url      : "https://www.littlefox.co.kr"
   location         : "Daechi, Seoul"
   email            : "ricky32575@gmail.com"
   links:
