@@ -1,5 +1,10 @@
-# main links
 main:
+  - title: "홈"
+    url: /
+  - title: "카테고리"
+    url: /categories/
+  - title: "소개"
+    url: /about/
   - title: "Quick-Start Guide"
     url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
   # - title: "About"
