@@ -18,3 +18,10 @@
     font-size: 0.9rem;
   }
 }
+
+/* 내비게이션 및 사이드 메뉴 폰트 일관성 */
+.masthead__menu a,
+.sidebar__navigation a {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
