@@ -4,8 +4,6 @@ layout: categories
 permalink: /categories/
 ---
 
-# 카테고리
-
 ## 튜닝
 
 [튜닝 관련 글 보기](/categories/튜닝/)
