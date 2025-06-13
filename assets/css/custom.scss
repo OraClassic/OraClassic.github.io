@@ -1,0 +1,13 @@
+.author__bio > br + br {
+  display: none; // 혹시 줄간격 문제 예방
+}
+
+.author__bio {
+  margin-bottom: 0.5em;
+}
+
+.author__company {
+  display: block;
+  margin-bottom: 0.75em; // 회사명과 위치 사이에 간격 줌
+  font-weight: 500;
+}
