@@ -1,10 +1,8 @@
 ---
-title: "DB"
+title: "DB 카테고리 글 모음"
 layout: categories
 permalink: /categories/DB/
 ---
-
-# DB 카테고리 글 모음
 
 ## Oracle 관련 글
 [Oracle 글 보기](/categories/Oracle/)
