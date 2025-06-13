@@ -20,7 +20,7 @@ rtl                      : # true, false (default) # turns direction of the page
 title                    : "밀레니엄 DB 기술집"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Your Name"
+name                     : "노원구 이효민"
 description              : "An amazing website."
 url                      : "https://OraClassic.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
