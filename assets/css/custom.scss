@@ -9,9 +9,12 @@
 .author__company {
   margin-top: 0.5em;
   color: $muted-text-color;
-  font-size: 0.9em;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
 
   i {
     margin-right: 5px;
+    font-size: 0.9rem;
   }
 }
