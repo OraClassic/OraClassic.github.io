@@ -8,24 +8,3 @@ search: false
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-
-.author__bio > br + br {
-  display: none; // 혹시 줄간격 문제 예방
-}
-
-.author__bio {
-  margin-bottom: 0.5em;
-}
-
-.author__company {
-  margin-top: 0.5em;
-  color: $muted-text-color;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-
-  i {
-    margin-right: 5px;
-    font-size: 0.9rem;
-  }
-}
