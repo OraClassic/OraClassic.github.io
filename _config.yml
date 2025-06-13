@@ -19,7 +19,7 @@ sass:
 
 # 커스텀 스타일 로드
 custom_css:
-  - /assets/css/custom.scss
+  - assets/css/custom.scss
 
 # Site Settings
 locale                   : "en-US"
