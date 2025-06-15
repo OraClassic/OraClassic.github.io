@@ -1,6 +1,6 @@
 ---
 title: "카테고리"
-layout: categories
+layout: default
 permalink: /categories/
 ---
 
