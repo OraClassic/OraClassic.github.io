@@ -20,3 +20,5 @@ permalink: /categories/
 - [Spreadsheet](/categories/App/Python/Spreadsheet)
 - [DB to DB Data Migration](/categories/App/Python/Migration)
 - [Anaconda](/categories/App/Python/Anaconda)
+- [Django](/categories/App/Python/Django)
+- [Python ETC](/categories/App/Python/Etc)
