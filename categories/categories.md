@@ -4,11 +4,9 @@ layout: categories
 permalink: /categories/
 ---
 
-## 튜닝
-
-[튜닝 관련 글 보기](/categories/튜닝/)
-
-## DB 
+## Database 
 - [Oracle](/categories/Oracle/)
 - [MySQL](/categories/MySQL/)
 - [MariaDB](/categories/MariaDB/)
+- [MongoDB](/categories/MariaDB/)
+- [DBian SQLP Basic (2025-05)](/categories/MariaDB/)
