@@ -1,8 +1,10 @@
 ---
 title: "카테고리"
-layout: page
+layout: default
 permalink: /categories/
 ---
+
+<div style="max-width: 800px; margin: 0 auto;">
 
 ## Database 
 - [Oracle](/categories/Database/Oracle)
