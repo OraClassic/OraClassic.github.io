@@ -5,8 +5,18 @@ permalink: /categories/
 ---
 
 ## Database 
-- [Oracle](/categories/Oracle/)
-- [MySQL](/categories/MySQL/)
-- [MariaDB](/categories/MariaDB/)
-- [MongoDB](/categories/MariaDB/)
-- [DBian SQLP Basic (2025-05)](/categories/MariaDB/)
+- [Oracle](/categories/Database/Oracle)
+- [MySQL](/categories/Database/MySQL)
+- [MariaDB](/categories/Database/MariaDB)
+- [MongoDB](/categories/Database/MariaDB)
+- [DBian SQLP Basic (2025-05)](/categories/Database/MariaDB)
+
+## Operating System 
+- [Linux](/categories/OS/Linux/)
+
+## Python, Jupyter
+- [Install Python](/categories/App/Python/Install)
+- [Install Jupyter](/categories/App/Python/Jupyter/Install)
+- [Spreadsheet](/categories/App/Python/Spreadsheet)
+- [DB to DB Data Migration](/categories/App/Python/Migration)
+- [Anaconda](/categories/App/Python/Anaconda)
