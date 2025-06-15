@@ -12,3 +12,4 @@ permalink: /categories/DB/
 
 ## MariaDB
 [MySQL 글 보기](/categories/MySQL/)
+
