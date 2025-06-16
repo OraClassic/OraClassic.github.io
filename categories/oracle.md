@@ -6,5 +6,5 @@ taxonomy: Oracle
 ---
 
 
-## Database 
+## Oracle DBMS
 - [Oracle Install](/categories/Database/Oracle/Install)
