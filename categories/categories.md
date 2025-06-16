@@ -1,7 +1,8 @@
 ---
 title: "카테고리"
-layout: categories
+layout: single
 permalink: /categories/
+author_profile: true
 ---
 
 ## Database 
