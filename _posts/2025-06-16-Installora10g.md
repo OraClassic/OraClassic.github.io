@@ -288,15 +288,23 @@ cd database
 
 2. **패치 설치 단계**
    - Next 클릭
+![Install](/assets/Image/ora10install/12.png)
    - orainventory 경로 확인 및 group 명 확인 후 Next
+![Install](/assets/Image/ora10install/13.png)
    - `echo $ORACLE_HOME` 경로와 비교하여 PATH 확인 후 Next
+![Install](/assets/Image/ora10install/14.png)
    - "I wish to receive security updates via My Oracle Support" 체크 해제 후 Next
+![Install](/assets/Image/ora10install/15.png)
    - 이메일 관련 팝업창에서 Yes 클릭
+![Install](/assets/Image/ora10install/16.png)
    - 체크 안되어 있는 것들 모두 체크 후 Next
+![Install](/assets/Image/ora10install/17.png)
    - Install 클릭
+![Install](/assets/Image/ora10install/18.png)
 
 3. **Root Script 실행**
    - 해당 스크립트 경로 복사 후 root 계정으로 실행
+![Install](/assets/Image/ora10install/19.png)
    - 완료 후 OK 클릭
   ```bash
    /app/oraInventory/orainstRoot.sh
@@ -304,6 +312,7 @@ cd database
 
 4. **패치 완료**
    - Exit 클릭
+  ![Install](/assets/Image/ora10install/20.png)
 
 ## 7. Database Configuration Assistant
 
