@@ -262,7 +262,7 @@ Creating /etc/oratab file...
 
 9. **설치 완료**
    - Exit 클릭
-![Install](/assets/Image/ora10install/10.png)
+![Install](/assets/Image/ora10install/11.png)
 
 ## 6. Oracle 10g 10.2.0.5 패치
 
