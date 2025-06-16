@@ -234,11 +234,11 @@ cd database
   
    - 설치 도중 `ins_emdb.mk` 설치 에러가 나올 수 있는데 Continue 클릭 (패치하면 잡히는 에러)
 
-![Install](/assets/Image/ora10install/8.png)
+  ![Install](/assets/Image/ora10install/8.png)
 
 8. **Root Script 실행**
    - 스크립트 실행 요청 시, Script Location을 복사 후 root 계정으로 실행
-![Install](/assets/Image/ora10install/9.png)
+  ![Install](/assets/Image/ora10install/9.png)
 
     ```bash
     # Oracle 설치 후 root 스크립트 실행
