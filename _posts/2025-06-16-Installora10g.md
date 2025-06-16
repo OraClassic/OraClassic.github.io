@@ -2,7 +2,7 @@
 
 title: "Install Oracle 10g"
 date: 2025-06-16
-categories: \["Categories","Database", "Oracle"]
+categories: ["Categories","Database", "Oracle"]
 ---
 
 > **주의**: OS는 CentOS6 이전 버전으로 설치할 것. 이후 버전은 호환 안됨.
