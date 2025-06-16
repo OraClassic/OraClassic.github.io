@@ -47,3 +47,22 @@ search: false
 .page__content {
   max-width: 1200px; /* 기본은 800~960px */
 }
+
+// bash 카피 버튼
+.copy-button {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: #007acc;
+  color: white;
+  border: none;
+  padding: 0.2em 0.6em;
+  font-size: 0.8em;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.highlight {
+  position: relative;
+}
