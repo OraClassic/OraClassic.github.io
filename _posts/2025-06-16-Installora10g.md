@@ -269,7 +269,9 @@ cd database
     Creating /etc/oratab file...
     </code></pre>
    ```
-   
+
+
+
 9. **설치 완료**
    - 스크립트 실행 완료 후 OK 클릭
    - Exit 클릭하여 설치 종료
@@ -285,6 +287,9 @@ cd database
    cd Disk1/
    ./runInstaller
    ```
+
+
+   
 2. **패치 설치 단계**
    - Next 클릭
 ![Install](/assets/Image/ora10install/12.png)
