@@ -24,3 +24,5 @@ permalink: /categories/
 - [Anaconda](/categories/App/Python/Anaconda)
 - [Django](/categories/App/Python/Django)
 - [Python ETC](/categories/App/Python/Etc)
+
+</div>
