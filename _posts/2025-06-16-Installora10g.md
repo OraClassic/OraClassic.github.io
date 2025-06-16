@@ -242,7 +242,6 @@ cd database
    **스크립트 실행 요청**
    - 설치 완료 후 스크립트 실행 요청 화면이 나타남
    - Script Location을 복사 후 root 계정으로 실행
-   
 ![Root Script 실행 요청 화면](/assets/Image/ora10install/9.png)
 
    **터미널에서 스크립트 실행**
