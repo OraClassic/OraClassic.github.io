@@ -424,14 +424,23 @@ netca
 ### Listener 시작 및 확인
 
 ```bash
-# 리스너 상태 확인
+# 리스너 상태 확인 (에러 발생 시 메시지)
 lsnrctl status
+TNS-12541: TNS:no listener
+TNS-12560: TNS:protocol adapter error
+TNS-00511: No listener
+Linux Error: 111: Connection refused
 
-# 리스너 시작
+# 리스너 시작 및 실행 로그 예시
 lsnrctl start
+Starting /app/oracle/product/10g/dbhome_1/bin/tnslsnr: please wait...
+...
+The command completed successfully
 
-# 리스너 상태 재확인
+# 리스너 상태 재확인 (리스너는 정상적으로 동작하지만 인스턴스가 아직 등록되지 않았음. 그래도 작동은 한다.)
 lsnrctl status
+The listener supports no services
+The command completed successfully
 ```
 
 ### Oracle Instance 확인
