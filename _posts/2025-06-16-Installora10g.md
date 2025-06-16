@@ -406,7 +406,7 @@ dbca
 netca
 ```
 
-### NetCA 설정 단계
+### NETCA 설정 단계
 
 1. **Configuration Type** - Listener configuration 선택 후 Next
 <p align="center"><img src="/assets/Image/ora10install/36.png" style="margin-bottom: 20px;"></p>   
