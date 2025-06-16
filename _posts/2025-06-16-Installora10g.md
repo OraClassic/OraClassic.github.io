@@ -247,7 +247,7 @@ cd database
 
    **터미널에서 스크립트 실행**
 
-   ```bash
+  <pre><code class="language-bash">#
    # Oracle 설치 후 root 스크립트 실행
    [root@localhost lib]# /app/oracle/oraInventory/orainstRoot.sh
    Changing permissions of /app/oracle/oraInventory to 770.
@@ -267,7 +267,8 @@ cd database
      Copying coraenv to /usr/local/bin ...
    
    Creating /etc/oratab file...
-   ```
+   </code></pre>
+   
 9. **설치 완료**
    - 스크립트 실행 완료 후 OK 클릭
    - Exit 클릭하여 설치 종료
