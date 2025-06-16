@@ -247,28 +247,28 @@ cd database
 
    **터미널에서 스크립트 실행**
 
-  ```bash
-   # Oracle 설치 후 root 스크립트 실행
-   [root@localhost lib]# /app/oracle/oraInventory/orainstRoot.sh
-   Changing permissions of /app/oracle/oraInventory to 770.
-   Changing groupname of /app/oracle/oraInventory to dba.
-   The execution of the script is complete
+   ```bash
+    # Oracle 설치 후 root 스크립트 실행
+    [root@localhost lib]# /app/oracle/oraInventory/orainstRoot.sh
+    Changing permissions of /app/oracle/oraInventory to 770.
+    Changing groupname of /app/oracle/oraInventory to dba.
+    The execution of the script is complete
+     
+    [root@localhost lib]# /app/oracle/product/10g/dbhome_1/root.sh
+    Running Oracle10 root.sh script...
     
-   [root@localhost lib]# /app/oracle/product/10g/dbhome_1/root.sh
-   Running Oracle10 root.sh script...
-   
-   The following environment variables are set as:
-     ORACLE_OWNER= oracle
-     ORACLE_HOME= /app/oracle/product/10g/dbhome_1
-   
-   Enter the full pathname of the local bin directory: [/usr/local/bin]:
-     Copying dbhome to /usr/local/bin ...
-     Copying oraenv to /usr/local/bin ...
-     Copying coraenv to /usr/local/bin ...
-   
-   Creating /etc/oratab file...
-   </code></pre>
-  ```
+    The following environment variables are set as:
+      ORACLE_OWNER= oracle
+      ORACLE_HOME= /app/oracle/product/10g/dbhome_1
+    
+    Enter the full pathname of the local bin directory: [/usr/local/bin]:
+      Copying dbhome to /usr/local/bin ...
+      Copying oraenv to /usr/local/bin ...
+      Copying coraenv to /usr/local/bin ...
+    
+    Creating /etc/oratab file...
+    </code></pre>
+   ```
    
 9. **설치 완료**
    - 스크립트 실행 완료 후 OK 클릭
