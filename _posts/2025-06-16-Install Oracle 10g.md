@@ -1,7 +1,7 @@
 ---
 title: "Install Oracle 10g"
 date: 2025-06-16
-categories: ["Database", "Oracle"]
+categories: ["Categories","Database", "Oracle"]
 ---
 
 Oracle 10g 설치 가이드입니다.
