@@ -228,43 +228,54 @@ cd database
 ![Install](/assets/Image/ora10install/6.png)
 
 7. **설치 진행**
-   - Install 클릭
-  
-![Install](/assets/Image/ora10install/7.png)
-  
+
+   **Summary 화면 확인**
+   - 설치 요약 정보를 확인한 후 Install 클릭
+   
+   ![Oracle 설치 Summary 화면](/assets/Image/ora10install/7.png)
+
+   **설치 에러 처리**
    - 설치 도중 `ins_emdb.mk` 설치 에러가 나올 수 있는데 Continue 클릭 (패치하면 잡히는 에러)
 
-  ![Install](/assets/Image/ora10install/8.png)
+   ![ins_emdb.mk 에러 화면](/assets/Image/ora10install/8.png)
 
 8. **Root Script 실행**
-   - 스크립트 실행 요청 시, Script Location을 복사 후 root 계정으로 실행
-  ![Install](/assets/Image/ora10install/9.png)
+   
+   **스크립트 실행 요청**
+   - 설치 완료 후 스크립트 실행 요청 화면이 나타남
+   - Script Location을 복사 후 root 계정으로 실행
+   
+   ![Root Script 실행 요청 화면](/assets/Image/ora10install/9.png)
 
-    ```bash
-    # Oracle 설치 후 root 스크립트 실행
-    [root@localhost lib]# /app/oracle/oraInventory/orainstRoot.sh
-    Changing permissions of /app/oracle/oraInventory to 770.
-    Changing groupname of /app/oracle/oraInventory to dba.
-    The execution of the script is complete
-     
-    [root@localhost lib]# /app/oracle/product/10g/dbhome_1/root.sh
-    Running Oracle10 root.sh script...
+   **터미널에서 스크립트 실행**
+
+   ```bash
+   # Oracle 설치 후 root 스크립트 실행
+   [root@localhost lib]# /app/oracle/oraInventory/orainstRoot.sh
+   Changing permissions of /app/oracle/oraInventory to 770.
+   Changing groupname of /app/oracle/oraInventory to dba.
+   The execution of the script is complete
     
-    The following environment variables are set as:
-      ORACLE_OWNER= oracle
-      ORACLE_HOME= /app/oracle/product/10g/dbhome_1
-    
-    Enter the full pathname of the local bin directory: [/usr/local/bin]:
-      Copying dbhome to /usr/local/bin ...
-      Copying oraenv to /usr/local/bin ...
-      Copying coraenv to /usr/local/bin ...
-    
-    Creating /etc/oratab file...
-    ```
+   [root@localhost lib]# /app/oracle/product/10g/dbhome_1/root.sh
+   Running Oracle10 root.sh script...
+   
+   The following environment variables are set as:
+     ORACLE_OWNER= oracle
+     ORACLE_HOME= /app/oracle/product/10g/dbhome_1
+   
+   Enter the full pathname of the local bin directory: [/usr/local/bin]:
+     Copying dbhome to /usr/local/bin ...
+     Copying oraenv to /usr/local/bin ...
+     Copying coraenv to /usr/local/bin ...
+   
+   Creating /etc/oratab file...
+   ```
 
 9. **설치 완료**
-   - Exit 클릭
-![Install](/assets/Image/ora10install/11.png)
+   - 스크립트 실행 완료 후 OK 클릭
+   - Exit 클릭하여 설치 종료
+   
+   ![설치 완료 화면](/assets/Image/ora10install/11.png)
 
 ## 6. Oracle 10g 10.2.0.5 패치
 
