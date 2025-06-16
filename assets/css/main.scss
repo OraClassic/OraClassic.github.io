@@ -2,18 +2,25 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 search: false
 ---
-
 @charset "utf-8";
 
-/* 배달의민족 도현체 폰트 import */
-@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff');
+/* 배달의민족 도현체 폰트 import - 수정된 버전 */
+@font-face {
+  font-family: 'BMYEONSUNG';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMYEONSUNG.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 또는 다른 CDN 시도 */
+@import url('https://fonts.googleapis.com/css2?family=Stylish&display=swap');
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
 /* 전체 사이트 폰트를 배달의민족 도현체로 변경 */
 html, body, * {
-  font-family: 'BMYEONSUNG', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+  font-family: 'BMYEONSUNG', 'Stylish', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
 }
 
 .author__avatar {
@@ -27,7 +34,6 @@ html, body, * {
   display: flex;
   align-items: center;
   justify-content: center;
-
   img {
     width: 150%;
     height: 150%;
@@ -43,7 +49,6 @@ html, body, * {
   .author__avatar {
     width: 100px;
     height: 100px;
-
     img {
       width: 100px !important;
       height: 100px !important;
@@ -79,10 +84,10 @@ html, body, * {
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
 }
+
 .highlight:hover .copy-button {
   opacity: 1;
 }
-
 
 /* 카테고리 링크 커스터마이징 - 다크 테마용 */
 .page__content {
@@ -148,4 +153,81 @@ html, body, * {
       }
     }
   }
+}
+
+/* 코드 블록 스타일 커스터마이징 - 흰색 배경, 검은색 글자 */
+.highlight,
+.language-bash .highlight,
+div.highlighter-rouge,
+.highlighter-rouge .highlight,
+pre.highlight {
+  background-color: #ffffff !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 6px !important;
+  
+  pre {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+  }
+  
+  code {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+  }
+}
+
+/* 인라인 코드 스타일 */
+p code,
+li code,
+td code {
+  background-color: #f8f9fa !important;
+  color: #333333 !important;
+  border: 1px solid #e0e0e0 !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+}
+
+/* 코드 블록 내 모든 텍스트 색상 강제 변경 */
+.highlight * {
+  color: #333333 !important;
+}
+
+/* 특정 언어 하이라이팅 색상 재정의 */
+.highlight .c,    /* 주석 */
+.highlight .cm,   /* 여러줄 주석 */
+.highlight .cp,   /* 전처리기 */
+.highlight .c1 {  /* 한줄 주석 */
+  color: #6a737d !important;
+}
+
+.highlight .k,    /* 키워드 */
+.highlight .kd,   /* 키워드 선언 */
+.highlight .kn,   /* 키워드 네임스페이스 */
+.highlight .kp,   /* 키워드 가상 */
+.highlight .kr,   /* 키워드 예약어 */
+.highlight .kt {  /* 키워드 타입 */
+  color: #d73a49 !important;
+}
+
+.highlight .s,    /* 문자열 */
+.highlight .s1,   /* 문자열 단일 */
+.highlight .s2,   /* 문자열 이중 */
+.highlight .sh,   /* 문자열 heredoc */
+.highlight .sx {  /* 문자열 기타 */
+  color: #032f62 !important;
+}
+
+.highlight .n,    /* 이름 */
+.highlight .na,   /* 이름 속성 */
+.highlight .nc,   /* 이름 클래스 */
+.highlight .nd,   /* 이름 데코레이터 */
+.highlight .ne,   /* 이름 예외 */
+.highlight .nf,   /* 이름 함수 */
+.highlight .nl,   /* 이름 라벨 */
+.highlight .nn,   /* 이름 네임스페이스 */
+.highlight .no,   /* 이름 상수 */
+.highlight .nt,   /* 이름 태그 */
+.highlight .nv,   /* 이름 변수 */
+.highlight .nx {  /* 이름 기타 */
+  color: #24292e !important;
 }
