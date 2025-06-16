@@ -174,23 +174,23 @@ cd database
    yum install ld-linux.so.2
    ```
 
-2. **Checking operating system version 관련 오류**
+2. **`Checking operating system version` 관련 오류**
    ```bash
    vi /etc/redhat-release
    ```
    기존내용 주석처리 후 호환되는 버전으로 수정
 
-3. **`libXp.so.6` 라이브러리 패키지 없음**
+3. **`libXp.so.6: cannot open shared object file: No such file or directory` 라이브러리 패키지 없는 이슈**
    ```bash
    yum install libXp.so.6
    ```
 
-4. **`libXt.so.6` 라이브러리 패키지 없음**
+4. **`libXt.so.6: cannot open shared object file: No such file or directory` 라이브러리 패키지 없는 이슈**
    ```bash
    yum install libXt.so.6
    ```
 
-5. **`libXtst.so.6` 라이브러리 패키지 없음**
+5. **`libXtst.so.6: cannot open shared object file: No such file or directory` 라이브러리 패키지 없는 이슈**
    ```bash
    yum install libXtst.so.6
    ```
