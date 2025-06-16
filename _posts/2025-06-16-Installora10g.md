@@ -4,8 +4,6 @@ date: 2025-06-16
 categories: ["Categories","Database", "Oracle"]
 ---
 
-# Oracle 10g Installation Guide for CentOS 6
-
 > **주의**: OS는 CentOS6 이전 버전으로 설치할 것. 이후 버전은 호환 안됨.
 
 ## 1. 라이브러리 설치
