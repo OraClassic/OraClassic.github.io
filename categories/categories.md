@@ -1,10 +1,8 @@
 ---
 title: "카테고리"
-layout: default
+layout: categories
 permalink: /categories/
 ---
-
-<div style="max-width: 800px; margin: 0 auto;">
 
 ## Database 
 - [Oracle](/categories/Database/Oracle)
@@ -24,5 +22,3 @@ permalink: /categories/
 - [Anaconda](/categories/App/Python/Anaconda)
 - [Django](/categories/App/Python/Django)
 - [Python ETC](/categories/App/Python/Etc)
-
-</div>
