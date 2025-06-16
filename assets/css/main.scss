@@ -76,3 +76,46 @@ search: false
   opacity: 1;
 }
 
+
+/* 카테고리 링크 커스터마이징 */
+.page__content {
+  /* 카테고리 섹션의 링크들 */
+  ul li a {
+    color: #2c3e50 !important; /* 링크 색상 변경 */
+    text-decoration: none !important;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin: 2px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-left: 4px solid #3498db;
+    
+    &:hover {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white !important;
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+  }
+  
+  /* 메인 카테고리 제목 스타일링 */
+  h2 {
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: #e74c3c;
+    }
+  }
+}
