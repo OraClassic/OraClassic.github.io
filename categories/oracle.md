@@ -1,8 +1,8 @@
 ---
 title: "Oracle"
-layout: category
+layout: single
 permalink: /categories/Database/Oracle/
-taxonomy: Oracle
+author_profile: true
 ---
 
 
