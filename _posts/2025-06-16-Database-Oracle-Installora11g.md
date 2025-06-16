@@ -5,9 +5,8 @@ date: 2025-06-16
 categories: ["Categories","Database", "Oracle"]
 ---
 
-# CentOS 7 Oracle 11g 설치 가이드
 
-**환경:** CentOS 7, RAM 8GB
+> **환경:** CentOS 7, RAM 8GB
 
 ## 1. 의존 라이브러리 설치
 
