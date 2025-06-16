@@ -364,26 +364,39 @@ dbca
 ### DBCA 설정 단계
 
 1. **Welcome** - Next 클릭
+<p align="center"><img src="/assets/Image/ora10install/21.png" style="margin-bottom: 20px;"></p>
 2. **Operations** - Create a Database 선택 후 Next
+<p align="center"><img src="/assets/Image/ora10install/22.png" style="margin-bottom: 20px;"></p>
 3. **Database Template** - General Purpose 선택 후 Next
+<p align="center"><img src="/assets/Image/ora10install/23.png" style="margin-bottom: 20px;"></p>
 4. **Database Identification** - Global Database Name과 SID 설정 후 Next
+<p align="center"><img src="/assets/Image/ora10install/24.png" style="margin-bottom: 20px;"></p>
 5. **Management Options** - Enterprise Manager 체크 해제 후 Next
+<p align="center"><img src="/assets/Image/ora10install/25.png" style="margin-bottom: 20px;"></p>
 6. **Database Credentials** - 모든 관리자 계정을 동일한 비밀번호로 설정 후 Next
+<p align="center"><img src="/assets/Image/ora10install/26.png" style="margin-bottom: 20px;"></p>
 7. **Storage Options** - File System 선택 후 Next
-
    * File System: OS가 관리
    * Raw Device: Oracle 서비스가 관리
    * ASM: Oracle ASM이 브로커
+<p align="center"><img src="/assets/Image/ora10install/27.png" style="margin-bottom: 20px;"></p>
 8. **Database File Locations** - Use Common Location for All Database Files 선택 후, oradata 경로 지정하고 Next
+<p align="center"><img src="/assets/Image/ora10install/28.png" style="margin-bottom: 20px;"></p>
 9. **Recovery Configuration** - Flash Recovery Area 체크 해제 후 Next
-
    * Flash Recovery Area는 Oradata 파일 크기의 2배 정도 공간에 백업파일을 저장할 수 있는 기능
-10. **Database Content** - Next 클릭
-11. **Initialization Parameters** - Character Sets 설정 후 Next
-12. **Security Settings** - Next 클릭
-13. **Database Creation** - Finish 클릭
-14. **확인** - OK 클릭
-15. **완료** - Exit 클릭
+<p align="center"><img src="/assets/Image/ora10install/29.png" style="margin-bottom: 20px;"></p>   
+11. **Database Content** - Next 클릭
+<p align="center"><img src="/assets/Image/ora10install/30.png" style="margin-bottom: 20px;"></p>   
+12. **Initialization Parameters** - Character Sets 설정 후 Next
+<p align="center"><img src="/assets/Image/ora10install/31.png" style="margin-bottom: 20px;"></p>   
+13. **Security Settings** - Next 클릭
+<p align="center"><img src="/assets/Image/ora10install/32.png" style="margin-bottom: 20px;"></p>   
+14. **Database Creation** - Finish 클릭
+<p align="center"><img src="/assets/Image/ora10install/33.png" style="margin-bottom: 20px;"></p>   
+15. **확인** - OK 클릭
+<p align="center"><img src="/assets/Image/ora10install/34.png" style="margin-bottom: 20px;"></p>   
+16. **완료** - Exit 클릭
+<p align="center"><img src="/assets/Image/ora10install/35.png" style="margin-bottom: 20px;"></p>   
 
 ## 8. DB Instance 확인 및 netca 설정
 
@@ -396,11 +409,17 @@ netca
 ### NetCA 설정 단계
 
 1. **Configuration Type** - Listener configuration 선택 후 Next
+<p align="center"><img src="/assets/Image/ora10install/36.png" style="margin-bottom: 20px;"></p>   
 2. **Listener Configuration** - Add 선택 후 Next
+<p align="center"><img src="/assets/Image/ora10install/37.png" style="margin-bottom: 20px;"></p>   
 3. **Listener Name** - LISTENER 설정 후 Next
+<p align="center"><img src="/assets/Image/ora10install/38.png" style="margin-bottom: 20px;"></p>   
 4. **Protocol** - TCP 프로토콜만 사용하므로 Next
+<p align="center"><img src="/assets/Image/ora10install/39.png" style="margin-bottom: 20px;"></p>   
 5. **Port** - 기본 port인 1521로 설정 후 Next
+<p align="center"><img src="/assets/Image/ora10install/40.png" style="margin-bottom: 20px;"></p>   
 6. **More Listeners** - No 선택 후 Next
+<p align="center"><img src="/assets/Image/ora10install/41.png" style="margin-bottom: 20px;"></p>   
 
 ### Listener 시작 및 확인
 
@@ -422,12 +441,12 @@ lsnrctl status
 ss
 ```
 
-bash\_profile에서 sqlplus 접속 alias를 설정했기에 `ss` 명령어를 통해 dbca에서 만든 instance가 정상 작동(normal)하는지 확인합니다.
+bash\_profile에서 sqlplus 접속 alias를 설정했기에 `ss` 명령어를 통해 dbca에서 만든 instance가 정상 작동(normal)하는지 확인.
 
 ## 9. Navicat을 통해 Oracle 10g 원격 접속하기
 
-Oracle 10g 설치가 완료되면 Navicat과 같은 GUI 도구를 사용하여 원격으로 Oracle 데이터베이스에 접속할 수 있습니다.
+Oracle 10g 설치가 완료되면 Navicat과 같은 GUI 도구를 사용하여 원격으로 Oracle 데이터베이스에 접속 가능.
 
 ---
 
-**설치 완료!** Oracle 10g가 성공적으로 설치되었습니다.
+**설치 완료!** Oracle 10g가 성공적으로 설치.
