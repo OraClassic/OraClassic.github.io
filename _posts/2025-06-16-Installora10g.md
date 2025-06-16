@@ -229,8 +229,8 @@ cd database
 
 7. **설치 진행**
    - Install 클릭
-
-  ![Install](/assets/Image/ora10install/7.png)
+![Install](/assets/Image/ora10install/7.png)
+  
    - 설치 도중 `ins_emdb.mk` 설치 에러가 나올 수 있는데 Continue 클릭 (패치하면 잡히는 에러)
 ![Install](/assets/Image/ora10install/8.png)
 
@@ -238,27 +238,27 @@ cd database
    - 스크립트 실행 요청 시, Script Location을 복사 후 root 계정으로 실행
 ![Install](/assets/Image/ora10install/9.png)
 
-   ```bash
-    # Oracle 설치 후 root 스크립트 실행
-    [root@localhost lib]# /app/oracle/oraInventory/orainstRoot.sh
-    Changing permissions of /app/oracle/oraInventory to 770.
-    Changing groupname of /app/oracle/oraInventory to dba.
-    The execution of the script is complete
-    
-    [root@localhost lib]# /app/oracle/product/10g/dbhome_1/root.sh
-    Running Oracle10 root.sh script...
-    
-    The following environment variables are set as:
-        ORACLE_OWNER= oracle
-        ORACLE_HOME= /app/oracle/product/10g/dbhome_1
+```bash
+# Oracle 설치 후 root 스크립트 실행
+[root@localhost lib]# /app/oracle/oraInventory/orainstRoot.sh
+Changing permissions of /app/oracle/oraInventory to 770.
+Changing groupname of /app/oracle/oraInventory to dba.
+The execution of the script is complete
+ 
+[root@localhost lib]# /app/oracle/product/10g/dbhome_1/root.sh
+Running Oracle10 root.sh script...
 
-    Enter the full pathname of the local bin directory: [/usr/local/bin]:
-       Copying dbhome to /usr/local/bin ...
-       Copying oraenv to /usr/local/bin ...
-       Copying coraenv to /usr/local/bin ...
+The following environment variables are set as:
+  ORACLE_OWNER= oracle
+  ORACLE_HOME= /app/oracle/product/10g/dbhome_1
 
-    Creating /etc/oratab file...
-       ```
+Enter the full pathname of the local bin directory: [/usr/local/bin]:
+  Copying dbhome to /usr/local/bin ...
+  Copying oraenv to /usr/local/bin ...
+  Copying coraenv to /usr/local/bin ...
+
+Creating /etc/oratab file...
+```
 
 9. **설치 완료**
    - Exit 클릭
