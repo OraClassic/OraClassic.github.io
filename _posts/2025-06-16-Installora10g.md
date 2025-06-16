@@ -231,12 +231,10 @@ cd database
 
    **Summary 화면 확인**
    - 설치 요약 정보를 확인한 후 Install 클릭
-   
    ![Oracle 설치 Summary 화면](/assets/Image/ora10install/7.png)
 
    **설치 에러 처리**
    - 설치 도중 `ins_emdb.mk` 설치 에러가 나올 수 있는데 Continue 클릭 (패치하면 잡히는 에러)
-
    ![ins_emdb.mk 에러 화면](/assets/Image/ora10install/8.png)
 
 8. **Root Script 실행**
