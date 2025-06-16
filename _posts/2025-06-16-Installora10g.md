@@ -237,6 +237,7 @@ cd database
 8. **Root Script 실행**
    - 스크립트 실행 요청 시, Script Location을 복사 후 root 계정으로 실행
 ![Install](/assets/Image/ora10install/9.png)
+
    ```bash
     # Oracle 설치 후 root 스크립트 실행
     [root@localhost lib]# /app/oracle/oraInventory/orainstRoot.sh
