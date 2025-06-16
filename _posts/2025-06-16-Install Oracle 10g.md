@@ -1,4 +1,5 @@
 ---
+title: "Install Oracle 10g"
 date: 2025-06-16
 categories: ["Database", "Oracle"]
 ---
