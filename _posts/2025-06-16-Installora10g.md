@@ -444,13 +444,22 @@ The command completed successfully
 ```
 
 ### Oracle Instance 확인
+bash\_profile에서 sqlplus 접속 alias를 설정했기에 `ss` 명령어를 통해 dbca에서 만든 instance가 정상 작동(normal)하는지 확인.
 
 ```bash
 # SQLPlus 접속 (bash_profile에서 설정한 alias 사용)
 ss
+
+# SQLPlus로 접속 후 아래 쿼리 실행:
+select instance_name, active_state from v$instance;
+
+# 출력 예시
+INSTANCE_NAME  ACTIVE_STATE
+-------------  -------------
+testdb         NORMAL
 ```
 
-bash\_profile에서 sqlplus 접속 alias를 설정했기에 `ss` 명령어를 통해 dbca에서 만든 instance가 정상 작동(normal)하는지 확인.
+
 
 ## 9. Navicat을 통해 Oracle 10g 원격 접속하기
 
