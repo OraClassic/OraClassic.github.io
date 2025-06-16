@@ -8,3 +8,8 @@ search: false
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
+
+.author__avatar {
+  width: 150px;  // 원하는 크기로 조절
+  height: 150px;
+}
