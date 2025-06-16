@@ -255,6 +255,9 @@ cd database
 3. **Root Script 실행**
    - 해당 스크립트 경로 복사 후 root 계정으로 실행
    - 완료 후 OK 클릭
+  ```bash
+   /app/oraInventory/orainstRoot.sh
+   ```
 
 4. **패치 완료**
    - Exit 클릭
