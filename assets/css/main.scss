@@ -28,6 +28,7 @@ search: false
     object-position: center;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
+    transform: scale(1.2); // 이미지 크기 강제로 확대
   }
 }
 
