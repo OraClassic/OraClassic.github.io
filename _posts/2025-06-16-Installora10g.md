@@ -230,7 +230,7 @@ cd database
 7. **설치 진행**
    - Install 클릭
 
-![Install](/assets/Image/ora10install/7.png)
+  ![Install](/assets/Image/ora10install/7.png)
    - 설치 도중 `ins_emdb.mk` 설치 에러가 나올 수 있는데 Continue 클릭 (패치하면 잡히는 에러)
 ![Install](/assets/Image/ora10install/8.png)
 
