@@ -288,7 +288,7 @@ cd database
    cd Disk1/
    ./runInstaller
    ```
-##
+
 
 2. **패치 설치 단계**
 
