@@ -231,11 +231,11 @@ cd database
 
    **Summary 화면 확인**
    - 설치 요약 정보를 확인한 후 Install 클릭
-   ![Oracle 설치 Summary 화면](/assets/Image/ora10install/7.png)
+![Oracle 설치 Summary 화면](/assets/Image/ora10install/7.png)
 
    **설치 에러 처리**
    - 설치 도중 `ins_emdb.mk` 설치 에러가 나올 수 있는데 Continue 클릭 (패치하면 잡히는 에러)
-   ![ins_emdb.mk 에러 화면](/assets/Image/ora10install/8.png)
+![ins_emdb.mk 에러 화면](/assets/Image/ora10install/8.png)
 
 8. **Root Script 실행**
    
@@ -243,7 +243,7 @@ cd database
    - 설치 완료 후 스크립트 실행 요청 화면이 나타남
    - Script Location을 복사 후 root 계정으로 실행
    
-   ![Root Script 실행 요청 화면](/assets/Image/ora10install/9.png)
+![Root Script 실행 요청 화면](/assets/Image/ora10install/9.png)
 
    **터미널에서 스크립트 실행**
 
