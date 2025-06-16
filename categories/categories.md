@@ -8,8 +8,8 @@ permalink: /categories/
 - [Oracle](/categories/Database/Oracle)
 - [MySQL](/categories/Database/MySQL)
 - [MariaDB](/categories/Database/MariaDB)
-- [MongoDB](/categories/Database/MariaDB)
-- [DBian SQLP Basic (2025-05)](/categories/Database/MariaDB)
+- [MongoDB](/categories/Database/MongoDB)
+- [DBian SQLP Basic (2025-05)](/categories/Database/DBian_sqlp_basic)
 
 ## Operating System 
 - [Linux](/categories/OS/Linux/)
