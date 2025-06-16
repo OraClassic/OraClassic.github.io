@@ -201,6 +201,7 @@ cd database
 
 1. **Installation Type 선택**
    - Advanced Installation 선택 후 Next
+![Type 선택 화면](/assets/Image/ora10install/1.png)
 
 2. **Inventory Directory 설정**
    - oraInventory는 Oracle Software 제품에 관한 정보와 Server에 설치되어 있는 Oracle_Home의 정보를 가지고 있는 일종의 Repository
