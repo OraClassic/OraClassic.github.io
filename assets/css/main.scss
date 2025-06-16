@@ -12,6 +12,11 @@ search: false
 .author__avatar {
   width: 150px;
   height: 150px;
-  margin-bottom: 10px;
-  border-radius: 50%;
+
+  img {
+    width: 150px !important;
+    height: 150px !important;
+    object-fit: cover;
+    border-radius: 50%;
+  }
 }
