@@ -93,20 +93,25 @@ search: false
     border: 1px solid #dee2e6;
     
     &:hover {
-      background: #007bff;
+      background: #00d4aa;
       color: white !important;
-      border-color: #007bff;
+      border-color: #00d4aa;
       transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+      box-shadow: 0 2px 8px rgba(0,212,170,0.3);
     }
   }
   
   /* 메인 카테고리 제목 스타일링 */
   h2 {
     color: #ffffff !important; /* 다크 테마에서 제목이 보이도록 흰색으로 */
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid #00d4aa;
     padding-bottom: 8px;
     margin-bottom: 15px;
     font-weight: 600;
+  }
+  
+  /* 포스트 내용의 모든 제목 라인 색상 변경 */
+  h1, h2, h3, h4, h5, h6 {
+    border-bottom-color: #00d4aa !important;
   }
 }
