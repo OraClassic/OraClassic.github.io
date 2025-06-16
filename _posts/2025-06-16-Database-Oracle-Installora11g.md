@@ -2,7 +2,7 @@
 
 title: "Install Oracle 11g"
 date: 2025-06-16
-categories: ["Categories","Database", "Oracle"]
+categories: ["Categories","Database", "Oracle", "Install"]
 ---
 
 
