@@ -6,7 +6,7 @@ search: false
 @charset "utf-8";
 
 /* 배달의민족 도현체 폰트 import */
-@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/BMYEONSUNG.woff');
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff');
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
