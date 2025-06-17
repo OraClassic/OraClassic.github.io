@@ -5,369 +5,110 @@ permalink: /search/
 author_profile: false
 ---
 
-<div class="search-content">
-  <div class="search-input-wrapper">
-    <input type="text" id="search-input" placeholder="검색어를 입력하세요..." class="search-input">
-    <i class="fas fa-search search-icon"></i>
+<div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+  <h2>블로그 포스트 검색</h2>
+  <p>제목, 내용, 카테고리에서 검색할 수 있습니다</p>
+  
+  <div style="margin-bottom: 30px;">
+    <input type="text" id="search-input" placeholder="검색어를 입력하세요..." 
+           style="width: 100%; padding: 15px; font-size: 16px; border: 2px solid #ddd; border-radius: 8px;">
   </div>
   
-  <div id="search-results" class="search-results">
-    <div class="loading">검색 데이터를 로딩 중...</div>
+  <div id="search-results">
+    <p>검색 데이터를 로딩 중...</p>
   </div>
 </div>
 
-<style>
-.search-content {
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.search-input-wrapper {
-  position: relative;
-  margin-bottom: 2rem;
-}
-
-.search-input {
-  width: 100%;
-  padding: 1rem 3rem 1rem 1rem;
-  font-size: 1.1rem;
-  border: 2px solid #e9ecef;
-  border-radius: 8px;
-  outline: none;
-  transition: all 0.3s ease;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.search-input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-}
-
-.search-icon {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #6c757d;
-  pointer-events: none;
-}
-
-.search-results {
-  margin-top: 1rem;
-}
-
-.results-count {
-  color: #6c757d;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.post-item {
-  background: white;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border: 1px solid #e9ecef;
-  transition: all 0.3s ease;
-}
-
-.post-item:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  transform: translateY(-2px);
-}
-
-.post-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-  text-decoration: none;
-  display: block;
-}
-
-.post-title:hover {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.post-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-}
-
-.post-date {
-  color: #6c757d;
-  font-size: 0.9rem;
-}
-
-.post-categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.category-tag {
-  background: #e9ecef;
-  color: #495057;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  text-decoration: none;
-}
-
-.category-tag:hover {
-  background: #dee2e6;
-  text-decoration: none;
-}
-
-.post-excerpt {
-  color: #6c757d;
-  line-height: 1.6;
-  margin-top: 0.75rem;
-}
-
-.highlight {
-  background-color: #fff3cd;
-  padding: 0.1rem 0.2rem;
-  border-radius: 3px;
-  font-weight: 500;
-}
-
-.no-results {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: #6c757d;
-}
-
-.no-results h3 {
-  margin-bottom: 0.5rem;
-  color: #495057;
-}
-
-.loading {
-  text-align: center;
-  padding: 2rem;
-  color: #6c757d;
-}
-
-/* 다크 모드 지원 */
-@media (prefers-color-scheme: dark) {
-  .search-input {
-    background: #2d3748;
-    border-color: #4a5568;
-    color: #e2e8f0;
-  }
-  
-  .search-input:focus {
-    border-color: #63b3ed;
-  }
-  
-  .post-item {
-    background: #2d3748;
-    border-color: #4a5568;
-  }
-  
-  .post-title {
-    color: #e2e8f0;
-  }
-  
-  .category-tag {
-    background: #4a5568;
-    color: #e2e8f0;
-  }
-}
-
-/* 반응형 */
-@media (max-width: 768px) {
-  .search-input {
-    font-size: 1rem;
-    padding: 0.875rem 2.5rem 0.875rem 0.875rem;
-  }
-  
-  .post-item {
-    padding: 1rem;
-  }
-  
-  .post-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-}
-</style>
-
 <script>
-class BlogSearch {
-  constructor() {
-    this.posts = [];
-    this.searchInput = document.getElementById('search-input');
-    this.searchResults = document.getElementById('search-results');
+// 간단한 테스트용 데이터
+const testPosts = [
+  {
+    title: "Oracle 19c CentOS7 설치 가이드",
+    date: "2025-06-17",
+    categories: ["Database", "Oracle", "Install"],
+    url: "/oracle-19c-install/",
+    content: "Oracle Database 설치 방법을 설명합니다."
+  },
+  {
+    title: "Oracle Statspack 가이드",
+    date: "2025-06-16", 
+    categories: ["Database", "Oracle", "Performance"],
+    url: "/oracle-statspack/",
+    content: "Statspack을 이용한 성능 분석 방법입니다."
+  }
+];
+
+function initSearch() {
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  
+  if (!searchInput || !searchResults) {
+    console.error('검색 요소를 찾을 수 없습니다');
+    return;
+  }
+  
+  // 처음에 모든 포스트 표시
+  displayResults(testPosts, '');
+  
+  // 검색 기능
+  searchInput.addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase();
     
-    this.init();
-  }
-
-  async init() {
-    await this.loadPosts();
-    this.setupEventListeners();
-    this.displayAllPosts();
-  }
-
-  async loadPosts() {
-    try {
-      const response = await fetch('/search.json');
-      if (!response.ok) {
-        throw new Error('검색 데이터를 불러올 수 없습니다.');
-      }
-      this.posts = await response.json();
-    } catch (error) {
-      console.error('검색 데이터 로딩 오류:', error);
-      this.searchResults.innerHTML = `
-        <div class="no-results">
-          <h3>검색 데이터를 불러올 수 없습니다</h3>
-          <p>잠시 후 다시 시도해주세요.</p>
-        </div>
-      `;
-    }
-  }
-
-  setupEventListeners() {
-    let timeout;
-    
-    this.searchInput.addEventListener('input', (e) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        this.search(e.target.value);
-      }, 300); // 300ms 디바운스
-    });
-
-    this.searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        clearTimeout(timeout);
-        this.search(e.target.value);
-      }
-    });
-  }
-
-  search(query) {
-    if (!query.trim()) {
-      this.displayAllPosts();
+    if (!query) {
+      displayResults(testPosts, '');
       return;
     }
-
-    const searchTerms = query.toLowerCase().split(' ').filter(term => term.length > 0);
-    const results = this.posts.filter(post => {
-      const searchableText = (
-        post.title + ' ' + 
-        post.content + ' ' + 
-        (post.categories ? post.categories.join(' ') : '') + ' ' +
-        (post.tags ? post.tags.join(' ') : '')
-      ).toLowerCase();
-
-      return searchTerms.every(term => searchableText.includes(term));
-    });
-
-    this.displayResults(results, query);
-  }
-
-  displayAllPosts() {
-    this.displayResults(this.posts, '');
-  }
-
-  displayResults(results, query) {
-    if (results.length === 0 && query) {
-      this.searchResults.innerHTML = `
-        <div class="no-results">
-          <h3>검색 결과가 없습니다</h3>
-          <p>"<strong>${query}</strong>"에 대한 검색 결과를 찾을 수 없습니다.</p>
-          <p>다른 검색어를 시도해보세요.</p>
-        </div>
-      `;
-      return;
-    }
-
-    if (results.length === 0 && !query) {
-      this.searchResults.innerHTML = `
-        <div class="no-results">
-          <h3>포스트가 없습니다</h3>
-          <p>아직 작성된 포스트가 없습니다.</p>
-        </div>
-      `;
-      return;
-    }
-
-    const resultsHtml = `
-      <div class="results-count">
-        ${query ? `"${query}"에 대한 ` : '전체 '}검색 결과: <strong>${results.length}개</strong>
-      </div>
-      ${results.map(post => this.renderPost(post, query)).join('')}
-    `;
-
-    this.searchResults.innerHTML = resultsHtml;
-  }
-
-  renderPost(post, query) {
-    const highlightedTitle = query ? this.highlightText(post.title, query) : post.title;
-    const highlightedContent = query ? this.highlightText(post.content, query) : post.content;
     
-    // 내용을 200자로 제한
-    const excerpt = highlightedContent.length > 200 ? 
-      highlightedContent.substring(0, 200) + '...' : 
-      highlightedContent;
-
-    const categories = post.categories || [];
-    const categoriesHtml = categories.length > 0 ? 
-      categories.map(cat => `<span class="category-tag">${cat}</span>`).join('') : 
-      '';
-
-    return `
-      <article class="post-item">
-        <a href="${post.url}" class="post-title">${highlightedTitle}</a>
-        <div class="post-meta">
-          <time class="post-date">${this.formatDate(post.date)}</time>
-          ${categoriesHtml ? `<div class="post-categories">${categoriesHtml}</div>` : ''}
-        </div>
-        <div class="post-excerpt">${excerpt}</div>
-      </article>
-    `;
-  }
-
-  highlightText(text, query) {
-    if (!query) return text;
+    const results = testPosts.filter(post => 
+      post.title.toLowerCase().includes(query) ||
+      post.content.toLowerCase().includes(query) ||
+      post.categories.some(cat => cat.toLowerCase().includes(query))
+    );
     
-    const searchTerms = query.toLowerCase().split(' ').filter(term => term.length > 0);
-    let highlightedText = text;
-
-    searchTerms.forEach(term => {
-      const regex = new RegExp(`(${this.escapeRegExp(term)})`, 'gi');
-      highlightedText = highlightedText.replace(regex, '<span class="highlight">$1</span>');
-    });
-
-    return highlightedText;
-  }
-
-  escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-
-  formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  }
+    displayResults(results, query);
+  });
 }
 
-// 페이지 로드 시 검색 시스템 초기화
-document.addEventListener('DOMContentLoaded', () => {
-  new BlogSearch();
-});
+function displayResults(results, query) {
+  const searchResults = document.getElementById('search-results');
+  
+  if (results.length === 0) {
+    searchResults.innerHTML = `
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <h3>검색 결과가 없습니다</h3>
+        <p>"${query}"에 대한 검색 결과를 찾을 수 없습니다.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  const resultsHtml = `
+    <div style="margin-bottom: 20px; color: #666; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+      ${query ? `"${query}"에 대한 ` : '전체 '}검색 결과: <strong>${results.length}개</strong>
+    </div>
+    ${results.map(post => `
+      <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h3 style="margin: 0 0 10px 0;">
+          <a href="${post.url}" style="color: #2c3e50; text-decoration: none;">${post.title}</a>
+        </h3>
+        <div style="color: #666; font-size: 14px; margin-bottom: 10px;">
+          ${post.date} | ${post.categories.join(', ')}
+        </div>
+        <p style="color: #666; margin: 0;">${post.content}</p>
+      </div>
+    `).join('')}
+  `;
+  
+  searchResults.innerHTML = resultsHtml;
+}
+
+// 페이지 로드 시 실행
+document.addEventListener('DOMContentLoaded', initSearch);
+
+// 만약 DOMContentLoaded가 이미 실행되었다면
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSearch);
+} else {
+  initSearch();
+}
 </script>
