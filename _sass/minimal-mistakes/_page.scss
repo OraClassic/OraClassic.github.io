@@ -1,188 +1,655 @@
-// 카테고리 태그를 포스트 제목에 자동 추가하는 스크립트
-document.addEventListener('DOMContentLoaded', function() {
-    // Recent Posts 섹션의 포스트 제목들 처리
-    const postTitles = document.querySelectorAll('.archive__item-title a, .list__item .archive__item-title a');
-    
-    postTitles.forEach(function(titleLink) {
-        // URL에서 카테고리 추출 (예: /categories/database/oracle/install/...)
-        const href = titleLink.getAttribute('href');
-        if (href && href.includes('/categories/')) {
-            const pathParts = href.split('/').filter(part => part !== ''); // 빈 문자열 제거
-            const categoryIndex = pathParts.indexOf('categories');
-            
-                if (categoryIndex !== -1 && pathParts.length > categoryIndex + 2) {
-                    // categories 다음 두 번째와 세 번째 디렉토리 추출
-                    let parentCategory = pathParts[categoryIndex + 1]; // database, os, app 등
-                    let category = pathParts[categoryIndex + 2]; // oracle, mysql, linux 등
-                    category = category.charAt(0).toUpperCase() + category.slice(1);
-                    
-                    // 이미 태그가 있는지 확인
-                    if (!titleLink.querySelector('.category-tag')) {
-                        // 카테고리 태그 생성
-                        const categoryTag = document.createElement('span');
-                        categoryTag.className = 'category-tag';
-                        categoryTag.setAttribute('data-category', category);
-                        categoryTag.setAttribute('data-parent', parentCategory); // 두 번째 디렉토리 추가
-                        
-                        // 카테고리별 아이콘 설정
-                        let icon = getIconForCategory(category.toLowerCase());
-                        categoryTag.innerHTML = icon + ' ' + category;
-                    
-                    // 제목 앞에 태그 추가
-                    const originalText = titleLink.textContent;
-                    titleLink.textContent = '';
-                    titleLink.appendChild(categoryTag);
-                    titleLink.appendChild(document.createTextNode(' ' + originalText));
-                }
-            }
-        }
-    });
+/* ==========================================================================
+   SINGLE PAGE/POST
+   ========================================================================== */
 
-// 카테고리별 아이콘을 반환하는 함수
-function getIconForCategory(category) {
-    const iconMap = {
-        // 데이터베이스 DBMS
-        'oracle': '🔴',          // Oracle 빨간 원
-        'mysql': '🟡',           // MySQL 노란 원 (돌고래 대신)
-        'postgresql': '🔵',      // PostgreSQL 파란 원
-        'postgres': '🔵',        // PostgreSQL 축약
-        'mongodb': '🟢',         // MongoDB 초록 원
-        'redis': '🔴',           // Redis 빨간색
-        'sqlite': '🔘',          // SQLite 회색 원
-        'mariadb': '🔵',         // MariaDB 파란색
-        'cassandra': '🟡',       // Cassandra 노란색
-        'elasticsearch': '🟡',   // Elasticsearch 노란색
-        'neo4j': '🟢',           // Neo4j 초록색
-        
-        // 클라우드 서비스
-        'aws': '🟠',             // AWS 주황색
-        'azure': '🔵',           // Azure 파란색
-        'gcp': '🔴',             // Google Cloud 빨간색
-        'docker': '🔵',          // Docker 파란색
-        'kubernetes': '🔵',      // Kubernetes 파란색
-        'k8s': '🔵',             // Kubernetes 축약
-        
-        // 프로그래밍 언어 (실제 로고 색상 반영)
-        'java': '🟠',            // Java 주황색 (커피 대신)
-        'python': '🟡',          // Python 노란색 (실제 Python 색상)
-        'javascript': '🟡',      // JavaScript 노란색
-        'js': '🟡',              // JavaScript 축약
-        'typescript': '🔵',      // TypeScript 파란색
-        'ts': '🔵',              // TypeScript 축약
-        'go': '🔵',              // Go 파란색 (고퍼 대신)
-        'rust': '🟠',            // Rust 주황색
-        'php': '🟣',             // PHP 보라색
-        'ruby': '🔴',            // Ruby 빨간색
-        'csharp': '🟣',          // C# 보라색
-        'cpp': '🔵',             // C++ 파란색
-        'c': '🔵',               // C 파란색
-        
-        // 웹 기술
-        'react': '🔵',           // React 파란색
-        'vue': '🟢',             // Vue.js 초록색
-        'angular': '🔴',         // Angular 빨간색
-        'nodejs': '🟢',          // Node.js 초록색
-        'node': '🟢',            // Node.js 축약
-        'express': '⚫',         // Express 검정색
-        'django': '🟢',          // Django 초록색
-        'flask': '⚫',           // Flask 검정색
-        'spring': '🟢',          // Spring 초록색
-        'laravel': '🔴',         // Laravel 빨간색
-        
-        // 운영체제
-        'linux': '🐧',           // Linux 펭귄 (그대로 유지)
-        'ubuntu': '🟠',          // Ubuntu 주황색
-        'centos': '🟣',          // CentOS 보라색
-        'redhat': '🔴',          // RedHat 빨간색
-        'windows': '🔵',         // Windows 파란색
-        'macos': '⚫',           // macOS 검정색
-        'unix': '⚫',            // Unix 검정색
-        
-        // 도구 및 기타
-        'git': '🟠',             // Git 주황색
-        'github': '⚫',          // GitHub 검정색
-        'gitlab': '🟠',          // GitLab 주황색
-        'jenkins': '🔵',         // Jenkins 파란색
-        'ansible': '🔴',         // Ansible 빨간색
-        'terraform': '🟣',       // Terraform 보라색
-        'nginx': '🟢',           // Nginx 초록색
-        'apache': '🔴',          // Apache 빨간색
-        'tomcat': '🟡',          // Tomcat 노란색
-        'kafka': '⚫',           // Kafka 검정색
-        'spark': '🟠',           // Apache Spark 주황색
-        'hadoop': '🟡',          // Hadoop 노란색
-        
-        // 설치/성능/보안 카테고리
-        'install': '⚙️',         // 설치 기어
-        'performance': '📊',     // 성능 차트
-        'security': '🔒',        // 보안 자물쇠
-        'monitoring': '📈',      // 모니터링 그래프
-        'backup': '💾',          // 백업 디스크
-        'migration': '🚚',       // 마이그레이션 트럭
-        'troubleshooting': '🔧', // 문제해결 도구
-        'optimization': '🚀',    // 최적화 로켓
-        'configuration': '⚙️',   // 구성 기어
-        'deployment': '🚀',      // 배포 로켓
-    };
-    
-    return iconMap[category] || '📁'; // 기본 아이콘
+#main {
+  @include clearfix;
+  margin-inline: auto;
+  padding-inline: 1em;
+  -webkit-animation: $intro-transition;
+  animation: $intro-transition;
+  max-width: 100%;
+  -webkit-animation-delay: 0.15s;
+  animation-delay: 0.15s;
+
+  @include breakpoint($x-large) {
+    max-width: $max-width;
+  }
 }
-    
-    // 개별 포스트 페이지의 제목 처리
-    const pageTitle = document.querySelector('.page__title');
-    if (pageTitle && window.location.pathname.includes('/categories/')) {
-        const pathParts = window.location.pathname.split('/').filter(part => part !== '');
-        const categoryIndex = pathParts.indexOf('categories');
-        
-        if (categoryIndex !== -1 && pathParts.length > categoryIndex + 2) {
-            let parentCategory = pathParts[categoryIndex + 1];
-            let category = pathParts[categoryIndex + 2];
-            category = category.charAt(0).toUpperCase() + category.slice(1);
-            
-            // 이미 태그가 있는지 확인
-            if (!pageTitle.querySelector('.category-tag')) {
-                const categoryTag = document.createElement('span');
-                categoryTag.className = 'category-tag';
-                categoryTag.setAttribute('data-category', category);
-                categoryTag.setAttribute('data-parent', parentCategory);
-                
-                // 카테고리별 아이콘 설정
-                let icon = getIconForCategory(category.toLowerCase());
-                categoryTag.innerHTML = icon + ' ' + category;
-                
-                // 제목 앞에 태그 추가
-                pageTitle.insertBefore(categoryTag, pageTitle.firstChild);
-                pageTitle.insertBefore(document.createTextNode(' '), categoryTag.nextSibling);
-            }
-        }
-    }
-    
-    // 포스트 메타데이터에서 카테고리 추출하는 대안 방법
-    const taxonomyItems = document.querySelectorAll('.page__taxonomy-item');
-    if (taxonomyItems.length > 0 && pageTitle && !pageTitle.querySelector('.category-tag')) {
-        // 마지막 카테고리를 주 카테고리로 사용
-        const lastCategory = taxonomyItems[taxonomyItems.length - 1];
-        const categoryText = lastCategory.textContent.trim();
-        
-        const categoryTag = document.createElement('span');
-        categoryTag.className = 'category-tag';
-        categoryTag.setAttribute('data-category', categoryText);
-        categoryTag.setAttribute('data-parent', 'fallback'); // 기본값 설정
-        
-        // 카테고리별 아이콘 설정
-        let icon = getIconForCategory(categoryText.toLowerCase());
-        categoryTag.innerHTML = icon + ' ' + categoryText;
-        
-        pageTitle.insertBefore(categoryTag, pageTitle.firstChild);
-        pageTitle.insertBefore(document.createTextNode(' '), categoryTag.nextSibling);
-    }
-});
 
-// 페이지 로드 후에도 실행 (AJAX 로딩 대응)
-window.addEventListener('load', function() {
-    setTimeout(function() {
-        // Recent Posts가 동적으로 로드되는 경우를 위한 재실행
-        const event = new Event('DOMContentLoaded');
-        document.dispatchEvent(event);
-    }, 1000);
-});
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.initial-content,
+.search-content {
+  flex: 1 0 auto;
+}
+
+.page {
+  @include breakpoint($large) {
+    float: inline-end;
+    width: calc(100% - #{$right-sidebar-width-narrow});
+    padding-inline-end: $right-sidebar-width-narrow;
+  }
+
+  @include breakpoint($x-large) {
+    width: calc(100% - #{$right-sidebar-width});
+    padding-inline-end: $right-sidebar-width;
+  }
+
+  .page__inner-wrap {
+    float: inline-start;
+    margin-top: 1em;
+    margin-inline: 0;
+    width: 100%;
+    clear: both;
+
+    .page__content,
+    .page__meta,
+    .page__share {
+      position: relative;
+      float: inline-start;
+      margin-inline: 0;
+      width: 100%;
+      clear: both;
+    }
+  }
+}
+
+.page__title {
+  margin-top: 0;
+  line-height: 1;
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+  }
+
+  & + .page__meta {
+    margin-top: -0.5em;
+  }
+}
+
+.page__lead {
+  font-family: $global-font-family;
+  font-size: $type-size-4;
+}
+
+.page__content {
+  h2 {
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid $border-color;
+  }
+
+	h1, h2, h3, h4, h5, h6 {
+		.header-link {
+			position: relative;
+			inset-inline-start: 0.5em;
+			opacity: 0;
+			font-size: 0.8em;
+			-webkit-transition: opacity 0.2s ease-in-out 0.1s;
+			-moz-transition: opacity 0.2s ease-in-out 0.1s;
+			-o-transition: opacity 0.2s ease-in-out 0.1s;
+			transition: opacity 0.2s ease-in-out 0.1s;
+		}
+
+		&:hover .header-link {
+			opacity: 1;
+		}
+	}
+
+  p,
+  li,
+  dl {
+    font-size: 1em;
+  }
+
+  /* paragraph indents */
+  p {
+    margin: 0 0 $indent-var;
+
+    /* sibling indentation*/
+    @if $paragraph-indent == true {
+      & + p {
+        text-indent: $indent-var;
+        margin-top: -($indent-var);
+      }
+    }
+  }
+
+  a:not(.btn) {
+    &:hover {
+      text-decoration: underline;
+
+      img {
+        box-shadow: 0 0 10px rgba(#000, 0.25);
+      }
+    }
+  }
+
+  :not(pre) > code {
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    font-size: 0.8em;
+    background: $code-background-color;
+    border-radius: $border-radius;
+
+    &::before,
+    &::after {
+      letter-spacing: -0.2em;
+      content: "\00a0"; /* non-breaking space*/
+    }
+  }
+
+  dt {
+    margin-top: 1em;
+    font-family: $sans-serif;
+    font-weight: bold;
+  }
+
+  dd {
+    margin-inline-start: 1em;
+    font-family: $sans-serif;
+    font-size: $type-size-6;
+  }
+
+  .small {
+    font-size: $type-size-6;
+  }
+
+  /* blockquote citations */
+  blockquote + .small {
+    margin-top: -1.5em;
+    padding-inline-start: 1.25rem;
+  }
+}
+
+.page__hero {
+  position: relative;
+  margin-bottom: 2em;
+  @include clearfix;
+  -webkit-animation: $intro-transition;
+  animation: $intro-transition;
+  -webkit-animation-delay: 0.25s;
+  animation-delay: 0.25s;
+
+  &--overlay {
+    position: relative;
+    margin-bottom: 2em;
+    padding: 3em 0;
+    @include clearfix;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-animation: $intro-transition;
+    animation: $intro-transition;
+    -webkit-animation-delay: 0.25s;
+    animation-delay: 0.25s;
+
+    a {
+      color: #fff;
+    }
+
+    .wrapper {
+      padding-inline: 1em;
+
+      @include breakpoint($x-large) {
+        max-width: $x-large;
+      }
+    }
+
+    .page__title,
+    .page__meta,
+    .page__lead,
+    .btn {
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(#000, 0.5);
+    }
+
+    .page__lead {
+      max-width: $medium;
+    }
+
+    .page__title {
+      font-size: $type-size-2;
+
+      @include breakpoint($small) {
+        font-size: $type-size-1;
+      }
+    }
+  }
+}
+
+.page__hero-image {
+  width: 100%;
+  height: auto;
+  -ms-interpolation-mode: bicubic;
+}
+
+.page__hero-caption {
+  position: absolute;
+  bottom: 0;
+  inset-inline-end: 0;
+  margin: 0 auto;
+  padding: 2px 5px;
+  color: #fff;
+  font-family: $caption-font-family;
+  font-size: $type-size-7;
+  background: #000;
+  text-align: end;
+  z-index: 5;
+  opacity: 0.5;
+  border-radius: $border-radius 0 0 0;
+
+  @include breakpoint($large) {
+    padding: 5px 10px;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+/*
+   Social sharing
+   ========================================================================== */
+
+.page__share {
+  margin-top: 2em;
+  padding-top: 1em;
+  border-top: 1px solid $border-color;
+
+  @include breakpoint(max-width $small) {
+    .btn span {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+  }
+}
+
+.page__share-title {
+  margin-bottom: 10px;
+  font-size: $type-size-6;
+  text-transform: uppercase;
+}
+
+/*
+   Page meta
+   ========================================================================== */
+
+.page__meta {
+  margin-top: 2em;
+  color: $muted-text-color;
+  font-family: $sans-serif;
+  font-size: $type-size-6;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+.page__meta-title {
+  margin-bottom: 10px;
+  font-size: $type-size-6;
+  text-transform: uppercase;
+}
+
+.page__meta-sep::before {
+  content: "\2022";
+  padding-inline: 0.5em;
+}
+
+/*
+   Page taxonomy
+   ========================================================================== */
+
+.page__taxonomy {
+  .sep {
+    display: none;
+  }
+
+  strong {
+    margin-inline-end: 10px;
+  }
+}
+
+.page__taxonomy-item {
+  display: inline-block;
+  margin-inline-end: 5px;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+  text-decoration: none;
+  border: 1px solid mix(#000, $border-color, 25%);
+  border-radius: $border-radius;
+
+  &:hover {
+    text-decoration: none;
+    color: $link-color-hover;
+  }
+}
+
+.taxonomy__section {
+  margin-bottom: 2em;
+  padding-bottom: 1em;
+
+  &:not(:last-child) {
+    border-bottom: solid 1px $border-color;
+  }
+
+  .archive__item-title {
+    margin-top: 0;
+  }
+
+  .archive__subtitle {
+    clear: both;
+    border: 0;
+  }
+
+  + .taxonomy__section {
+    margin-top: 2em;
+  }
+}
+
+.taxonomy__title {
+  margin-bottom: 0.5em;
+  color: $muted-text-color;
+}
+
+.taxonomy__count {
+  color: $muted-text-color;
+}
+
+.taxonomy__index {
+  display: grid;
+  grid-column-gap: 2em;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 1.414em 0;
+  padding: 0;
+  font-size: 0.75em;
+  list-style: none;
+
+  @include breakpoint($large) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0.25em 0;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid $border-color;
+  }
+}
+
+.back-to-top {
+  display: block;
+  clear: both;
+  color: $muted-text-color;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  text-align: end;
+  text-decoration: none;
+}
+
+/*
+   Comments
+   ========================================================================== */
+
+.page__comments {
+  float: inline-start;
+  margin-inline: 0;
+  width: 100%;
+  clear: both;
+}
+
+.page__comments-title {
+  margin-top: 2rem;
+  margin-bottom: 10px;
+  padding-top: 2rem;
+  font-size: $type-size-6;
+  border-top: 1px solid $border-color;
+  text-transform: uppercase;
+}
+
+.page__comments-form {
+  -webkit-transition: $global-transition;
+  transition: $global-transition;
+
+  &.disabled {
+    input,
+    button,
+    textarea,
+    label {
+      pointer-events: none;
+      cursor: not-allowed;
+      filter: alpha(opacity=65);
+      box-shadow: none;
+      opacity: 0.65;
+    }
+  }
+}
+
+.comment {
+  @include clearfix();
+  margin: 1em 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $border-color;
+  }
+}
+
+.comment__avatar-wrapper {
+  float: inline-start;
+  width: 60px;
+  height: 60px;
+
+  @include breakpoint($large) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.comment__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  @include breakpoint($large) {
+    width: 80px;
+    height: 80px;
+    padding: 5px;
+    border: 1px solid $border-color;
+  }
+}
+
+.comment__content-wrapper {
+  float: inline-end;
+  width: calc(100% - 60px);
+
+  @include breakpoint($large) {
+    width: calc(100% - 100px);
+  }
+}
+
+.comment__author {
+  margin: 0;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.comment__date {
+  @extend .page__meta;
+  margin: 0;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+/*
+   Related
+   ========================================================================== */
+
+.page__related {
+  @include clearfix();
+  float: inline-start;
+  margin-top: 2em;
+  padding-top: 1em;
+  border-top: 1px solid $border-color;
+
+  @include breakpoint($large) {
+    float: inline-end;
+    width: calc(100% - #{$right-sidebar-width-narrow});
+  }
+
+  @include breakpoint($x-large) {
+    width: calc(100% - #{$right-sidebar-width});
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.page__related-title {
+  margin-bottom: 10px;
+  font-size: $type-size-6;
+  text-transform: uppercase;
+}
+
+/*
+   Wide Pages
+   ========================================================================== */
+
+.wide {
+  .page, .page__related {
+    @include breakpoint($large) {
+      padding-inline-end: 0;
+    }
+
+    @include breakpoint($x-large) {
+      padding-inline-end: 0;
+    }
+  }
+}
+
+/*
+   Category Tags (배경색만 담당)
+   ========================================================================== */
+
+.category-tag {
+  display: inline-block;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 0.8rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(#000, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(#000, 0.15);
+    text-decoration: none;
+    color: white;
+  }
+
+  // 두 번째 디렉토리 기준 배경색
+  &[data-parent="database"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // 보라색
+  }
+
+  &[data-parent="os"] {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); // 주황색
+  }
+
+  &[data-parent="app"] {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%); // 회색
+  }
+
+  // 기본 색상
+  &:not([data-parent]) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // 기본 보라색
+  }
+}
+
+// Recent Posts 섹션에서의 크기 조정
+.archive__item-title {
+  .category-tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    margin-right: 0.6rem;
+    vertical-align: middle;
+  }
+}
+
+// 다크 모드 지원
+@media (prefers-color-scheme: dark) {
+  .category-tag {
+    border-color: rgba(255, 255, 255, 0.1);
+    
+    &[data-parent="database"] {
+      background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%);
+    }
+
+    &[data-parent="os"] {
+      background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
+    }
+
+    &[data-parent="app"] {
+      background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    }
+
+    &:not([data-parent]) {
+      background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%);
+    }
+  }
+}
+
+// 반응형 디자인
+@include breakpoint(max-width $small) {
+  .category-tag {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.6rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .archive__item-title .category-tag {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.5rem;
+  }
+}
