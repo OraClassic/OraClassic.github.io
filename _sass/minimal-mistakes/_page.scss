@@ -588,38 +588,26 @@ body {
     color: white;
   }
 
-  // 카테고리별 색상 (아이콘 제거)
-  &[data-category*="Oracle"],
-  &[data-category*="oracle"] {
-    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+  // 두 번째 디렉토리 기준 색상 분류
+  &[data-parent="Database"],
+  &[data-parent="database"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // 보라색 그라데이션 (MySQL 스타일)
   }
 
-  &[data-category*="Database"],
-  &[data-category*="database"] {
-    background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+  &[data-parent="OS"],
+  &[data-parent="os"] {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); // 주황색 그라데이션
   }
 
-  &[data-category*="Install"],
-  &[data-category*="install"] {
-    background: linear-gradient(135deg, #45B7D1 0%, #96C93D 100%);
+  &[data-parent="App"],
+  &[data-parent="app"] {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%); // 회색 그라데이션
   }
 
-  &[data-category*="Performance"],
-  &[data-category*="performance"] {
-    background: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
+  // 기본 색상 (분류되지 않은 경우)
+  &:not([data-parent]) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // 기본 보라색
   }
-
-  &[data-category*="Linux"],
-  &[data-category*="linux"] {
-    background: linear-gradient(135deg, #FFA726 0%, #FB8C00 100%);
-  }
-
-  &[data-category*="Security"],
-  &[data-category*="security"] {
-    background: linear-gradient(135deg, #EF5350 0%, #E53935 100%);
-  }
-
-  // 기본 아이콘 제거 - 모든 ::before 삭제
 }
 
 // Recent Posts 섹션에서의 카테고리 태그 스타일
@@ -632,39 +620,28 @@ body {
   }
 }
 
-// 다크 모드 지원 (아이콘 제거)
+// 다크 모드 지원 (두 번째 디렉토리 기준)
 @media (prefers-color-scheme: dark) {
   .category-tag {
     border-color: rgba(255, 255, 255, 0.1);
     
-    &[data-category*="Oracle"],
-    &[data-category*="oracle"] {
-      background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
+    &[data-parent="Database"],
+    &[data-parent="database"] {
+      background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%); // 다크 보라색
     }
 
-    &[data-category*="Database"],
-    &[data-category*="database"] {
-      background: linear-gradient(135deg, #26A69A 0%, #00695C 100%);
+    &[data-parent="OS"],
+    &[data-parent="os"] {
+      background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%); // 다크 주황색
     }
 
-    &[data-category*="Install"],
-    &[data-category*="install"] {
-      background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    &[data-parent="App"],
+    &[data-parent="app"] {
+      background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%); // 다크 회색
     }
 
-    &[data-category*="Performance"],
-    &[data-category*="performance"] {
-      background: linear-gradient(135deg, #E91E63 0%, #AD1457 100%);
-    }
-
-    &[data-category*="Linux"],
-    &[data-category*="linux"] {
-      background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
-    }
-
-    &[data-category*="Security"],
-    &[data-category*="security"] {
-      background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%);
+    &:not([data-parent]) {
+      background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%); // 기본 다크 보라색
     }
   }
 }
