@@ -272,7 +272,7 @@ PS1='[${ORACLE_SID}]$PWD> '
 
 ```bash
 # 1번 서버 환경변수 적용
-[oracle@oraser01 ~]$ . .bash_profile
+. .bash_profile
 ```
 
 #### 2번 서버
@@ -282,10 +282,8 @@ export ORACLE_SID=ORCL2
 ```
 
 ```bash
-# 1번 서버 환경변수 적용
-[oracle@oraser01 ~]$ . .bash_profile
-
-[ORCL2]/home/oracle>
+# 2번 서버 환경변수 적용
+. .bash_profile
 ```
 
 ---
@@ -296,6 +294,14 @@ export ORACLE_SID=ORCL2
 ```bash
 # ORACLEASM 상태 확인
 oracleasm configure
+ORACLEASM_ENABLED=false
+ORACLEASM_UID=
+ORACLEASM_GID=
+ORACLEASM_SCANBOOT=true
+ORACLEASM_SCANORDER=""
+ORACLEASM_SCANEXCLUDE=""
+ORACLEASM_SCAN_DIRECTORIES=""
+ORACLEASM_USE_LOGICAL_BLOCK_SIZE="false"
 
 # ORACLEASM 설정
 oracleasm configure -i
@@ -304,8 +310,23 @@ oracleasm configure -i
 # Start on boot: y
 # Scan on boot: y
 
+# ORACLEASM 상태 재확인
+oracleasm configure
+ORACLEASM_ENABLED=true
+ORACLEASM_UID=oracle
+ORACLEASM_GID=dba
+ORACLEASM_SCANBOOT=true
+ORACLEASM_SCANORDER=""
+ORACLEASM_SCANEXCLUDE=""
+ORACLEASM_SCAN_DIRECTORIES=""
+ORACLEASM_USE_LOGICAL_BLOCK_SIZE="false"
+
 # ASM Mount Point 설정
 oracleasm init
+Creating /dev/oracleasm mount point: /dev/oracleasm
+Loading module "oracleasm": oracleasm
+Configuring "oracleasm" to use device physical block size
+Mounting ASMlib driver filesystem: /dev/oracleasm
 ```
 
 ### Raw Device 설정
