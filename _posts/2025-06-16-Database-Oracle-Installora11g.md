@@ -250,6 +250,19 @@ $(SYSMANBIN) emdctl:
 ```bash
 /app/oracle/oraInventory/orainstRoot.sh
 /app/oracle/product/11.2.0/dbhome_1/root.sh
+	The following environment variables are set as:	　
+    ORACLE_OWNER= oracle	　
+    ORACLE_HOME=  /app/oracle/product/11.2.0/dbhome_1/root.sh	　
+　	　
+Enter the full pathname of the local bin directory: [/usr/local/bin]:	<- 아무 입력없이 엔터키
+The contents of "dbhome" have not changed. No need to overwrite.	　
+The contents of "oraenv" have not changed. No need to overwrite.	　
+The contents of "coraenv" have not changed. No need to overwrite.	　
+　	　
+Entries will be added to the /etc/oratab file as needed by	　
+Database Configuration Assistant when a database is created	　
+Finished running generic part of root script.	　
+Now product-specific root actions will be performed.
 ```
 
 ### 환경변수 적용
