@@ -87,9 +87,16 @@ search: false
   cursor: pointer;
   opacity: 0.7;
   z-index: 10;
-
-.highlight {
-  position: relative;
+  
+  // 추가: 모든 상태에서 흰색 텍스트 강제 적용
+  &, &:hover, &:focus, &:active, &:visited {
+    color: #ffffff !important;
+  }
+  
+  // 혹시 다른 요소가 영향을 주는 경우를 대비
+  * {
+    color: #ffffff !important;
+  }
 }
 
 // 마우스 올릴 때만 Copy 버튼 나오게 하기
@@ -101,6 +108,7 @@ search: false
 
 .highlight:hover .copy-button {
   opacity: 1;
+  color: #ffffff !important;  // hover 상태에서도 흰색 유지
 }
 
 /* 카테고리 링크 커스터마이징 - 다크 테마용 */
