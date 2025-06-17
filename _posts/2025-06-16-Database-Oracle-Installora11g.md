@@ -458,10 +458,10 @@ Database Creation Summary에서 Finish
 
 ![데이터베이스 생성 요약](/assets/Image/ora11ginstall/36.png)
 
-#### 17단계: 최종 확인
-최종 확인 후 OK
+#### 17단계: 설치 단계
+설치되고 있는 상황
 
-![최종 확인](/assets/Image/ora11ginstall/37.png)
+![설치 단계](/assets/Image/ora11ginstall/37.png)
 
 #### 18단계: 설치 완료
 설치 완료 후 Exit
