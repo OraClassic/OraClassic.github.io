@@ -550,6 +550,11 @@ cd $GRID_HOME
 ./gridSetup.sh
 ```
 
+### RAC 1번, 2번 노드 모두 oracleasm listdisks 맞는지 재확인
+```bash
+oracleasm listdisks
+```
+
 > **⚠️ 중요:** root.sh 쉘 스크립트 실행 시 에러 발생하면 무조건 에러를 잡고 NEXT 하기. 로그를 보면서 어떤 부분이 문제인지 파악하는 것이 중요.
 
 
