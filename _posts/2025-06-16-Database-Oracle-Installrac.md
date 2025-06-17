@@ -377,11 +377,29 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 
 # sdc, sdd, sde, sdf에도 동일하게 적용
+
+# 작업 후에 다시 Raw Devce 확인
+ls -la sd*
+
+# 아래와 같이 출력되었다면 정상 
+brw-rw---- 1 root disk 8, 16 Mar  3 22:35 sdb
+brw-rw---- 1 root disk 8, 17 Mar  3 22:35 sdb1
+brw-rw---- 1 root disk 8, 32 Mar  3 22:35 sdc
+brw-rw---- 1 root disk 8, 33 Mar  3 22:35 sdc1
+brw-rw---- 1 root disk 8, 48 Mar  3 22:36 sdd
+brw-rw---- 1 root disk 8, 49 Mar  3 22:36 sdd1
+brw-rw---- 1 root disk 8, 64 Mar  3 22:36 sde
+brw-rw---- 1 root disk 8, 65 Mar  3 22:36 sde1
+brw-rw---- 1 root disk 8, 80 Mar  3 22:37 sdf
+brw-rw---- 1 root disk 8, 81 Mar  3 22:37 sdf1
 ```
 
-### 디스크 그룹 생성
+### 1번 서버 디스크 그룹 설정
 ```bash
-# 크기별로 확인 후 적절히 할당
+# 어떤 디스크가 CRS 인지, DATA 인지, ARCH 인지 확인 하고 생성해야 한다. 
+fdisk -l
+
+# 크기별로 확인 후 적절히 할당 (삭제할 때는 oracleasm delete disk [alias])
 oracleasm createdisk CRS01 /dev/sdb1
 oracleasm createdisk CRS02 /dev/sdc1
 oracleasm createdisk CRS03 /dev/sdd1
@@ -393,17 +411,73 @@ oracleasm scandisks
 
 # 디스크 그룹 확인
 oracleasm listdisks
+
+# 아래와 같이 출력되면 정상
+ARCH01
+CRS01
+CRS02
+CRS03
+DATA01
 ```
 
-### 2번 서버 설정
+### 2번 서버 디스크 그룹 설정
 ```bash
 # ORACLEASM 설정 (1번 서버와 동일)
 oracleasm configure -i
+
+# ORACLEASM 설정 과정
+Default user to own the driver interface []: oracle
+Default group to own the driver interface []: dba
+Start Oracle ASM library driver on boot (y/n) [n]: y
+Scan for Oracle ASM disks on boot (y/n) [y]: y
+Writing Oracle ASM library driver configuration: done
+
+# ORACLEASM 설정 확인
+oracleasm configure
+
+# 아래와 같이 출력되면 정상
+ORACLEASM_ENABLED=true
+ORACLEASM_UID=oracle
+ORACLEASM_GID=dba
+ORACLEASM_SCANBOOT=true
+ORACLEASM_SCANORDER=""
+ORACLEASM_SCANEXCLUDE=""
+ORACLEASM_SCAN_DIRECTORIES=""
+ORACLEASM_USE_LOGICAL_BLOCK_SIZE="false"
+
+# ASM Mount Point 설정
 oracleasm init
+
+# ASM Mount Point 아래와 같이 설정
+Creating /dev/oracleasm mount point: /dev/oracleasm
+Loading module "oracleasm": oracleasm
+Configuring "oracleasm" to use device physical block size
+Mounting ASMlib driver filesystem: /dev/oracleasm
 
 # 디스크 그룹 스캔
 oracleasm scandisks
+
+# 디스크 그룹 스캔 아래와 같이 출력이면 정상
+Reloading disk partitions: done
+Cleaning any stale ASM disks...
+Scanning system for ASM disks...
+Instantiating disk "DATA01"
+Instantiating disk "CRS03"
+Instantiating disk "ARCH01"
+Instantiating disk "CRS02"
+Instantiating disk "CRS01"
+
+# 디스크 그룹 확인
 oracleasm listdisks
+
+# 디스크 그룹 확인 아래와 같이 출력이면 정상
+ARCH01
+CRS01
+CRS02
+CRS03
+DATA01
+
+​
 ```
 
 ---
