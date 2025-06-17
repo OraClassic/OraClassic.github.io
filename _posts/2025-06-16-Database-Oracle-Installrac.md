@@ -334,9 +334,47 @@ Mounting ASMlib driver filesystem: /dev/oracleasm
 cd /dev
 ls -la sd*
 
+# ls 출력 리스트
+brw-rw---- 1 root disk 8, 16 Mar  3 22:33 sdb
+brw-rw---- 1 root disk 8, 32 Mar  3 22:33 sdc
+brw-rw---- 1 root disk 8, 48 Mar  3 22:33 sdd
+brw-rw---- 1 root disk 8, 64 Mar  3 22:33 sde
+brw-rw---- 1 root disk 8, 80 Mar  3 22:33 sdf
+
 # 각 디스크에 파티션 생성
 fdisk /dev/sdb
 # n -> p -> 1 -> 2048 -> 2097151 -> w
+
+# 아래는 설정 과정
+[root@oraser01 dev]# fdisk /dev/sdb
+Command (m for help): n
+Partition type
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (1-4, default 1): 1
+First sector (2048-2097151, default 2048): 2048
+Last sector, +sectors or +size{K,M,G,T,P} (2048-2097151, default 2097151): 2097151
+Created a new partition 1 of type 'Linux' and of size 1023 MiB.
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+[root@oraser01 dev]# fdisk /dev/sdc
+Command (m for help): n
+Partition type
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (1-4, default 1): 1
+First sector (2048-2097151, default 2048): 2048
+Last sector, +sectors or +size{K,M,G,T,P} (2048-2097151, default 2097151): 2097151
+Created a new partition 1 of type 'Linux' and of size 1023 MiB.
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
 
 # sdc, sdd, sde, sdf에도 동일하게 적용
 ```
