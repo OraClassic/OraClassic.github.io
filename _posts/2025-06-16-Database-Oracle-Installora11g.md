@@ -1,10 +1,8 @@
 ---
-
 title: "Install Oracle 11g"
 date: 2025-06-16
 categories: ["Categories","Database", "Oracle", "Install"]
 ---
-
 
 > **환경:** CentOS 7, RAM 8GB
 
@@ -167,32 +165,61 @@ cd database
 
 ### 설치 단계별 진행
 
-1. **보안 업데이트 설정**: 빨간색 콤보박스 체크 해제 후 NEXT
-<p align="center"><img src="/assets/Image/ora11ginstall/1.png" style="margin-bottom: 20px;"></p>
-2. **설치 옵션**: "Install database software only" 체크 후 NEXT
-<p align="center"><img src="/assets/Image/ora11ginstall/2.png" style="margin-bottom: 20px;"></p>
-3. **데이터베이스 설치 옵션**: "Single Instance database Installation" 체크 후 NEXT
-<p align="center"><img src="/assets/Image/ora11ginstall/3.png" style="margin-bottom: 20px;"></p>
-4. **언어 선택**: "Korean"을 Available Languages에서 Selected Languages로 이동 후 NEXT
-<p align="center"><img src="/assets/Image/ora11ginstall/4.png" style="margin-bottom: 20px;"></p>
-5. **데이터베이스 에디션**: "Enterprise Edition" 체크 후 NEXT
-<p align="center"><img src="/assets/Image/ora11ginstall/5.png" style="margin-bottom: 20px;"></p>
-6. **설치 위치**: Bash_profile에서 설정한 ORACLE_BASE, ORACLE_HOME 확인 후 NEXT
-<p align="center"><img src="/assets/Image/ora11ginstall/6.png" style="margin-bottom: 20px;"></p>
-7. **인벤토리 생성**: 경로 체크 후 NEXT
-<p align="center"><img src="/assets/Image/ora11ginstall/7.png" style="margin-bottom: 20px;"></p>
-8. **운영 체제 그룹**: 생성한 그룹명 확인 후 NEXT
-<p align="center"><img src="/assets/Image/ora11ginstall/8.png" style="margin-bottom: 20px;"></p>
-9. **전제 조건 검사**: 빨간색 박스 체크 후 NEXT
-<p align="center"><img src="/assets/Image/ora11ginstall/9.png" style="margin-bottom: 20px;"></p>
-10. **요약**: 최종 확인 후 FINISH
-<p align="center"><img src="/assets/Image/ora11ginstall/10.png" style="margin-bottom: 20px;"></p>
+#### 1단계: 보안 업데이트 설정
+빨간색 콤보박스 체크 해제 후 NEXT
+
+![보안 업데이트 설정](/assets/Image/ora11ginstall/1.png)
+
+#### 2단계: 설치 옵션
+"Install database software only" 체크 후 NEXT
+
+![설치 옵션](/assets/Image/ora11ginstall/2.png)
+
+#### 3단계: 데이터베이스 설치 옵션
+"Single Instance database Installation" 체크 후 NEXT
+
+![데이터베이스 설치 옵션](/assets/Image/ora11ginstall/3.png)
+
+#### 4단계: 언어 선택
+"Korean"을 Available Languages에서 Selected Languages로 이동 후 NEXT
+
+![언어 선택](/assets/Image/ora11ginstall/4.png)
+
+#### 5단계: 데이터베이스 에디션
+"Enterprise Edition" 체크 후 NEXT
+
+![데이터베이스 에디션](/assets/Image/ora11ginstall/5.png)
+
+#### 6단계: 설치 위치
+Bash_profile에서 설정한 ORACLE_BASE, ORACLE_HOME 확인 후 NEXT
+
+![설치 위치](/assets/Image/ora11ginstall/6.png)
+
+#### 7단계: 인벤토리 생성
+경로 체크 후 NEXT
+
+![인벤토리 생성](/assets/Image/ora11ginstall/7.png)
+
+#### 8단계: 운영 체제 그룹
+생성한 그룹명 확인 후 NEXT
+
+![운영 체제 그룹](/assets/Image/ora11ginstall/8.png)
+
+#### 9단계: 전제 조건 검사
+빨간색 박스 체크 후 NEXT
+
+![전제 조건 검사](/assets/Image/ora11ginstall/9.png)
+
+#### 10단계: 요약
+최종 확인 후 FINISH
+
+![요약](/assets/Image/ora11ginstall/10.png)
 
 ### 설치 중 오류 해결
 
-#### 84% 지점 오류 해결
+#### 84% 지점에서 발생하는 오류 해결
 
-설치 도중 84% 지점에서 오류가 발생할 수 있습니다.
+설치 도중 84% 지점에서 다음과 같은 오류가 발생할 수 있습니다:
 
 ```bash
 Error in invoking target 'install' of makefile 
@@ -200,9 +227,9 @@ Error in invoking target 'install' of makefile
 '/app/oraInventory/logs/installActions2023-09-07_13-02-14PM.log' for details
 ```
 
-#### 해결 방안
+**해결 방법:**
 
-아래의 경로로 이동하여 해당 파일을 open:
+아래의 경로로 이동하여 해당 파일을 편집:
 ```bash
 cd /app/product/11.2.0/dbhome_1/ctx/lib
 vi ins_ctx.mk
@@ -211,18 +238,18 @@ vi ins_ctx.mk
 다음 구문을 찾아서:
 ```bash
 ctxhx: $(CTXHXOBJ)     
-
    $(LINK_CTXHX) $(CTXHXOBJ) $(INSO_LINK) 
 ```
 
 다음과 같이 수정:
 ```bash
 ctxhx: $(CTXHXOBJ)     
-
    -static $(LINK_CTXHX) $(CTXHXOBJ) $(INSO_LINK) 
 ```
 
 #### 추가 오류 해결
+
+다음과 같은 오류가 발생할 수 있습니다:
 
 ```bash
 Error in invoking target 'agent nmhs' of makefile '/app/oracle/product/11.2.0/dbhome_1/sysman/lib/ins_emagent.mk'.
@@ -231,9 +258,9 @@ See
 details.
 ```
 
-#### 해결 방안
+**해결 방법:**
 
-아래의 경로로 이동하여 해당 파일을 open:
+아래의 경로로 이동하여 해당 파일을 편집:
 ```bash
 cd app/oracle/product/11.2.0/dbhome_1/sysman/lib
 vi ins_emagent.mk
@@ -242,41 +269,39 @@ vi ins_emagent.mk
 다음 구문을 찾아서:
 ```bash
 $(SYSMANBIN) emdctl:     
-
    $(MK_EMAGENT_NMECTL) 
 ```
 
 다음과 같이 수정:
 ```bash
 $(SYSMANBIN) emdctl:     
-
    $(MK_EMAGENT_NMECTL) -lnnz11 
 ```
 
-#### 스크립트 실행
+### 설치 완료 후 스크립트 실행
 
 설치 완료 후 root 계정으로 다음 스크립트들을 실행:
 
 ```bash
 /app/oracle/oraInventory/orainstRoot.sh
 /app/oracle/product/11.2.0/dbhome_1/root.sh
-	The following environment variables are set as:	　
-    ORACLE_OWNER= oracle	　
-    ORACLE_HOME=  /app/oracle/product/11.2.0/dbhome_1/root.sh	　
-　	　
-Enter the full pathname of the local bin directory: [/usr/local/bin]:	<- 아무 입력없이 엔터키
-The contents of "dbhome" have not changed. No need to overwrite.	　
-The contents of "oraenv" have not changed. No need to overwrite.	　
-The contents of "coraenv" have not changed. No need to overwrite.	　
-　	　
-Entries will be added to the /etc/oratab file as needed by	　
-Database Configuration Assistant when a database is created	　
-Finished running generic part of root script.	　
-Now product-specific root actions will be performed.
 ```
 
-다시 오라클 설치화면으로 돌아가서 OK 누르고 결과창 확인
-<p align="center"><img src="/assets/Image/ora11ginstall/11.png" style="margin-bottom: 20px;"></p>
+root.sh 실행 시 다음과 같은 메시지가 나타납니다:
+
+```bash
+The following environment variables are set as:
+    ORACLE_OWNER= oracle
+    ORACLE_HOME=  /app/oracle/product/11.2.0/dbhome_1/root.sh
+
+Enter the full pathname of the local bin directory: [/usr/local/bin]:
+```
+
+아무 입력없이 엔터키를 누르면 됩니다.
+
+다시 오라클 설치화면으로 돌아가서 OK를 누르고 결과창을 확인합니다.
+
+![설치 완료](/assets/Image/ora11ginstall/11.png)
 
 ### 환경변수 적용
 
@@ -299,24 +324,47 @@ cd /app/oracle/product/11.2.0/dbhome_1/bin
 netca
 ```
 
-### 리스너 설정 단계
+### 리스너 설정 단계별 진행
 
-1. "Listener configuration" 선택 후 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/12.png" style="margin-bottom: 20px;"></p>
-2. Add 선택 후 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/13.png" style="margin-bottom: 20px;"></p>
-3. 리스너 이름 확인 후 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/14.png" style="margin-bottom: 20px;"></p>
-4. 프로토콜 선택 후 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/15.png" style="margin-bottom: 20px;"></p>
-5. Oracle 기본 port 1521 확인 후 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/16.png" style="margin-bottom: 20px;"></p>
-6. 추가 리스너 문의에 "No" 체크 후 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/17.png" style="margin-bottom: 20px;"></p>
-7. Listener Configuration Done 화면에서 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/18.png" style="margin-bottom: 20px;"></p>
-8. Finish로 창 종료
-<p align="center"><img src="/assets/Image/ora11ginstall/19.png" style="margin-bottom: 20px;"></p>
+#### 1단계: 리스너 구성 선택
+"Listener configuration" 선택 후 Next
+
+![리스너 구성](/assets/Image/ora11ginstall/12.png)
+
+#### 2단계: 리스너 추가
+Add 선택 후 Next
+
+![리스너 추가](/assets/Image/ora11ginstall/13.png)
+
+#### 3단계: 리스너 이름 확인
+리스너 이름 확인 후 Next
+
+![리스너 이름](/assets/Image/ora11ginstall/14.png)
+
+#### 4단계: 프로토콜 선택
+프로토콜 선택 후 Next
+
+![프로토콜 선택](/assets/Image/ora11ginstall/15.png)
+
+#### 5단계: 포트 설정
+Oracle 기본 port 1521 확인 후 Next
+
+![포트 설정](/assets/Image/ora11ginstall/16.png)
+
+#### 6단계: 추가 리스너 설정
+추가 리스너 문의에 "No" 체크 후 Next
+
+![추가 리스너](/assets/Image/ora11ginstall/17.png)
+
+#### 7단계: 리스너 구성 완료
+Listener Configuration Done 화면에서 Next
+
+![리스너 구성 완료](/assets/Image/ora11ginstall/18.png)
+
+#### 8단계: 완료
+Finish로 창 종료
+
+![완료](/assets/Image/ora11ginstall/19.png)
 
 ## 6. 데이터베이스 생성
 
@@ -326,45 +374,99 @@ netca
 dbca
 ```
 
-### 데이터베이스 생성 단계
+### 데이터베이스 생성 단계별 진행
 
-1. Welcome 화면에서 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/20.png" style="margin-bottom: 20px;"></p>
-2. "Create a Database" 선택 후 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/21.png" style="margin-bottom: 20px;"></p>
-3. "General Purpose or Transaction Processing" 선택 후 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/22.png" style="margin-bottom: 20px;"></p>
-4. .bash_profile에서 설정한 SID 네임 설정 후 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/23.png" style="margin-bottom: 20px;"></p>
-5. Management Options에서 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/24.png" style="margin-bottom: 20px;"></p>
-6. "Use the Same Administrative Password for All Accounts" 선택 후 비밀번호 설정
-<p align="center"><img src="/assets/Image/ora11ginstall/25.png" style="margin-bottom: 20px;"></p>
-7. Password 확인 창에서 Yes 클릭
-<p align="center"><img src="/assets/Image/ora11ginstall/26.png" style="margin-bottom: 20px;"></p>
-8. "Use Common Location for All Database Files" 선택 후 oradata 경로 지정
-<p align="center"><img src="/assets/Image/ora11ginstall/27.png" style="margin-bottom: 20px;"></p>
-9. Recovery Configuration에서 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/28.png" style="margin-bottom: 20px;"></p>
-10. Database Content에서 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/29.png" style="margin-bottom: 20px;"></p>
-11. Memory 설정 
-<p align="center"><img src="/assets/Image/ora11ginstall/30.png" style="margin-bottom: 20px;"></p>
-12. "Sizing" 클릭 후 설정
-<p align="center"><img src="/assets/Image/ora11ginstall/31.png" style="margin-bottom: 20px;"></p>
-13. "Character Sets" 클릭 후 설정
-<p align="center"><img src="/assets/Image/ora11ginstall/32.png" style="margin-bottom: 20px;"></p>
-14. "Connection Mode" 클릭 후 설정
-<p align="center"><img src="/assets/Image/ora11ginstall/33.png" style="margin-bottom: 20px;"></p>
-15. Creation Options에서 Next
-<p align="center"><img src="/assets/Image/ora11ginstall/34.png" style="margin-bottom: 20px;"></p>
-<p align="center"><img src="/assets/Image/ora11ginstall/35.png" style="margin-bottom: 20px;"></p>
-16. Database Creation Summary에서 Finish
-<p align="center"><img src="/assets/Image/ora11ginstall/36.png" style="margin-bottom: 20px;"></p>
-17. 최종 확인 후 OK
-<p align="center"><img src="/assets/Image/ora11ginstall/37.png" style="margin-bottom: 20px;"></p>
-18. 설치 완료 후 Exit
-<p align="center"><img src="/assets/Image/ora11ginstall/38.png" style="margin-bottom: 20px;"></p>
+#### 1단계: 시작 화면
+Welcome 화면에서 Next
+
+![시작 화면](/assets/Image/ora11ginstall/20.png)
+
+#### 2단계: 데이터베이스 생성 선택
+"Create a Database" 선택 후 Next
+
+![데이터베이스 생성](/assets/Image/ora11ginstall/21.png)
+
+#### 3단계: 템플릿 선택
+"General Purpose or Transaction Processing" 선택 후 Next
+
+![템플릿 선택](/assets/Image/ora11ginstall/22.png)
+
+#### 4단계: 데이터베이스 식별
+.bash_profile에서 설정한 SID 네임 설정 후 Next
+
+![데이터베이스 식별](/assets/Image/ora11ginstall/23.png)
+
+#### 5단계: 관리 옵션
+Management Options에서 Next
+
+![관리 옵션](/assets/Image/ora11ginstall/24.png)
+
+#### 6단계: 데이터베이스 자격 증명
+"Use the Same Administrative Password for All Accounts" 선택 후 비밀번호 설정
+
+![데이터베이스 자격 증명](/assets/Image/ora11ginstall/25.png)
+
+#### 7단계: 비밀번호 확인
+Password 확인 창에서 Yes 클릭
+
+![비밀번호 확인](/assets/Image/ora11ginstall/26.png)
+
+#### 8단계: 저장소 옵션
+"Use Common Location for All Database Files" 선택 후 oradata 경로 지정
+
+![저장소 옵션](/assets/Image/ora11ginstall/27.png)
+
+#### 9단계: 복구 구성
+Recovery Configuration에서 Next
+
+![복구 구성](/assets/Image/ora11ginstall/28.png)
+
+#### 10단계: 데이터베이스 콘텐츠
+Database Content에서 Next
+
+![데이터베이스 콘텐츠](/assets/Image/ora11ginstall/29.png)
+
+#### 11단계: 메모리 설정
+Memory 설정
+
+![메모리 설정](/assets/Image/ora11ginstall/30.png)
+
+#### 12단계: 크기 설정
+"Sizing" 클릭 후 설정
+
+![크기 설정](/assets/Image/ora11ginstall/31.png)
+
+#### 13단계: 문자 집합 설정
+"Character Sets" 클릭 후 설정
+
+![문자 집합](/assets/Image/ora11ginstall/32.png)
+
+#### 14단계: 연결 모드 설정
+"Connection Mode" 클릭 후 설정
+
+![연결 모드](/assets/Image/ora11ginstall/33.png)
+
+#### 15단계: 생성 옵션
+Creation Options에서 Next
+
+![생성 옵션](/assets/Image/ora11ginstall/34.png)
+
+![생성 옵션 상세](/assets/Image/ora11ginstall/35.png)
+
+#### 16단계: 데이터베이스 생성 요약
+Database Creation Summary에서 Finish
+
+![데이터베이스 생성 요약](/assets/Image/ora11ginstall/36.png)
+
+#### 17단계: 최종 확인
+최종 확인 후 OK
+
+![최종 확인](/assets/Image/ora11ginstall/37.png)
+
+#### 18단계: 설치 완료
+설치 완료 후 Exit
+
+![설치 완료](/assets/Image/ora11ginstall/38.png)
 
 ## 7. 데이터베이스 및 리스너 실행
 
@@ -425,18 +527,29 @@ lsnrctl start
 lsnrctl status
 ```
 
-### Navicat 설정
+### Navicat 설정 단계
 
-1. Navicat에서 "연결" 버튼 클릭
-2. "Oracle" 선택
-3. 연결 정보 입력:
-   - **호스트**: Oracle DB 서버 IP
-   - **서비스 이름**: 생성한 인스턴스 이름 (testdb)
-   - **사용자 이름**: sys
-   - **비밀번호**: 설정한 관리자 비밀번호
-4. "고급" 탭에서 역할을 "SYSDBA"로 변경
-5. "테스트 연결"로 연결 확인
-6. 연결 성공 시 "확인" 클릭
+#### 1단계: 연결 생성
+Navicat에서 "연결" 버튼 클릭
+
+#### 2단계: 데이터베이스 유형 선택
+"Oracle" 선택
+
+#### 3단계: 연결 정보 입력
+다음 정보를 입력:
+- **호스트**: Oracle DB 서버 IP
+- **서비스 이름**: 생성한 인스턴스 이름 (testdb)
+- **사용자 이름**: sys
+- **비밀번호**: 설정한 관리자 비밀번호
+
+#### 4단계: 고급 설정
+"고급" 탭에서 역할을 "SYSDBA"로 변경
+
+#### 5단계: 연결 테스트
+"테스트 연결"로 연결 확인
+
+#### 6단계: 설정 완료
+연결 성공 시 "확인" 클릭
 
 ## 주요 명령어 정리
 
