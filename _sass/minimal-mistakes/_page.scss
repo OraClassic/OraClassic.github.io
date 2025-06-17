@@ -559,3 +559,161 @@ body {
     }
   }
 }
+
+/*
+   Category Tags for Post Titles
+   ========================================================================== */
+
+.category-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 0.8rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(#000, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(#000, 0.15);
+    text-decoration: none;
+    color: white;
+  }
+
+  // 카테고리별 색상 및 아이콘
+  &[data-category*="Oracle"],
+  &[data-category*="oracle"] {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+    
+    &::before {
+      content: "🗃️ ";
+      margin-right: 0.3rem;
+    }
+  }
+
+  &[data-category*="Database"],
+  &[data-category*="database"] {
+    background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+    
+    &::before {
+      content: "💾 ";
+      margin-right: 0.3rem;
+    }
+  }
+
+  &[data-category*="Install"],
+  &[data-category*="install"] {
+    background: linear-gradient(135deg, #45B7D1 0%, #96C93D 100%);
+    
+    &::before {
+      content: "⚙️ ";
+      margin-right: 0.3rem;
+    }
+  }
+
+  &[data-category*="Performance"],
+  &[data-category*="performance"] {
+    background: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
+    
+    &::before {
+      content: "📊 ";
+      margin-right: 0.3rem;
+    }
+  }
+
+  &[data-category*="Linux"],
+  &[data-category*="linux"] {
+    background: linear-gradient(135deg, #FFA726 0%, #FB8C00 100%);
+    
+    &::before {
+      content: "🐧 ";
+      margin-right: 0.3rem;
+    }
+  }
+
+  &[data-category*="Security"],
+  &[data-category*="security"] {
+    background: linear-gradient(135deg, #EF5350 0%, #E53935 100%);
+    
+    &::before {
+      content: "🔒 ";
+      margin-right: 0.3rem;
+    }
+  }
+
+  // 기본 아이콘 (특정 카테고리가 아닌 경우)
+  &:not([data-category*="Oracle"]):not([data-category*="oracle"]):not([data-category*="Database"]):not([data-category*="database"]):not([data-category*="Install"]):not([data-category*="install"]):not([data-category*="Performance"]):not([data-category*="performance"]):not([data-category*="Linux"]):not([data-category*="linux"]):not([data-category*="Security"]):not([data-category*="security"])::before {
+    content: "📁 ";
+    margin-right: 0.3rem;
+  }
+}
+
+// Recent Posts 섹션에서의 카테고리 태그 스타일
+.archive__item-title {
+  .category-tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    margin-right: 0.6rem;
+    vertical-align: middle;
+  }
+}
+
+// 다크 모드 지원
+@media (prefers-color-scheme: dark) {
+  .category-tag {
+    border-color: rgba(255, 255, 255, 0.1);
+    
+    &[data-category*="Oracle"],
+    &[data-category*="oracle"] {
+      background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
+    }
+
+    &[data-category*="Database"],
+    &[data-category*="database"] {
+      background: linear-gradient(135deg, #26A69A 0%, #00695C 100%);
+    }
+
+    &[data-category*="Install"],
+    &[data-category*="install"] {
+      background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    }
+
+    &[data-category*="Performance"],
+    &[data-category*="performance"] {
+      background: linear-gradient(135deg, #E91E63 0%, #AD1457 100%);
+    }
+
+    &[data-category*="Linux"],
+    &[data-category*="linux"] {
+      background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+    }
+
+    &[data-category*="Security"],
+    &[data-category*="security"] {
+      background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%);
+    }
+  }
+}
+
+// 반응형 디자인
+@include breakpoint(max-width $small) {
+  .category-tag {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.6rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .archive__item-title .category-tag {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.5rem;
+  }
+}
