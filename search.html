@@ -20,17 +20,28 @@ author_profile: false
 </div>
 
 <script>
+// 전역 변수로 포스트 데이터 저장
+let allPosts = [];
+
+// 포스트 데이터 로드
 async function loadPosts() {
   try {
     const response = await fetch('/search.json');
-    return await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const posts = await response.json();
+    console.log('로드된 포스트 수:', posts.length); // 디버깅용
+    return posts;
   } catch (error) {
     console.error('검색 데이터 로딩 오류:', error);
-    return testPosts; // 실패 시 테스트 데이터 사용
+    // 실패 시 빈 배열 반환
+    return [];
   }
 }
 
-function initSearch() {
+// 검색 초기화
+async function initSearch() {
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
   
@@ -39,36 +50,73 @@ function initSearch() {
     return;
   }
   
+  // 포스트 데이터 로드
+  allPosts = await loadPosts();
+  
+  if (allPosts.length === 0) {
+    searchResults.innerHTML = `
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <h3>포스트를 불러올 수 없습니다</h3>
+        <p>잠시 후 다시 시도해주세요.</p>
+      </div>
+    `;
+    return;
+  }
+  
   // 처음에 모든 포스트 표시
-  displayResults(testPosts, '');
+  displayResults(allPosts, '');
   
   // 검색 기능
   searchInput.addEventListener('input', function(e) {
-    const query = e.target.value.toLowerCase();
+    const query = e.target.value.toLowerCase().trim();
     
     if (!query) {
-      displayResults(testPosts, '');
+      displayResults(allPosts, '');
       return;
     }
     
-    const results = testPosts.filter(post => 
-      post.title.toLowerCase().includes(query) ||
-      post.content.toLowerCase().includes(query) ||
-      post.categories.some(cat => cat.toLowerCase().includes(query))
-    );
+    const results = allPosts.filter(post => {
+      // 제목 검색
+      if (post.title && post.title.toLowerCase().includes(query)) {
+        return true;
+      }
+      
+      // 내용 검색
+      if (post.content && post.content.toLowerCase().includes(query)) {
+        return true;
+      }
+      
+      // 카테고리 검색
+      if (post.categories && Array.isArray(post.categories)) {
+        return post.categories.some(cat => cat.toLowerCase().includes(query));
+      }
+      
+      return false;
+    });
     
     displayResults(results, query);
   });
 }
 
+// 검색 결과 표시
 function displayResults(results, query) {
   const searchResults = document.getElementById('search-results');
   
-  if (results.length === 0) {
+  if (results.length === 0 && query) {
     searchResults.innerHTML = `
       <div style="text-align: center; padding: 40px; color: #666;">
         <h3>검색 결과가 없습니다</h3>
         <p>"${query}"에 대한 검색 결과를 찾을 수 없습니다.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  if (results.length === 0 && !query) {
+    searchResults.innerHTML = `
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <h3>포스트가 없습니다</h3>
+        <p>아직 작성된 포스트가 없습니다.</p>
       </div>
     `;
     return;
@@ -81,12 +129,12 @@ function displayResults(results, query) {
     ${results.map(post => `
       <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
         <h3 style="margin: 0 0 10px 0;">
-          <a href="${post.url}" style="color: #2c3e50; text-decoration: none;">${post.title}</a>
+          <a href="${post.url}" style="color: #2c3e50; text-decoration: none;">${highlightSearchTerm(post.title, query)}</a>
         </h3>
         <div style="color: #666; font-size: 14px; margin-bottom: 10px;">
-          ${post.date} | ${post.categories.join(', ')}
+          ${formatDate(post.date)} ${post.categories && post.categories.length > 0 ? '| ' + post.categories.join(', ') : ''}
         </div>
-        <p style="color: #666; margin: 0;">${post.content}</p>
+        <p style="color: #666; margin: 0;">${highlightSearchTerm(truncateText(post.content, 150), query)}</p>
       </div>
     `).join('')}
   `;
@@ -94,13 +142,43 @@ function displayResults(results, query) {
   searchResults.innerHTML = resultsHtml;
 }
 
+// 검색어 하이라이트
+function highlightSearchTerm(text, query) {
+  if (!query || !text) return text;
+  
+  const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
+  return text.replace(regex, '<mark style="background-color: #fff3cd; padding: 2px 4px; border-radius: 3px;">$1</mark>');
+}
+
+// 정규식 특수문자 이스케이프
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// 텍스트 자르기
+function truncateText(text, maxLength) {
+  if (!text) return '';
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength) + '...';
+}
+
+// 날짜 포맷
+function formatDate(dateString) {
+  if (!dateString) return '';
+  
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', initSearch);
 
-// 만약 DOMContentLoaded가 이미 실행되었다면
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initSearch);
-} else {
+// 이미 로드된 경우에도 실행
+if (document.readyState !== 'loading') {
   initSearch();
 }
 </script>
