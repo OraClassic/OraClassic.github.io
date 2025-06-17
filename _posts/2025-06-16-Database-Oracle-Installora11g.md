@@ -185,6 +185,15 @@ cd database
 설치 도중 84% 지점에서 오류가 발생할 수 있습니다.
 
 ```bash
+Error in invoking target 'install' of makefile 
+'/app/product/11.2.0/dbhome_1/ctx/lib/ins_ctx.mk'. See 
+'/app/oraInventory/logs/installActions2023-09-07_13-02-14PM.log' for details
+```
+
+## 해결 방안
+
+아래의 경로로 이동하여 해당 파일을 open:
+```bash
 cd /app/product/11.2.0/dbhome_1/ctx/lib
 vi ins_ctx.mk
 ```
