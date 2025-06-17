@@ -127,7 +127,7 @@ author:
       icon: "fas fa-fw fa-envelope-square"
       # url: "mailto:your.name@email.com"
     - label: "Littlefox"
-      icon: "fas fa-fw fa-link"
+      icon: "fas fa-fw fa-building"
       url: "https://your-littlefox-url.com"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
