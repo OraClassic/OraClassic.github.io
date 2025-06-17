@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function getIconForCategory(category) {
     const iconMap = {
         // 데이터베이스 DBMS
-        'oracle': '🔴',        // Oracle 빨간 원
+        'oracle': '<img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/oracle.svg" width="16" height="16" style="vertical-align: middle;">',        // Oracle 빨간 원
         'mysql': '🐬',         // MySQL 돌고래
         'postgresql': '🐘',    // PostgreSQL 코끼리
         'postgres': '🐘',      // PostgreSQL 축약
