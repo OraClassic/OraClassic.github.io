@@ -62,7 +62,7 @@ function getIconForCategory(category) {
         
         // 프로그래밍 언어
         'java': '☕',         // Java 커피
-        'python': '🐍',       // Python 뱀
+        'python': '<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="16" height="16" style="vertical-align: middle;">',       // Python 뱀
         'javascript': '🟨',   // JavaScript 노란색
         'js': '🟨',          // JavaScript 축약
         'typescript': '🔷',   // TypeScript 파란 다이아몬드
