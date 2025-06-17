@@ -9,12 +9,16 @@ categories: ["Categories","Database", "Oracle", "Install"]
 
 ## Real Application Cluster
 
+![보안 업데이트 설정](/assets/Image/oraRACinstall/1.png)
+
 ---
 
 ## 0. 설치하기 전 주의사항
 
 1. **RAC 서버 구축할 때 네트워크 쪽 무조건 "NAT 네트워크"로 설정한다.** 일반 NAT으로 하면 root.sh 실행할 때 에러 생김
 2. **RAC 2번 구축할 때 1번 복제로 구축했다면, MAC 주소 초기화 시키기** (어댑터 1, 2 둘 다)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/2.png)
 
 ---
 
@@ -38,6 +42,8 @@ categories: ["Categories","Database", "Oracle", "Install"]
 
 ## 2. 시스템 요구사항
 
+![보안 업데이트 설정](/assets/Image/oraRACinstall/3.png)
+
 **주의사항:**
 1. Hostname 설정
 2. 모든 서버 네트워크 카드 장치명 동일하게
@@ -56,13 +62,23 @@ categories: ["Categories","Database", "Oracle", "Install"]
 
 ### 설정 순서
 1. ORARAC
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/4.png)
 2. ORARAC2
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/5.png)
 3. ORARAC3
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/6.png)
 4. 다 설정 후, 공유 디스크 관리자에서 5개 디스크들 모두 **'공유 가능'**으로 바꿔주기
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/7.png)
 
 ---
 
 ## 4. OS 설정
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/8.png)
 
 ### 시스템 확인
 ```bash
@@ -85,7 +101,7 @@ yum install lib*
 yum --enablerepo=ol8_codeready_builder install -y libnsl2-devel
 ```
 
-### hosts 파일 설정
+### hosts 파일 설정 (RAC 1번, 2번 노드 동일하게)
 ```bash
 vi /etc/hosts
 ```
@@ -107,7 +123,7 @@ vi /etc/hosts
 192.168.56.13   oraser-scan
 ```
 
-### 커널 파라미터 설정
+### 커널 파라미터 설정 (RAC 1번, 2번 노드 동일하게)
 ```bash
 vi /etc/sysctl.conf
 ```
@@ -132,7 +148,7 @@ net.ipv4.ip_local_port_range = 9000 65500
 sysctl -p
 ```
 
-### 리소스 제한 설정
+### 리소스 제한 설정 (RAC 1번, 2번 노드 동일하게) 
 ```bash
 vi /etc/security/limits.conf
 ```
@@ -148,7 +164,7 @@ oracle soft memlock 3774874
 oracle hard memlock 3774874
 ```
 
-### 네트워크 설정
+### 네트워크 설정 (RAC 1번, 2번 노드 동일하게)
 ```bash
 vi /etc/sysconfig/network
 ```
@@ -157,7 +173,7 @@ vi /etc/sysconfig/network
 NOZEROCONF=yes
 ```
 
-### ASM 라이브러리 설치 (1,2번 둘 다)
+### ASM 라이브러리 설치 (RAC 1번, 2번 노드 동일하게)
 ```bash
 # ASM 라이브러리 설치
 rpm -ivh oracleasmlib-2.0.17-1.el8.x86_64.rpm
@@ -169,7 +185,7 @@ yum install oracleasm
 rpm -ivh oracleasm-support-2.1.12-1.el8.x86_64.rpm
 ```
 
-### 방화벽 & SELinux 설정
+### 방화벽 & SELinux 설정 (RAC 1번, 2번 노드 동일하게)
 ```bash
 vi /etc/selinux/config
 ```
@@ -183,7 +199,7 @@ SELINUXTYPE=targeted
 systemctl stop firewalld
 ```
 
-### avahi-daemon 해제
+### avahi-daemon 해제 (RAC 1번, 2번 노드 동일하게)
 ```bash
 # avahi-daemon 중지
 systemctl stop avahi-daemon
@@ -331,7 +347,7 @@ Configuring "oracleasm" to use device physical block size
 Mounting ASMlib driver filesystem: /dev/oracleasm
 ```
 
-### Raw Device 설정
+### 1번 서버 Raw Device 설정
 ```bash
 cd /dev
 ls -la sd*
@@ -485,6 +501,8 @@ DATA01
 ---
 
 ## 7. 그리드 인프라스트럭처 설치
+- 그리드 인프라스트럭처 설치는 RAC 1번 서버에서 진행.
+- 2번 서버의 설치는  SSH를 이용해서 오라클이 네트워크를 통해서 설치를 진행
 
 ### 사전 준비
 ```bash
@@ -507,7 +525,7 @@ chown -R oracle:dba /oracle
 chmod -R 775 /oracle
 ```
 
-### SSH 설정
+### SSH 설정 (RAC 1번, 2번 노드 동일하게)
 ```bash
 cd $GRID_HOME/oui/prov/resources/scripts
 ./sshUserSetup.sh -user oracle -hosts "oraser01 oraser02" -noPromptPassphrase -advanced
@@ -521,12 +539,65 @@ cd $GRID_HOME
 
 > **⚠️ 중요:** root.sh 쉘 스크립트 실행 시 에러 발생하면 무조건 에러를 잡고 NEXT 하기. 로그를 보면서 어떤 부분이 문제인지 파악하는 것이 중요.
 
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/9.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/10.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/11.png)
+
+```bash
+# 참고. https://dataforum.io/display/ORCL/19c+RAC+Silent+%3A+01.+Grid+Install
+
+[ORCL1]/home/oracle> cd $GRID_HOME/oui/prov/resources/scripts
+[ORCL1]/oralce/grid/19c/oui/prov/resources/scripts> ./sshUserSetup.sh -user oracle -hosts "oraser01 oraser02" -noPromptPassphrase -advanced
+```
+
+- enp0s3: ASM & Private
+- enp0s8: Public
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/12.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/13.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/14.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/15.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/16.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/17.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/18.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/19.png)
+
+```bash
+# INS-13016, INS-20802, INS-43080 등 오류 발생
+
+# oinstall 그룹 생성
+/oracle/oraInventory/orainstRoot.sh
+
+# RPM 설치 Master, Slave (root 계정)
+rpm -ivh /oracle/grid/19c/cv/rpm/cvuqdisk-1.0.10-1.rpm        
+
+# ssh 수동 설정 (Master, Slave 모두 다)
+[ORCL1]/home/oracle> cd $GRID_HOME/oui/prov/resources/scripts
+[ORCL1]/oracle/grid/19c/oui/prov/resources/scripts> ./sshUserSetup.sh -user oracle -hosts "oraser01 oraser02" -noPromptPassphrase -advanced
+```
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/20.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/21.png)
+
+
 ---
 
 ## 8. ASM 디스크 그룹 생성
 
-### ASMCA 실행
+### ASMCA 실행 (안되면 해당 경로 권한 확인하거나, oracle로 바꾸고 실행
 ```bash
+su - oracle
 cd $GRID_HOME/bin
 ./asmca
 ```
@@ -536,9 +607,130 @@ cd $GRID_HOME/bin
 - **Disk Groups:** 현재 구성된 디스크 그룹 및 새로운 디스크 그룹 생성 및 삭제
 - **Settings:** ASM 설정
 
+![보안 업데이트 설정](/assets/Image/oraRACinstall/22.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/23.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/24.png)
+
 ### 상태 확인
 ```bash
 crsctl stat res -t
+
+# 결과 리스트
+--------------------------------------------------------------------------------
+
+Name           Target  State        Server                   State details      
+
+--------------------------------------------------------------------------------
+
+Local Resources
+
+--------------------------------------------------------------------------------
+
+ora.LISTENER.lsnr
+
+               ONLINE  ONLINE       oraser01                 STABLE
+
+               ONLINE  ONLINE       oraser02                 STABLE
+
+ora.chad
+
+               ONLINE  ONLINE       oraser01                 STABLE
+
+               ONLINE  ONLINE       oraser02                 STABLE
+
+ora.net1.network
+
+               ONLINE  ONLINE       oraser01                 STABLE
+
+               ONLINE  ONLINE       oraser02                 STABLE
+
+ora.ons
+
+               ONLINE  ONLINE       oraser01                 STABLE
+
+               ONLINE  ONLINE       oraser02                 STABLE
+
+--------------------------------------------------------------------------------
+
+Cluster Resources
+
+--------------------------------------------------------------------------------
+
+ora.ARCH.dg(ora.asmgroup)
+
+      1        ONLINE  ONLINE       oraser01                 STABLE
+
+      2        ONLINE  ONLINE       oraser02                 STABLE
+
+      3        ONLINE  OFFLINE                               STABLE
+
+ora.ASMNET1LSNR_ASM.lsnr(ora.asmgroup)
+
+      1        ONLINE  ONLINE       oraser01                 STABLE
+
+      2        ONLINE  ONLINE       oraser02                 STABLE
+
+      3        OFFLINE OFFLINE                               STABLE
+
+ora.CRS.dg(ora.asmgroup)
+
+      1        ONLINE  ONLINE       oraser01                 STABLE
+
+      2        ONLINE  ONLINE       oraser02                 STABLE
+
+      3        OFFLINE OFFLINE                               STABLE
+
+ora.DATA.dg(ora.asmgroup)
+
+      1        ONLINE  ONLINE       oraser01                 STABLE
+
+      2        ONLINE  ONLINE       oraser02                 STABLE
+
+      3        ONLINE  OFFLINE                               STABLE
+
+ora.LISTENER_SCAN1.lsnr
+
+      1        ONLINE  ONLINE       oraser01                 STABLE
+
+ora.asm(ora.asmgroup)
+
+      1        ONLINE  ONLINE       oraser01                 Started,STABLE
+
+      2        ONLINE  ONLINE       oraser02                 Started,STABLE
+
+      3        OFFLINE OFFLINE                               STABLE
+
+ora.asmnet1.asmnetwork(ora.asmgroup)
+
+      1        ONLINE  ONLINE       oraser01                 STABLE
+
+      2        ONLINE  ONLINE       oraser02                 STABLE
+
+      3        OFFLINE OFFLINE                               STABLE
+
+ora.cvu
+
+      1        ONLINE  ONLINE       oraser01                 STABLE
+
+ora.oraser01.vip
+
+      1        ONLINE  ONLINE       oraser01                 STABLE
+
+ora.oraser02.vip
+
+      1        ONLINE  ONLINE       oraser02                 STABLE
+
+ora.qosmserver
+
+      1        ONLINE  ONLINE       oraser01                 STABLE
+
+ora.scan1.vip
+
+      1        ONLINE  ONLINE       oraser01                 STABLE
+
+--------------------------------------------------------------------------------
 ```
 
 ---
@@ -555,10 +747,50 @@ chown -R oracle:dba /oracle/db
 ./runInstaller
 ```
 
+![보안 업데이트 설정](/assets/Image/oraRACinstall/25.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/26.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/27.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/28.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/29.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/30.png)
+
+
 ### DBCA로 데이터베이스 생성
 ```bash
 dbca
 ```
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/31.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/31.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/33.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/34.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/35.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/36.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/37.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/38.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/39.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/40.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/41.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/42.png)
+
+![보안 업데이트 설정](/assets/Image/oraRACinstall/43.png)
+
 
 ### DB 상태 확인
 ```sql
@@ -582,7 +814,8 @@ Oracle RAC는 ASM(Automatic Storage Management)을 사용하여 데이터 파일
 SELECT * FROM V$CONTROLFILE;
 ```
 
-결과에서 `+DATA`는 ASM 디스크 그룹을 나타낸다. ASM 디스크 그룹은 파일 시스템 경로가 아니라 ASM 인스턴스에 의해 관리되는 스토리지 풀이다.
+결과에서 `+DATA`는 ASM 디스크 그룹을 나타낸다. ASM 디스크 그룹은 파일 시스템 경로가 아니라 ASM 인스턴스에 의해 관리되는 스토리지 풀이다. 
+따라서 물리적인 방법으로 찾을 수는 없다. 대신 ASMCMD 명령어를 이용해서 해당 파일들을 확인할 수 있다.
 
 ### ASMCMD를 통한 파일 확인
 ```bash
