@@ -446,8 +446,15 @@ DATA01
 
 ### 2번 서버 디스크 그룹 설정
 ```bash
-# ORACLEASM 설정 (1번 서버와 동일)
+# ORACLEASM 설정 
 oracleasm configure -i
+
+# ORACLEASM 아래와 같이 설정
+Default user to own the driver interface []: oracle
+Default group to own the driver interface []: dba
+Start Oracle ASM library driver on boot (y/n) [n]: y
+Scan for Oracle ASM disks on boot (y/n) [y]: y
+Writing Oracle ASM library driver configuration: done
 
 # ORACLEASM 설정 과정
 Default user to own the driver interface []: oracle
