@@ -18,6 +18,10 @@ minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "default", "dirt"
 navigation:
   enabled: true
 
+# 제목 옆 태그 JS 적용
+head_scripts:
+  - /assets/js/custom.js
+
 # Site Settings
 locale                   : "en-US"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
