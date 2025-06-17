@@ -312,6 +312,8 @@ export ORACLE_SID=ORCL2
 ```bash
 # ORACLEASM 상태 확인
 oracleasm configure
+
+# ORACLEASM 상태 확인 출력
 ORACLEASM_ENABLED=false
 ORACLEASM_UID=
 ORACLEASM_GID=
@@ -330,6 +332,8 @@ oracleasm configure -i
 
 # ORACLEASM 상태 재확인
 oracleasm configure
+
+# ORACLEASM 상태 재확인 아래와 같이 나오면 정상
 ORACLEASM_ENABLED=true
 ORACLEASM_UID=oracle
 ORACLEASM_GID=dba
@@ -341,6 +345,8 @@ ORACLEASM_USE_LOGICAL_BLOCK_SIZE="false"
 
 # ASM Mount Point 설정
 oracleasm init
+
+# ASM Mount Point 설정 아래와 같이 나오면 정상
 Creating /dev/oracleasm mount point: /dev/oracleasm
 Loading module "oracleasm": oracleasm
 Configuring "oracleasm" to use device physical block size
