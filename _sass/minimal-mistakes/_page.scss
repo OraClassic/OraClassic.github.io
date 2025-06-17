@@ -588,72 +588,38 @@ body {
     color: white;
   }
 
-  // 카테고리별 색상 및 아이콘
+  // 카테고리별 색상 (아이콘 제거)
   &[data-category*="Oracle"],
   &[data-category*="oracle"] {
     background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
-    
-    &::before {
-      content: "🗃️ ";
-      margin-right: 0.3rem;
-    }
   }
 
   &[data-category*="Database"],
   &[data-category*="database"] {
     background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
-    
-    &::before {
-      content: "💾 ";
-      margin-right: 0.3rem;
-    }
   }
 
   &[data-category*="Install"],
   &[data-category*="install"] {
     background: linear-gradient(135deg, #45B7D1 0%, #96C93D 100%);
-    
-    &::before {
-      content: "⚙️ ";
-      margin-right: 0.3rem;
-    }
   }
 
   &[data-category*="Performance"],
   &[data-category*="performance"] {
     background: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
-    
-    &::before {
-      content: "📊 ";
-      margin-right: 0.3rem;
-    }
   }
 
   &[data-category*="Linux"],
   &[data-category*="linux"] {
     background: linear-gradient(135deg, #FFA726 0%, #FB8C00 100%);
-    
-    &::before {
-      content: "🐧 ";
-      margin-right: 0.3rem;
-    }
   }
 
   &[data-category*="Security"],
   &[data-category*="security"] {
     background: linear-gradient(135deg, #EF5350 0%, #E53935 100%);
-    
-    &::before {
-      content: "🔒 ";
-      margin-right: 0.3rem;
-    }
   }
 
-  // 기본 아이콘 (특정 카테고리가 아닌 경우)
-  &:not([data-category*="Oracle"]):not([data-category*="oracle"]):not([data-category*="Database"]):not([data-category*="database"]):not([data-category*="Install"]):not([data-category*="install"]):not([data-category*="Performance"]):not([data-category*="performance"]):not([data-category*="Linux"]):not([data-category*="linux"]):not([data-category*="Security"]):not([data-category*="security"])::before {
-    content: "📁 ";
-    margin-right: 0.3rem;
-  }
+  // 기본 아이콘 제거 - 모든 ::before 삭제
 }
 
 // Recent Posts 섹션에서의 카테고리 태그 스타일
@@ -666,7 +632,7 @@ body {
   }
 }
 
-// 다크 모드 지원
+// 다크 모드 지원 (아이콘 제거)
 @media (prefers-color-scheme: dark) {
   .category-tag {
     border-color: rgba(255, 255, 255, 0.1);
