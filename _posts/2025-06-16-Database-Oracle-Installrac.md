@@ -162,6 +162,9 @@ NOZEROCONF=yes
 # ASM 라이브러리 설치
 rpm -ivh oracleasmlib-2.0.17-1.el8.x86_64.rpm
 
+# 의존성 때문에 설치가 안되면, 아래 설치하고 다시 ASM 라이브러리 설치해보기
+yum install oracleasm
+
 # ASM Support 설치  
 rpm -ivh oracleasm-support-2.1.12-1.el8.x86_64.rpm
 ```
