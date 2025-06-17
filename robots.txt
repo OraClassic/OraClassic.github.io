@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://https://oraclassic.github.io//sitemap.xml
