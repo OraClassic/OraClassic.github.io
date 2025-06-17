@@ -20,23 +20,15 @@ author_profile: false
 </div>
 
 <script>
-// 간단한 테스트용 데이터
-const testPosts = [
-  {
-    title: "Oracle 19c CentOS7 설치 가이드",
-    date: "2025-06-17",
-    categories: ["Database", "Oracle", "Install"],
-    url: "/oracle-19c-install/",
-    content: "Oracle Database 설치 방법을 설명합니다."
-  },
-  {
-    title: "Oracle Statspack 가이드",
-    date: "2025-06-16", 
-    categories: ["Database", "Oracle", "Performance"],
-    url: "/oracle-statspack/",
-    content: "Statspack을 이용한 성능 분석 방법입니다."
+async function loadPosts() {
+  try {
+    const response = await fetch('/search.json');
+    return await response.json();
+  } catch (error) {
+    console.error('검색 데이터 로딩 오류:', error);
+    return testPosts; // 실패 시 테스트 데이터 사용
   }
-];
+}
 
 function initSearch() {
   const searchInput = document.getElementById('search-input');
