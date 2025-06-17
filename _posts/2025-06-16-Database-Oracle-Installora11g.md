@@ -221,8 +221,6 @@ See
 details.
 ```
 
-## 해결 방안
-
 아래의 경로로 이동하여 해당 파일을 open:
 ```bash
 cd app/oracle/product/11.2.0/dbhome_1/sysman/lib
