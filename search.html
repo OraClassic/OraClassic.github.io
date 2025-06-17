@@ -1,0 +1,53 @@
+---
+layout: default
+title: "검색"
+permalink: /search/
+---
+
+<div class="search-container">
+    <h1>블로그 포스트 검색</h1>
+    <p>제목, 내용, 카테고리에서 검색할 수 있습니다</p>
+    
+    <div class="search-input-container">
+        <input type="text" id="search-input" placeholder="검색어를 입력하세요...">
+    </div>
+    
+    <div id="search-results"></div>
+</div>
+
+<style>
+/* 위의 CSS 스타일을 여기에 복사 */
+</style>
+
+<script>
+class BlogSearch {
+    constructor() {
+        this.posts = [];
+        this.searchInput = document.getElementById('search-input');
+        this.searchResults = document.getElementById('search-results');
+        
+        this.init();
+    }
+
+    async init() {
+        await this.loadPosts();
+        this.setupEventListeners();
+        this.displayAllPosts();
+    }
+
+    async loadPosts() {
+        try {
+            const response = await fetch('/search.json');
+            this.posts = await response.json();
+        } catch (error) {
+            console.error('검색 데이터를 불러올 수 없습니다:', error);
+        }
+    }
+
+    // 나머지 JavaScript 코드는 위와 동일
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    new BlogSearch();
+});
+</script>
