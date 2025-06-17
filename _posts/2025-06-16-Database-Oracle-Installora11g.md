@@ -215,6 +215,16 @@ ctxhx: $(CTXHXOBJ)
 #### 추가 오류 해결
 
 ```bash
+Error in invoking target 'agent nmhs' of makefile '/app/oracle/product/11.2.0/dbhome_1/sysman/lib/ins_emagent.mk'.
+See 
+'/app/oraInventory/logs/installActions2023-09-07_13-03-14PM.log' for 
+details.
+```
+
+## 해결 방안
+
+아래의 경로로 이동하여 해당 파일을 open:
+```bash
 cd app/oracle/product/11.2.0/dbhome_1/sysman/lib
 vi ins_emagent.mk
 ```
