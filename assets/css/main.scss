@@ -7,7 +7,7 @@ search: false
 /* 배달의민족 도현체 폰트 import - 수정된 버전 */
 @font-face {
   font-family: 'BMYEONSUNG';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMYEONSUNG.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -66,13 +66,14 @@ html, body, * {
   top: 0.5em;
   right: 0.5em;
   background: #007acc;
-  color: white;
+  color: white !important;
   border: none;
   padding: 0.2em 0.6em;
   font-size: 0.8em;
   border-radius: 4px;
   cursor: pointer;
   opacity: 0.7;
+  z-index: 10; /* 다른 요소 위에 표시되도록 */
 }
 
 .highlight {
@@ -146,6 +147,26 @@ html, body, * {
       
       a {
         color: #ffffff !important;
+        
+        &:hover {
+          color: #00d4aa !important;
+        }
+      }
+      
+      /* 아이콘이 보이도록 설정 */
+      i {
+        color: #ffffff !important;
+        opacity: 1 !important;
+        
+        &:hover {
+          color: #00d4aa !important;
+        }
+      }
+      
+      /* Font Awesome 아이콘 */
+      .fa, .fas, .far, .fab {
+        color: #ffffff !important;
+        opacity: 1 !important;
         
         &:hover {
           color: #00d4aa !important;
