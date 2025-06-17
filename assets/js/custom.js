@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // URL에서 카테고리 추출 (예: /categories/database/oracle/install/...)
         const href = titleLink.getAttribute('href');
         if (href && href.includes('/categories/')) {
-            const pathParts = href.split('/');
+            const pathParts = href.split('/').filter(part => part !== ''); // 빈 문자열 제거
             const categoryIndex = pathParts.indexOf('categories');
             
-            if (categoryIndex !== -1 && pathParts.length > categoryIndex + 3) {
-                // 세 번째 카테고리 (Install, Performance 등)
-                let category = pathParts[categoryIndex + 3];
-                category = category.charAt(0).toUpperCase() + category.slice(1);
+            if (categoryIndex !== -1 && pathParts.length > categoryIndex + 2) {
+                // categories 다음 세 번째 디렉토리 (oracle)
+                let category = pathParts[categoryIndex + 2]; // categories/database/oracle <- 이 부분
+                category = category.charAt(0).toUpperCase() + category.slice(1); // Oracle로 변환
                 
                 // 이미 태그가 있는지 확인
                 if (!titleLink.querySelector('.category-tag')) {
@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // 개별 포스트 페이지의 제목 처리
     const pageTitle = document.querySelector('.page__title');
     if (pageTitle && window.location.pathname.includes('/categories/')) {
-        const pathParts = window.location.pathname.split('/');
+        const pathParts = window.location.pathname.split('/').filter(part => part !== '');
         const categoryIndex = pathParts.indexOf('categories');
         
-        if (categoryIndex !== -1 && pathParts.length > categoryIndex + 3) {
-            let category = pathParts[categoryIndex + 3];
+        if (categoryIndex !== -1 && pathParts.length > categoryIndex + 2) {
+            let category = pathParts[categoryIndex + 2]; // categories/database/oracle <- 이 부분
             category = category.charAt(0).toUpperCase() + category.slice(1);
             
             // 이미 태그가 있는지 확인
