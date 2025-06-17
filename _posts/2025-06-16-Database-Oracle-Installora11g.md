@@ -454,7 +454,7 @@ Creation Options에서 Next
 ![생성 옵션 상세](/assets/Image/ora11ginstall/35.png)
 
 #### 16단계: 데이터베이스 생성 요약
-Database Creation Summary에서 Finish
+Database Creation Summary에서 OK
 
 ![데이터베이스 생성 요약](/assets/Image/ora11ginstall/36.png)
 
