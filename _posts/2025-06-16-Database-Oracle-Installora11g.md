@@ -191,12 +191,16 @@ vi ins_ctx.mk
 
 다음 구문을 찾아서:
 ```bash
-CTXHX_LINKLINE= $(LINK_CTXHX) $(CTXHXOBJ) $(INSO_LINK)
+ctxhx: $(CTXHXOBJ)     
+
+   $(LINK_CTXHX) $(CTXHXOBJ) $(INSO_LINK) 
 ```
 
 다음과 같이 수정:
 ```bash
-CTXHX_LINKLINE= $(LINK_CTXHX) $(CTXHXOBJ) $(INSO_LINK) -lrt
+ctxhx: $(CTXHXOBJ)     
+
+   -static $(LINK_CTXHX) $(CTXHXOBJ) $(INSO_LINK) 
 ```
 
 #### 추가 오류 해결
@@ -208,12 +212,16 @@ vi ins_emagent.mk
 
 다음 구문을 찾아서:
 ```bash
-$(MK_EMAGENT_NMECTL)
+$(SYSMANBIN) emdctl:     
+
+   $(MK_EMAGENT_NMECTL) 
 ```
 
 다음과 같이 수정:
 ```bash
-$(MK_EMAGENT_NMECTL) -lnnz11
+$(SYSMANBIN) emdctl:     
+
+   $(MK_EMAGENT_NMECTL) -lnnz11 
 ```
 
 #### 스크립트 실행
