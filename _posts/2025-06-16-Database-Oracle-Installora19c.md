@@ -134,10 +134,21 @@ hm_test
 [oracle@hm_test ora19c]$ cd /app/ora19c/19c/
 [oracle@hm_test 19c]$ ./runInstaller
 ```
+![보안 업데이트 설정](/assets/Image/ora19cinstall/1.png)
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/2.png)
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/3.png)
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/4.png)
 
 ### 설치 시 주의사항
 
 > **참고**: Swap 쪽은 ignore 하고 지나가도 되는데, 패키지 의존성에서 걸리면 안됩니다. 따라서 세션 하나를 더 띄워서 관련 패키지 설치하고 "Check Again" 버튼을 눌러서 해결한 후, Next 합니다.
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/5.png)
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/6.png)
 
 ## 4. Database Configuration Assistant
 
@@ -146,6 +157,21 @@ Oracle 엔진 설치를 끝냈으니 Database를 설치해봅시다.
 ```bash
 [oracle@hm_test 19c]$ dbca
 ```
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/7.png)
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/8.png)
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/9.png)
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/10.png)
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/11.png)
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/12.png)
+
+![보안 업데이트 설정](/assets/Image/ora19cinstall/13.png)
+
 
 ## 5. 19c 작동 테스트
 
