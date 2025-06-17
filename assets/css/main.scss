@@ -4,24 +4,10 @@ search: false
 ---
 @charset "utf-8";
 
-/* 배달의민족 도현체 폰트 import - 수정된 버전 */
-@font-face {
-  font-family: 'BMYEONSUNG';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* 또는 다른 CDN 시도 */
-@import url('https://fonts.googleapis.com/css2?family=Stylish&display=swap');
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-/* 전체 사이트 폰트를 배달의민족 도현체로 변경 */
-html, body, * {
-  font-family: 'BMYEONSUNG', 'Stylish', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-}
 
 .author__avatar {
   width: 150px;
