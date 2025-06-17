@@ -190,7 +190,7 @@ Error in invoking target 'install' of makefile
 '/app/oraInventory/logs/installActions2023-09-07_13-02-14PM.log' for details
 ```
 
-## 해결 방안
+#### 해결 방안
 
 아래의 경로로 이동하여 해당 파일을 open:
 ```bash
@@ -220,6 +220,8 @@ See
 '/app/oraInventory/logs/installActions2023-09-07_13-03-14PM.log' for 
 details.
 ```
+
+#### 해결 방안
 
 아래의 경로로 이동하여 해당 파일을 open:
 ```bash
