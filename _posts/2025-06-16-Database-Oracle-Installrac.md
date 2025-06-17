@@ -625,6 +625,7 @@ cd $GRID_HOME/bin
 - **Disk Groups:** 현재 구성된 디스크 그룹 및 새로운 디스크 그룹 생성 및 삭제
 - **Settings:** ASM 설정
 
+** 실행했을 때, 그리드가 잘 깔렸다면 아래처럼 인스턴스가 2개 뜬다. **
 ![보안 업데이트 설정](/assets/Image/oraRACinstall/22.png)
 
 ![보안 업데이트 설정](/assets/Image/oraRACinstall/23.png)
