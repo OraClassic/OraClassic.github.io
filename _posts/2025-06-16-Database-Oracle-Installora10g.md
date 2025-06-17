@@ -1,21 +1,18 @@
 ---
-
-title: "Install Oracle 10g"
+title: "Install Oracle 11g"
 date: 2025-06-16
 categories: ["Categories","Database", "Oracle", "Install"]
 ---
 
-> **주의**: OS는 CentOS6 이전 버전으로 설치할 것. 이후 버전은 호환 안됨.
+> **환경:** CentOS 7, RAM 8GB
 
-## 1. 라이브러리 설치
+## 1. 의존 라이브러리 설치
 
 ```bash
-yum update
-
-yum install xorg-x11-xauth binutils compat-libstdc++-296 compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel elfutils-libelf-devel-static gcc gcc-c++ glibc glibc-common glibc-devel ksh libaio libaio-devel libgcc libgomp libstdc++ libstdc++-devel make sysstat glibc-headers unixODBC unixODBC-devel pdksh unixODBC.x86_64 compat-gcc-34.x86_64 compat-libstdc++-33.i686 libstdc++-devel.i686 glibc-devel.i686 libaio-devel.i686 unixODBC.i686 libXt.i686 libXtst.i686 ld-linux.so.2 libXp libXp.so.6 libXext libXt.so.6 libXtst.so.6 xterm xclock unzip
+yum -y install compat-libstdc++-33.x86_64 binutils elfutils-libelf elfutils-libelf-devel glibc glibc-common glibc-devel glibc-headers gcc gcc-c++ libaio-devel libaio libgcc libstdc++ libstdc++ make sysstat unixODBC unixODBC-devel unzip
 ```
 
-## 2. 파라미터 & 유저 리소스
+## 2. 파라미터 및 유저 리소스 설정
 
 ### 시스템 커널 파라미터 설정
 
@@ -23,7 +20,7 @@ yum install xorg-x11-xauth binutils compat-libstdc++-296 compat-libstdc++-33 elf
 vi /etc/sysctl.conf
 ```
 
-다음 내용을 `/etc/sysctl.conf` 파일에 추가:
+다음 내용을 추가:
 
 ```bash
 # 공유 메모리 세그먼트 최대 크기를 설정함
@@ -50,13 +47,13 @@ net.core.wmem_default = 262144
 net.core.wmem_max = 1048586
 ```
 
-변경 후 파라미터 값을 적용:
+변경 후 파라미터 값 적용:
 
 ```bash
 /sbin/sysctl -p
 ```
 
-> **참고**: sysctl은 `/proc/sys/` 파일시스템에 존재하는 파일들의 값을 변경할 수 있는 명령어입니다. `/proc/sys/` 파일시스템은 리눅스의 가상파일시스템으로서 디스크 상에 물리적으로 존재하는 파일 시스템이 아니라 메모리에 존재하는 가상파일시스템으로서 리눅스의 현재 커널 파라미터 값들을 저장하고 있는 일종의 가상 디렉토리입니다.
+> **참고:** sysctl은 `/proc/sys/` 파일시스템에 존재하는 파일들의 값을 변경할 수 있는 명령어입니다. `/proc/sys/` 파일시스템은 리눅스의 가상파일시스템으로서 현재 커널 파라미터 값들을 저장하고 있습니다.
 
 ### 유저 자원 사용 제한값 설정
 
@@ -64,7 +61,7 @@ net.core.wmem_max = 1048586
 vi /etc/security/limits.conf
 ```
 
-다음 내용을 `/etc/security/limits.conf` 파일에 추가:
+다음 내용을 추가:
 
 ```bash
 oracle soft nproc 2048
@@ -73,12 +70,10 @@ oracle soft nofile 1024
 oracle hard nofile 65536
 ```
 
-**설정 의미**:
+- `oracle soft nproc 2048`: oracle 유저는 한번 접속에 soft 세팅으로 2048개의 프로시저를 생성할 수 있음
+- `oracle hard nofile 65536`: oracle 유저는 한번 접속에 hard 세팅으로 65536개 파일까지 열 수 있음
 
-* `oracle soft nproc 2048`: oracle 유저는 한번 접속에 soft 세팅으로 2048개의 프로시저를 생성할 수 있음
-* `oracle hard nofile 65536`: oracle 유저는 한번 접속에 hard 세팅으로 65536개 파일까지 열 수 있음
-
-> **참고**: limits.conf 설정하는 이유는 하나의 유저에 대해서 할당할 자원량의 한계를 정해주어, 리눅스 시스템의 과부하를 막기 위함입니다. hard는 해당쉘의 최대값을 의미, soft는 현재 설정값을 의미합니다.
+> **참고:** hard는 해당 쉘의 최대값을 의미하고, soft는 현재 설정값을 의미합니다.
 
 ### SELINUX 설정 해제
 
@@ -86,13 +81,17 @@ oracle hard nofile 65536
 vi /etc/selinux/config
 ```
 
-SELINUX 설정을 비활성화로 변경합니다.
+다음과 같이 변경:
 
-> **참고**: SELINUX란, 관리자가 시스템 액세스 권한을 효과적으로 제어할 수 있는 리눅스 보안 강화 아키텍처입니다. 즉, 좀 더 보안적인 룰을 적용시켜 운영할 수 있으나, 해당 설정이 되어있을 경우, 특정 데몬들이 selinux 정책에 막혀 접속이 안될 수 있으므로, selinux를 끕니다.
+```bash
+SELINUX=disabled
+```
 
-## 3. 유저, 환경변수, 권한 설정
+> **참고:** SELINUX는 관리자가 시스템 액세스 권한을 효과적으로 제어할 수 있는 리눅스 보안 강화 아키텍처입니다. 특정 데몬들이 selinux 정책에 막혀 접속이 안될 수 있으므로 해제합니다.
 
-### Oracle 유저 생성
+## 3. 유저 생성, 환경변수 설정, 권한 설정
+
+### Oracle 유저 및 그룹 생성
 
 ```bash
 groupadd dba
@@ -100,9 +99,9 @@ useradd -g dba oracle
 passwd oracle
 ```
 
-> **참고**: 따로 gid, uid 설정 안해주면 default 1001로 들어가게 됩니다. (centos7)
+> **참고:** 따로 gid, uid 설정 안해주면 default 1001로 들어가게 됩니다. (CentOS 7)
 
-### Oracle 설치 디렉터리 생성 및 권한 설정
+### 디렉터리 생성 및 권한 설정
 
 ```bash
 mkdir -p /app/oracle
@@ -110,32 +109,30 @@ chown -R oracle:dba /app
 chmod -R 775 /app
 ```
 
-> **참고**: chmod 명령어를 실행한 이유는 `/home/oracle`에서 작업한 것이 아닌, `/app` 디렉토리에서 진행했기 때문입니다.
-
 ### Oracle 환경변수 설정
 
-Oracle 계정으로 접속하여 환경변수를 설정:
+Oracle 계정으로 접속:
 
 ```bash
 su - oracle
 vi .bash_profile
 ```
 
-`.bash_profile` 파일에 다음 내용 추가:
+다음 내용을 추가:
 
 ```bash
 umask 022
 
 export DB_UNIQUE_NAME=testdb
 export ORACLE_BASE=/app/oracle
-export ORACLE_HOME=$ORACLE_BASE/product/10g/dbhome_1
+export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/dbhome_1
 export NLS_LANG=AMERICAN_AMERICA.KO16MSWIN949
 export TNS_ADMIN=$ORACLE_HOME/network/admin
 export PATH=$PATH:$ORACLE_HOME/bin:$ORACLE_HOME/OPatch
 export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/usr/lib:$ORACLE_HOME/network/lib
 export ORACLE_SID=testdb
 
-#CLASSPATH must include the following JRE locations:
+# CLASSPATH must include the following JRE locations:
 export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 export CLASSPATH=$CLASSPATH:$ORACLE_HOME/network/jlib
 set -o vi
@@ -148,323 +145,436 @@ alias ss='sqlplus "/as sysdba"'
 
 export LANG=C
 export DISPLAY=192.168.56.1:0.0
-
-stty erase ^H
 ```
 
-## 4. Oracle 10g 설치 전 이슈 사항
+## 4. Oracle 엔진 설치
 
 ### 설치 파일 압축 해제
 
 ```bash
-cpio -idmv < 10201_database_linux_x86_64.cpio
+unzip linux.x64_11gR2_database_1of2.zip
+unzip linux.x64_11gR2_database_2of2.zip
 ```
 
-### runInstaller 실행
-
-database 디렉토리로 이동해서 runInstaller 실행:
+### 설치 시작
 
 ```bash
 cd database
 ./runInstaller
 ```
 
-### 설치 시 발생 가능한 오류 및 해결방법
-
-1. **`/lib/ld-linux.so.2: bad ELF interpreter` 오류**
-
-   ```bash
-   yum install ld-linux.so.2
-   ```
-
-2. **`Checking operating system version` 관련 오류**
-
-   ```bash
-   vi /etc/redhat-release
-   ```
-
-   기존내용 주석처리 후 호환되는 버전으로 수정
-
-3. **`libXp.so.6: cannot open shared object file: No such file or directory` 라이브러리 패키지 없는 이슈**
-
-   ```bash
-   yum install libXp.so.6
-   ```
-
-4. **`libXt.so.6: cannot open shared object file: No such file or directory` 라이브러리 패키지 없는 이슈**
-
-   ```bash
-   yum install libXt.so.6
-   ```
-
-5. **`libXtst.so.6: cannot open shared object file: No such file or directory` 라이브러리 패키지 없는 이슈**
-
-   ```bash
-   yum install libXtst.so.6
-   ```
-
-## 5. Oracle 10g 설치
-
 ### 설치 단계별 진행
 
-1. **Installation Type 선택**
+#### 1단계: 보안 업데이트 설정
+빨간색 콤보박스 체크 해제 후 NEXT
 
-   * Advanced Installation 선택 후 Next
+![보안 업데이트 설정](/assets/Image/ora11ginstall/1.png)
 
-   <p align="center"><img src="/assets/Image/ora10install/1.png" style="margin-bottom: 20px;"></p>
+#### 2단계: 설치 옵션
+"Install database software only" 체크 후 NEXT
 
-2. **Inventory Directory 설정**
+![설치 옵션](/assets/Image/ora11ginstall/2.png)
 
-   * oraInventory는 Oracle Software 제품에 관한 정보와 Server에 설치되어 있는 Oracle\_Home의 정보를 가지고 있는 일종의 Repository
-   * inventory directory 경로와 생성한 dba group 확인 후 Next
+#### 3단계: 데이터베이스 설치 옵션
+"Single Instance database Installation" 체크 후 NEXT
 
-   <p align="center"><img src="/assets/Image/ora10install/2.png" style="margin-bottom: 20px;"></p>
+![데이터베이스 설치 옵션](/assets/Image/ora11ginstall/3.png)
 
-3. **Installation Type 선택**
+#### 4단계: 언어 선택
+"Korean"을 Available Languages에서 Selected Languages로 이동 후 NEXT
 
-   * Enterprise Edition 선택 후 Next
-   * Enterprise 옵션은 Oracle 사에서 제공하는 많은 기능을 사용할 수 있고, Standard 옵션은 Enterprise 옵션보다 약한 기능을 사용
+![언어 선택](/assets/Image/ora11ginstall/4.png)
 
-   <p align="center"><img src="/assets/Image/ora10install/3.png" style="margin-bottom: 20px;"></p>
+#### 5단계: 데이터베이스 에디션
+"Enterprise Edition" 체크 후 NEXT
 
-4. **Oracle Home 경로 확인**
+![데이터베이스 에디션](/assets/Image/ora11ginstall/5.png)
 
-   * `echo $ORACLE_HOME` 명령어와 비교하여 경로 확인 후 Next
+#### 6단계: 설치 위치
+Bash_profile에서 설정한 ORACLE_BASE, ORACLE_HOME 확인 후 NEXT
 
-   <p align="center"><img src="/assets/Image/ora10install/4.png" style="margin-bottom: 20px;"></p>
+![설치 위치](/assets/Image/ora11ginstall/6.png)
 
-5. **Prerequisite Checks**
+#### 7단계: 인벤토리 생성
+경로 체크 후 NEXT
 
-   * Oracle 10g Engine 설치를 위해 필수적인 체크 사항
-   * 비어있는 상자들에 모두 체크를 눌러주고 Next
+![인벤토리 생성](/assets/Image/ora11ginstall/7.png)
 
-   <p align="center"><img src="/assets/Image/ora10install/5.png" style="margin-bottom: 20px;"></p>
+#### 8단계: 운영 체제 그룹
+생성한 그룹명 확인 후 NEXT
 
-6. **Installation Option**
+![운영 체제 그룹](/assets/Image/ora11ginstall/8.png)
 
-   * Install database Software only를 선택 후 Next
-   * 엔진과 DB를 동시에 설치할 것인지, 엔진만 설치할 것인지 선택하는 단계
+#### 9단계: 전제 조건 검사
+빨간색 박스 체크 후 NEXT
 
-   <p align="center"><img src="/assets/Image/ora10install/6.png" style="margin-bottom: 20px;"></p>
+![전제 조건 검사](/assets/Image/ora11ginstall/9.png)
 
-7. **설치 진행**
+#### 10단계: 요약
+최종 확인 후 FINISH
 
-   **Summary 화면 확인**
+![요약](/assets/Image/ora11ginstall/10.png)
 
-   * 설치 요약 정보를 확인한 후 Install 클릭
+### 설치 중 오류 해결
 
-   <p align="center"><img src="/assets/Image/ora10install/7.png" style="margin-bottom: 20px;"></p>
+#### 84% 지점에서 발생하는 오류 해결
 
-   **설치 에러 처리**
-
-   * 설치 도중 `ins_emdb.mk` 설치 에러가 나올 수 있는데 Continue 클릭 (패치하면 잡히는 에러)
-
-   <p align="center"><img src="/assets/Image/ora10install/8.png" style="margin-bottom: 20px;"></p>
-
-8. **Root Script 실행**
-
-   **스크립트 실행 요청**
-
-   * 설치 완료 후 스크립트 실행 요청 화면이 나타남
-   * Script Location을 복사 후 root 계정으로 실행
-
-   <p align="center"><img src="/assets/Image/ora10install/9.png" style="margin-bottom: 20px;"></p>
-
-   **터미널에서 스크립트 실행**
-
-   ```bash
-    [root@localhost lib]# /app/oracle/oraInventory/orainstRoot.sh
-    Changing permissions of /app/oracle/oraInventory to 770.
-    Changing groupname of /app/oracle/oraInventory to dba.
-    The execution of the script is complete
-
-    [root@localhost lib]# /app/oracle/product/10g/dbhome_1/root.sh
-    Running Oracle10 root.sh script...
-
-    The following environment variables are set as:
-      ORACLE_OWNER= oracle
-      ORACLE_HOME= /app/oracle/product/10g/dbhome_1
-
-    Enter the full pathname of the local bin directory: [/usr/local/bin]:
-      Copying dbhome to /usr/local/bin ...
-      Copying oraenv to /usr/local/bin ...
-      Copying coraenv to /usr/local/bin ...
-
-    Creating /etc/oratab file...
-   ```
-
-9. **설치 완료**
-
-   * 스크립트 실행 완료 후 OK 클릭
-   * Exit 클릭하여 설치 종료
-
-   <p align="center"><img src="/assets/Image/ora10install/11.png" style="margin-bottom: 20px;"></p>
-
-## 6. Oracle 10g 10.2.0.5 패치
-
-### 패치 설치 진행
-
-1. **패치 파일 압축 해제**
-
-   ```bash
-   unzip [패치파일명]
-   cd Disk1/
-   ./runInstaller
-   ```
-
-2. **패치 설치 단계**
-
-   * Next 클릭
-
-     <p align="center"><img src="/assets/Image/ora10install/12.png" style="margin-bottom: 20px;"></p>
-   * orainventory 경로 확인 및 group 명 확인 후 Next
-
-     <p align="center"><img src="/assets/Image/ora10install/13.png" style="margin-bottom: 20px;"></p>
-   * `echo $ORACLE_HOME` 경로와 비교하여 PATH 확인 후 Next
-
-     <p align="center"><img src="/assets/Image/ora10install/14.png" style="margin-bottom: 20px;"></p>
-   * "I wish to receive security updates via My Oracle Support" 체크 해제 후 Next
-
-     <p align="center"><img src="/assets/Image/ora10install/15.png" style="margin-bottom: 20px;"></p>
-   * 이메일 관련 팝업창에서 Yes 클릭
-
-     <p align="center"><img src="/assets/Image/ora10install/16.png" style="margin-bottom: 20px;"></p>
-   * 체크 안되어 있는 것들 모두 체크 후 Next
-
-     <p align="center"><img src="/assets/Image/ora10install/17.png" style="margin-bottom: 20px;"></p>
-   * Install 클릭
-
-     <p align="center"><img src="/assets/Image/ora10install/18.png" style="margin-bottom: 20px;"></p>
-
-3. **Root Script 실행**
-
-   * 해당 스크립트 경로 복사 후 root 계정으로 실행
-
-     <p align="center"><img src="/assets/Image/ora10install/19.png" style="margin-bottom: 20px;"></p>
-   * 완료 후 OK 클릭
-
-   ```bash
-   /app/oraInventory/orainstRoot.sh
-   ```
-
-4. **패치 완료**
-
-   * Exit 클릭
-
-   <p align="center"><img src="/assets/Image/ora10install/20.png" style="margin-bottom: 20px;"></p>
-
-## 7. Database Configuration Assistant
-
-### 데이터베이스 생성
+설치 도중 84% 지점에서 다음과 같은 오류가 발생할 수 있습니다:
 
 ```bash
-dbca
+Error in invoking target 'install' of makefile 
+'/app/product/11.2.0/dbhome_1/ctx/lib/ins_ctx.mk'. See 
+'/app/oraInventory/logs/installActions2023-09-07_13-02-14PM.log' for details
 ```
 
-### DBCA 설정 단계
+**해결 방법:**
 
-1. **Welcome** - Next 클릭
-<p align="center"><img src="/assets/Image/ora10install/21.png" style="margin-bottom: 20px;"></p>
-2. **Operations** - Create a Database 선택 후 Next
-<p align="center"><img src="/assets/Image/ora10install/22.png" style="margin-bottom: 20px;"></p>
-3. **Database Template** - General Purpose 선택 후 Next
-<p align="center"><img src="/assets/Image/ora10install/23.png" style="margin-bottom: 20px;"></p>
-4. **Database Identification** - Global Database Name과 SID 설정 후 Next
-<p align="center"><img src="/assets/Image/ora10install/24.png" style="margin-bottom: 20px;"></p>
-5. **Management Options** - Enterprise Manager 체크 해제 후 Next
-<p align="center"><img src="/assets/Image/ora10install/25.png" style="margin-bottom: 20px;"></p>
-6. **Database Credentials** - 모든 관리자 계정을 동일한 비밀번호로 설정 후 Next
-<p align="center"><img src="/assets/Image/ora10install/26.png" style="margin-bottom: 20px;"></p>
-7. **Storage Options** - File System 선택 후 Next
-   * File System: OS가 관리
-   * Raw Device: Oracle 서비스가 관리
-   * ASM: Oracle ASM이 브로커
-<p align="center"><img src="/assets/Image/ora10install/27.png" style="margin-bottom: 20px;"></p>
-8. **Database File Locations** - Use Common Location for All Database Files 선택 후, oradata 경로 지정하고 Next
-<p align="center"><img src="/assets/Image/ora10install/28.png" style="margin-bottom: 20px;"></p>
-9. **Recovery Configuration** - Flash Recovery Area 체크 해제 후 Next
-   * Flash Recovery Area는 Oradata 파일 크기의 2배 정도 공간에 백업파일을 저장할 수 있는 기능
-<p align="center"><img src="/assets/Image/ora10install/29.png" style="margin-bottom: 20px;"></p>   
-11. **Database Content** - Next 클릭
-<p align="center"><img src="/assets/Image/ora10install/30.png" style="margin-bottom: 20px;"></p>   
-12. **Initialization Parameters** - Character Sets 설정 후 Next
-<p align="center"><img src="/assets/Image/ora10install/31.png" style="margin-bottom: 20px;"></p>   
-13. **Security Settings** - Next 클릭
-<p align="center"><img src="/assets/Image/ora10install/32.png" style="margin-bottom: 20px;"></p>   
-14. **Database Creation** - Finish 클릭
-<p align="center"><img src="/assets/Image/ora10install/33.png" style="margin-bottom: 20px;"></p>   
-15. **확인** - OK 클릭
-<p align="center"><img src="/assets/Image/ora10install/34.png" style="margin-bottom: 20px;"></p>   
-16. **완료** - Exit 클릭
-<p align="center"><img src="/assets/Image/ora10install/35.png" style="margin-bottom: 20px;"></p>   
+아래의 경로로 이동하여 해당 파일을 편집:
+```bash
+cd /app/product/11.2.0/dbhome_1/ctx/lib
+vi ins_ctx.mk
+```
 
-## 8. DB Instance 확인 및 netca 설정
+다음 구문을 찾아서:
+```bash
+ctxhx: $(CTXHXOBJ)     
+   $(LINK_CTXHX) $(CTXHXOBJ) $(INSO_LINK) 
+```
 
-### Listener 설정
+다음과 같이 수정:
+```bash
+ctxhx: $(CTXHXOBJ)     
+   -static $(LINK_CTXHX) $(CTXHXOBJ) $(INSO_LINK) 
+```
+
+#### 추가 오류 해결
+
+다음과 같은 오류가 발생할 수 있습니다:
+
+```bash
+Error in invoking target 'agent nmhs' of makefile '/app/oracle/product/11.2.0/dbhome_1/sysman/lib/ins_emagent.mk'.
+See 
+'/app/oraInventory/logs/installActions2023-09-07_13-03-14PM.log' for 
+details.
+```
+
+**해결 방법:**
+
+아래의 경로로 이동하여 해당 파일을 편집:
+```bash
+cd app/oracle/product/11.2.0/dbhome_1/sysman/lib
+vi ins_emagent.mk
+```
+
+다음 구문을 찾아서:
+```bash
+$(SYSMANBIN) emdctl:     
+   $(MK_EMAGENT_NMECTL) 
+```
+
+다음과 같이 수정:
+```bash
+$(SYSMANBIN) emdctl:     
+   $(MK_EMAGENT_NMECTL) -lnnz11 
+```
+
+### 설치 완료 후 스크립트 실행
+
+설치 완료 후 root 계정으로 다음 스크립트들을 실행:
+
+```bash
+/app/oracle/oraInventory/orainstRoot.sh
+/app/oracle/product/11.2.0/dbhome_1/root.sh
+```
+
+root.sh 실행 시 다음과 같은 메시지가 나타납니다:
+
+```bash
+The following environment variables are set as:
+    ORACLE_OWNER= oracle
+    ORACLE_HOME=  /app/oracle/product/11.2.0/dbhome_1/root.sh
+
+Enter the full pathname of the local bin directory: [/usr/local/bin]:
+```
+
+아무 입력없이 엔터키를 누르면 됩니다.
+
+다시 오라클 설치화면으로 돌아가서 OK를 누르고 결과창을 확인합니다.
+
+![설치 완료](/assets/Image/ora11ginstall/11.png)
+
+### 환경변수 적용
+
+```bash
+source ~/.bash_profile
+```
+
+## 5. 리스너 설정
+
+### 리스너 생성
+
+```bash
+cd /app/oracle/product/11.2.0/dbhome_1/bin
+./netca
+```
+
+또는 단순히:
 
 ```bash
 netca
 ```
 
-### NETCA 설정 단계
+### 리스너 설정 단계별 진행
 
-1. **Configuration Type** - Listener configuration 선택 후 Next
-<p align="center"><img src="/assets/Image/ora10install/36.png" style="margin-bottom: 20px;"></p>   
-2. **Listener Configuration** - Add 선택 후 Next
-<p align="center"><img src="/assets/Image/ora10install/37.png" style="margin-bottom: 20px;"></p>   
-3. **Listener Name** - LISTENER 설정 후 Next
-<p align="center"><img src="/assets/Image/ora10install/38.png" style="margin-bottom: 20px;"></p>   
-4. **Protocol** - TCP 프로토콜만 사용하므로 Next
-<p align="center"><img src="/assets/Image/ora10install/39.png" style="margin-bottom: 20px;"></p>   
-5. **Port** - 기본 port인 1521로 설정 후 Next
-<p align="center"><img src="/assets/Image/ora10install/40.png" style="margin-bottom: 20px;"></p>   
-6. **More Listeners** - No 선택 후 Next
-<p align="center"><img src="/assets/Image/ora10install/41.png" style="margin-bottom: 20px;"></p>   
+#### 1단계: 리스너 구성 선택
+"Listener configuration" 선택 후 Next
 
-### Listener 시작 및 확인
+![리스너 구성](/assets/Image/ora11ginstall/12.png)
+
+#### 2단계: 리스너 추가
+Add 선택 후 Next
+
+![리스너 추가](/assets/Image/ora11ginstall/13.png)
+
+#### 3단계: 리스너 이름 확인
+리스너 이름 확인 후 Next
+
+![리스너 이름](/assets/Image/ora11ginstall/14.png)
+
+#### 4단계: 프로토콜 선택
+프로토콜 선택 후 Next
+
+![프로토콜 선택](/assets/Image/ora11ginstall/15.png)
+
+#### 5단계: 포트 설정
+Oracle 기본 port 1521 확인 후 Next
+
+![포트 설정](/assets/Image/ora11ginstall/16.png)
+
+#### 6단계: 추가 리스너 설정
+추가 리스너 문의에 "No" 체크 후 Next
+
+![추가 리스너](/assets/Image/ora11ginstall/17.png)
+
+#### 7단계: 리스너 구성 완료
+Listener Configuration Done 화면에서 Next
+
+![리스너 구성 완료](/assets/Image/ora11ginstall/18.png)
+
+#### 8단계: 완료
+Finish로 창 종료
+
+![완료](/assets/Image/ora11ginstall/19.png)
+
+## 6. 데이터베이스 생성
+
+### Database Configuration Assistant 실행
 
 ```bash
-# 리스너 상태 확인 (에러 발생 시 메시지)
-lsnrctl status
-TNS-12541: TNS:no listener
-TNS-12560: TNS:protocol adapter error
-TNS-00511: No listener
-Linux Error: 111: Connection refused
-
-# 리스너 시작 및 실행 로그 예시
-lsnrctl start
-Starting /app/oracle/product/10g/dbhome_1/bin/tnslsnr: please wait...
-...
-The command completed successfully
-
-# 리스너 상태 재확인 (리스너는 정상적으로 동작하지만 인스턴스가 아직 등록되지 않았음. 그래도 작동은 한다.)
-lsnrctl status
-The listener supports no services
-The command completed successfully
+dbca
 ```
 
-### Oracle Instance 확인
-bash\_profile에서 sqlplus 접속 alias를 설정했기에 `ss` 명령어를 통해 dbca에서 만든 instance가 정상 작동(normal)하는지 확인.
+### 데이터베이스 생성 단계별 진행
+
+#### 1단계: 시작 화면
+Welcome 화면에서 Next
+
+![시작 화면](/assets/Image/ora11ginstall/20.png)
+
+#### 2단계: 데이터베이스 생성 선택
+"Create a Database" 선택 후 Next
+
+![데이터베이스 생성](/assets/Image/ora11ginstall/21.png)
+
+#### 3단계: 템플릿 선택
+"General Purpose or Transaction Processing" 선택 후 Next
+
+![템플릿 선택](/assets/Image/ora11ginstall/22.png)
+
+#### 4단계: 데이터베이스 식별
+.bash_profile에서 설정한 SID 네임 설정 후 Next
+
+![데이터베이스 식별](/assets/Image/ora11ginstall/23.png)
+
+#### 5단계: 관리 옵션
+Management Options에서 Next
+
+![관리 옵션](/assets/Image/ora11ginstall/24.png)
+
+#### 6단계: 데이터베이스 자격 증명
+"Use the Same Administrative Password for All Accounts" 선택 후 비밀번호 설정
+
+![데이터베이스 자격 증명](/assets/Image/ora11ginstall/25.png)
+
+#### 7단계: 비밀번호 확인
+Password 확인 창에서 Yes 클릭
+
+![비밀번호 확인](/assets/Image/ora11ginstall/26.png)
+
+#### 8단계: 저장소 옵션
+"Use Common Location for All Database Files" 선택 후 oradata 경로 지정
+
+![저장소 옵션](/assets/Image/ora11ginstall/27.png)
+
+#### 9단계: 복구 구성
+Recovery Configuration에서 Next
+
+![복구 구성](/assets/Image/ora11ginstall/28.png)
+
+#### 10단계: 데이터베이스 콘텐츠
+Database Content에서 Next
+
+![데이터베이스 콘텐츠](/assets/Image/ora11ginstall/29.png)
+
+#### 11단계: 메모리 설정
+Memory 설정
+
+![메모리 설정](/assets/Image/ora11ginstall/30.png)
+
+#### 12단계: 크기 설정
+"Sizing" 클릭 후 설정
+
+![크기 설정](/assets/Image/ora11ginstall/31.png)
+
+#### 13단계: 문자 집합 설정
+"Character Sets" 클릭 후 설정
+
+![문자 집합](/assets/Image/ora11ginstall/32.png)
+
+#### 14단계: 연결 모드 설정
+"Connection Mode" 클릭 후 설정
+
+![연결 모드](/assets/Image/ora11ginstall/33.png)
+
+#### 15단계: 생성 옵션
+Creation Options에서 Next
+
+![생성 옵션](/assets/Image/ora11ginstall/34.png)
+
+![생성 옵션 상세](/assets/Image/ora11ginstall/35.png)
+
+#### 16단계: 데이터베이스 생성 요약
+Database Creation Summary에서 Finish
+
+![데이터베이스 생성 요약](/assets/Image/ora11ginstall/36.png)
+
+#### 17단계: 최종 확인
+최종 확인 후 OK
+
+![최종 확인](/assets/Image/ora11ginstall/37.png)
+
+#### 18단계: 설치 완료
+설치 완료 후 Exit
+
+![설치 완료](/assets/Image/ora11ginstall/38.png)
+
+## 7. 데이터베이스 및 리스너 실행
+
+### 데이터베이스 접속 및 제어
 
 ```bash
-# SQLPlus 접속 (bash_profile에서 설정한 alias 사용)
+# SQLPlus 접속 (별칭 사용)
 ss
 
-# SQLPlus로 접속 후 아래 쿼리 실행:
-select instance_name, active_state from v$instance;
+# 데이터베이스 종료
+SQL> shutdown immediate
 
-# 출력 예시
-INSTANCE_NAME  ACTIVE_STATE
--------------  -------------
-testdb         NORMAL
+# 데이터베이스 시작
+SQL> startup
 ```
 
+### 리스너 제어
 
+```bash
+# 리스너 시작
+lsnrctl start
 
-## 9. Navicat을 통해 Oracle 10g 원격 접속하기
+# 리스너 종료
+lsnrctl stop
 
-Oracle 10g 설치가 완료되면 Navicat과 같은 GUI 도구를 사용하여 원격으로 Oracle 데이터베이스에 접속 가능.
+# 리스너 상태 확인
+lsnrctl status
+```
+
+## 8. Navicat을 통한 Oracle 11g 원격 접속
+
+### listener.ora 파일 수정
+
+리스너 상태 확인 시 "The listener supports no services" 메시지가 나타나면 listener.ora 파일을 수정해야 합니다.
+
+```bash
+vi $ORACLE_HOME/network/admin/listener.ora
+```
+
+다음 내용을 추가:
+
+```bash
+SID_LIST_LISTENER =
+  (SID_LIST =
+    (SID_DESC =
+      (GLOBAL_DBNAME = testdb)
+      (ORACLE_HOME = /app/oracle/product/11.2.0/dbhome_1)
+      (SID_NAME = testdb)
+    )
+  )
+```
+
+리스너 재시작:
+
+```bash
+lsnrctl stop
+lsnrctl start
+lsnrctl status
+```
+
+### Navicat 설정 단계
+
+#### 1단계: 연결 생성
+Navicat에서 "연결" 버튼 클릭
+
+#### 2단계: 데이터베이스 유형 선택
+"Oracle" 선택
+
+#### 3단계: 연결 정보 입력
+다음 정보를 입력:
+- **호스트**: Oracle DB 서버 IP
+- **서비스 이름**: 생성한 인스턴스 이름 (testdb)
+- **사용자 이름**: sys
+- **비밀번호**: 설정한 관리자 비밀번호
+
+#### 4단계: 고급 설정
+"고급" 탭에서 역할을 "SYSDBA"로 변경
+
+#### 5단계: 연결 테스트
+"테스트 연결"로 연결 확인
+
+#### 6단계: 설정 완료
+연결 성공 시 "확인" 클릭
+
+## 주요 명령어 정리
+
+### 환경 확인
+```bash
+echo $ORACLE_BASE    # Oracle Base 경로 확인
+echo $ORACLE_HOME    # Oracle Home 경로 확인  
+echo $ORACLE_SID     # Oracle SID 확인
+```
+
+### 리스너 관리
+```bash
+lsnrctl start        # 리스너 시작
+lsnrctl stop         # 리스너 종료
+lsnrctl status       # 리스너 상태 확인
+```
+
+### 데이터베이스 관리
+```bash
+ss                   # SQLPlus 접속 (별칭)
+sqlplus / as sysdba  # SQLPlus 직접 접속
+shutdown immediate   # DB 종료
+startup             # DB 시작
+```
 
 ---
 
-**설치 완료!** Oracle 10g가 성공적으로 설치.
+**설치 완료!** 이제 CentOS 7에서 Oracle 11g가 정상적으로 설치되고 실행됩니다.
