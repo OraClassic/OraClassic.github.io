@@ -130,9 +130,13 @@ search: false
     
     li {
       color: #ffffff !important;
+      display: flex !important;           /* 추가: 플렉스 박스로 정렬 */
+      align-items: center !important;     /* 추가: 세로 중앙 정렬 */
       
       a {
         color: #ffffff !important;
+        display: flex !important;         /* 추가: 링크도 플렉스 박스로 */
+        align-items: center !important;   /* 추가: 아이콘과 텍스트 중앙 정렬 */
         
         &:hover {
           color: #00d4aa !important;
@@ -142,6 +146,9 @@ search: false
         &::before {
           color: #ffffff !important;
           opacity: 1 !important;
+          margin-right: 8px !important;    /* 추가: 아이콘과 텍스트 간격 */
+          width: 16px !important;           /* 추가: 아이콘 폭 고정 */
+          text-align: center !important;   /* 추가: 아이콘 중앙 정렬 */
         }
         
         &:hover::before {
@@ -153,8 +160,11 @@ search: false
       i {
         color: #ffffff !important;
         opacity: 1 !important;
-        display: inline !important;
+        display: inline-block !important;  /* 수정: inline-block으로 변경 */
         visibility: visible !important;
+        margin-right: 8px !important;      /* 추가: 아이콘과 텍스트 간격 */
+        width: 16px !important;             /* 추가: 아이콘 폭 고정 */
+        text-align: center !important;     /* 추가: 아이콘 중앙 정렬 */
         
         &:hover {
           color: #00d4aa !important;
@@ -165,8 +175,11 @@ search: false
       .fa, .fas, .far, .fab, .fal, .fad {
         color: #ffffff !important;
         opacity: 1 !important;
-        display: inline !important;
+        display: inline-block !important;  /* 수정: inline-block으로 변경 */
         visibility: visible !important;
+        margin-right: 8px !important;      /* 추가: 아이콘과 텍스트 간격 */
+        width: 16px !important;             /* 추가: 아이콘 폭 고정 */
+        text-align: center !important;     /* 추가: 아이콘 중앙 정렬 */
         
         &:hover {
           color: #00d4aa !important;
@@ -178,6 +191,9 @@ search: false
         fill: #ffffff !important;
         color: #ffffff !important;
         opacity: 1 !important;
+        margin-right: 8px !important;      /* 추가: 아이콘과 텍스트 간격 */
+        width: 16px !important;             /* 추가: 아이콘 폭 고정 */
+        height: 16px !important;            /* 추가: 아이콘 높이 고정 */
         
         &:hover {
           fill: #00d4aa !important;
@@ -190,11 +206,19 @@ search: false
   /* author__urls 클래스에 대한 추가 스타일 */
   .author__urls {
     li {
+      display: flex !important;           /* 추가: 플렉스 박스로 정렬 */
+      align-items: center !important;     /* 추가: 세로 중앙 정렬 */
+      
       a {
         color: #ffffff !important;
+        display: flex !important;         /* 추가: 링크도 플렉스 박스로 */
+        align-items: center !important;   /* 추가: 아이콘과 텍스트 중앙 정렬 */
         
         &:before {
           color: #ffffff !important;
+          margin-right: 8px !important;    /* 추가: 아이콘과 텍스트 간격 */
+          width: 16px !important;           /* 추가: 아이콘 폭 고정 */
+          text-align: center !important;   /* 추가: 아이콘 중앙 정렬 */
         }
         
         &:hover {
@@ -208,7 +232,6 @@ search: false
     }
   }
 }
-
 /* 코드 블록 스타일 커스터마이징 - 흰색 배경, 검은색 글자 */
 .highlight,
 .language-bash .highlight,
