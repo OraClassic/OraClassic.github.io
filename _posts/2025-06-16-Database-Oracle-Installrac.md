@@ -270,10 +270,22 @@ export CV_ASSUME_DISTID=RHEL7.6
 PS1='[${ORACLE_SID}]$PWD> '
 ```
 
+```bash
+# 1번 서버 환경변수 적용
+[oracle@oraser01 ~]$ . .bash_profile
+```
+
 #### 2번 서버
 ```bash
 # ORACLE_SID=ORCL2로 설정하는 것 외에는 동일
 export ORACLE_SID=ORCL2
+```
+
+```bash
+# 1번 서버 환경변수 적용
+[oracle@oraser01 ~]$ . .bash_profile
+
+[ORCL2]/home/oracle>
 ```
 
 ---
