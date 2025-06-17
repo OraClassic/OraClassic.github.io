@@ -8,6 +8,33 @@ search: false
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
+/* 사이드바 링크 기본 색상을 흰색으로 설정 */
+.sidebar .author__urls .author__urls-wrapper .author__urls li a {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+/* hover 시에도 흰색 유지 */
+.sidebar .author__urls .author__urls-wrapper .author__urls li a:hover {
+  color: #fff !important;
+  text-decoration: underline;
+}
+
+/* 아이콘과 텍스트 정렬 맞추기 */
+.sidebar .author__urls .author__urls-wrapper .author__urls li {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .author__urls .author__urls-wrapper .author__urls li i,
+.sidebar .author__urls .author__urls-wrapper .author__urls li svg {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+
 
 .author__avatar {
   width: 150px;
