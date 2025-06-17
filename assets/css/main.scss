@@ -7,7 +7,7 @@ search: false
 /* 배달의민족 도현체 폰트 import - 수정된 버전 */
 @font-face {
   font-family: 'BMYEONSUNG';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMYEONSUNG.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -151,12 +151,24 @@ html, body, * {
         &:hover {
           color: #00d4aa !important;
         }
+        
+        /* 가상 요소(::before)로 표시되는 아이콘들 */
+        &::before {
+          color: #ffffff !important;
+          opacity: 1 !important;
+        }
+        
+        &:hover::before {
+          color: #00d4aa !important;
+        }
       }
       
       /* 아이콘이 보이도록 설정 */
       i {
         color: #ffffff !important;
         opacity: 1 !important;
+        display: inline !important;
+        visibility: visible !important;
         
         &:hover {
           color: #00d4aa !important;
@@ -164,12 +176,47 @@ html, body, * {
       }
       
       /* Font Awesome 아이콘 */
-      .fa, .fas, .far, .fab {
+      .fa, .fas, .far, .fab, .fal, .fad {
+        color: #ffffff !important;
+        opacity: 1 !important;
+        display: inline !important;
+        visibility: visible !important;
+        
+        &:hover {
+          color: #00d4aa !important;
+        }
+      }
+      
+      /* SVG 아이콘 */
+      svg {
+        fill: #ffffff !important;
         color: #ffffff !important;
         opacity: 1 !important;
         
         &:hover {
+          fill: #00d4aa !important;
           color: #00d4aa !important;
+        }
+      }
+    }
+  }
+  
+  /* author__urls 클래스에 대한 추가 스타일 */
+  .author__urls {
+    li {
+      a {
+        color: #ffffff !important;
+        
+        &:before {
+          color: #ffffff !important;
+        }
+        
+        &:hover {
+          color: #00d4aa !important;
+          
+          &:before {
+            color: #00d4aa !important;
+          }
         }
       }
     }
