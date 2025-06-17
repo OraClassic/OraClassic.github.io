@@ -46,7 +46,7 @@ categories: ["Categories","Database", "Oracle", "Install"]
 
 **주의사항:**
 1. Hostname 설정
-2. 모든 서버 네트워크 카드 장치명 동일하게
+2. 모든 서버 네트워크 카드 장치명 동일하게 작업
 
 ---
 
@@ -92,7 +92,7 @@ grep SwapTotal /proc/meminfo
 df -h /tmp
 ```
 
-### 패키지 설치 (RAC 1번, 2번 노드 동일하게)
+### 패키지 설치 (RAC 1번, 2번 노드 동일하게 작업)
 ```bash
 yum install -y bc binutils elfutils-libelf elfutils-libelf-devel fontconfig-devel glibc glibc-devel ksh libaio libaio-devel libXrender libX11 libXau libXi libXtst libgcc libnsl librdmacm libstdc++ libstdc++-devel libxcb libibverbs make smartmontools sysstat libnsl2
 
@@ -101,7 +101,7 @@ yum install lib*
 yum --enablerepo=ol8_codeready_builder install -y libnsl2-devel
 ```
 
-### hosts 파일 설정 (RAC 1번, 2번 노드 동일하게)
+### hosts 파일 설정 (RAC 1번, 2번 노드 동일하게 작업)
 ```bash
 vi /etc/hosts
 ```
@@ -123,7 +123,7 @@ vi /etc/hosts
 192.168.56.13   oraser-scan
 ```
 
-### 커널 파라미터 설정 (RAC 1번, 2번 노드 동일하게)
+### 커널 파라미터 설정 (RAC 1번, 2번 노드 동일하게 작업)
 ```bash
 vi /etc/sysctl.conf
 ```
@@ -148,7 +148,7 @@ net.ipv4.ip_local_port_range = 9000 65500
 sysctl -p
 ```
 
-### 리소스 제한 설정 (RAC 1번, 2번 노드 동일하게) 
+### 리소스 제한 설정 (RAC 1번, 2번 노드 동일하게 작업) 
 ```bash
 vi /etc/security/limits.conf
 ```
@@ -164,7 +164,7 @@ oracle soft memlock 3774874
 oracle hard memlock 3774874
 ```
 
-### 네트워크 설정 (RAC 1번, 2번 노드 동일하게)
+### 네트워크 설정 (RAC 1번, 2번 노드 동일하게 작업)
 ```bash
 vi /etc/sysconfig/network
 ```
@@ -173,7 +173,7 @@ vi /etc/sysconfig/network
 NOZEROCONF=yes
 ```
 
-### ASM 라이브러리 설치 (RAC 1번, 2번 노드 동일하게)
+### ASM 라이브러리 설치 (RAC 1번, 2번 노드 동일하게 작업)
 ```bash
 # ASM 라이브러리 설치
 rpm -ivh oracleasmlib-2.0.17-1.el8.x86_64.rpm
@@ -185,7 +185,7 @@ yum install oracleasm
 rpm -ivh oracleasm-support-2.1.12-1.el8.x86_64.rpm
 ```
 
-### 방화벽 & SELinux 설정 (RAC 1번, 2번 노드 동일하게)
+### 방화벽 & SELinux 설정 (RAC 1번, 2번 노드 동일하게 작업)
 ```bash
 vi /etc/selinux/config
 ```
@@ -199,7 +199,7 @@ SELINUXTYPE=targeted
 systemctl stop firewalld
 ```
 
-### avahi-daemon 해제 (RAC 1번, 2번 노드 동일하게)
+### avahi-daemon 해제 (RAC 1번, 2번 노드 동일하게 작업)
 ```bash
 # avahi-daemon 중지
 systemctl stop avahi-daemon
@@ -400,7 +400,7 @@ The partition table has been altered.
 Calling ioctl() to re-read partition table.
 Syncing disks.
 
-# sdc, sdd, sde, sdf에도 동일하게 적용
+# sdc, sdd, sde, sdf에도 동일하게 작업 적용
 
 # 작업 후에 다시 Raw Devce 확인
 ls -la sd*
@@ -538,7 +538,7 @@ chown -R oracle:dba /oracle
 chmod -R 775 /oracle
 ```
 
-### SSH 설정 (RAC 1번, 2번 노드 동일하게)
+### SSH 설정 (RAC 1번, 2번 노드 동일하게 작업)
 ```bash
 cd $GRID_HOME/oui/prov/resources/scripts
 ./sshUserSetup.sh -user oracle -hosts "oraser01 oraser02" -noPromptPassphrase -advanced
