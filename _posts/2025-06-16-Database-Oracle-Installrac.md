@@ -268,6 +268,8 @@ export PATH=$ORACLE_HOME/OPatch:$ORACLE_HOME/bin:/bin:/usr/bin:/sbin:/usr/sbin:/
 export LANG=C
 export CV_ASSUME_DISTID=RHEL7.6
 PS1='[${ORACLE_SID}]$PWD> '
+export DISPLAY=[디스플레이를 표시하고자 하는 PC의 IP주소]:0.0
+
 ```
 
 ```bash
