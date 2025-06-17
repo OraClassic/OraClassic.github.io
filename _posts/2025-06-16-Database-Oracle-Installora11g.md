@@ -265,6 +265,9 @@ Finished running generic part of root script.	　
 Now product-specific root actions will be performed.
 ```
 
+다시 오라클 설치화면으로 돌아가서 OK 클릭
+
+
 ### 환경변수 적용
 
 ```bash
