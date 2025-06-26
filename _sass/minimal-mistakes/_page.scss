@@ -587,18 +587,17 @@ body {
     color: white;
   }
 
-  &[data-parent="Database"], &[data-parent="database"] {
-    background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%); // 빨간색
+  &[data-parent="Database"] {
+    background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%) !important;
   }
-  &[data-parent="OS"], &[data-parent="os"] {
-    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); // 주황색
+  &[data-parent="OS"] {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%) !important;
   }
-  &[data-parent="App"], &[data-parent="app"] {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // 보라색
+  &[data-parent="App"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   }
-  // 기본 색상
   &:not([data-parent]) {
-    background: linear-gradient(135deg, #17ce69 0%, #8eca0c 100%); 
+    background: linear-gradient(135deg, #17ce69 0%, #8eca0c 100%);
   }
 }
 
@@ -617,14 +616,14 @@ body {
   .category-tag {
     border-color: rgba(255, 255, 255, 0.1);
     
-    &[data-parent="Database"], &[data-parent="database"] {
-      background: linear-gradient(135deg, #a600ff 0%, #00ffbb 100%);
+    &[data-parent="Database"] {
+      background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%) !important;
     }
-    &[data-parent="OS"], &[data-parent="os"] {
-      background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
+    &[data-parent="OS"] {
+      background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%) !important;
     }
-    &[data-parent="App"], &[data-parent="app"] {
-      background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%);
+    &[data-parent="App"] {
+      background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%) !important;
     }
     &:not([data-parent]) {
       background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%);
