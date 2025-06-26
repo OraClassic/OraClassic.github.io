@@ -104,7 +104,6 @@ SQL> exec dbms_logmnr.start_logmnr(dictfilename=>'/app/logmnr/logmnrdict.ora');
 
 7. **분석 결과 조회 및 복구**
 ```sql
-# 트랜잭션 조회
 SQL> CREATE TABLE hm_test.logmnr_table AS
 SELECT TO_CHAR(timestamp, 'YYYY-MM-DD:HH24:MI:SS') AS formatted_timestamp,
        seg_owner,
