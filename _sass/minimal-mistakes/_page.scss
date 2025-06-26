@@ -565,7 +565,8 @@ body {
    ========================================================================== */
 
 .category-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   color: white;
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
@@ -582,26 +583,35 @@ body {
   overflow: hidden;
   white-space: nowrap;
   vertical-align: middle;
+  line-height: 1.2;
+}
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(#000, 0.15);
-    text-decoration: none;
-    color: white;
-  }
+.category-tag img,
+.category-tag svg {
+  height: 1em;
+  width: auto;
+  vertical-align: middle;
+  margin-right: 0.3em;
+}
 
-  &[data-parent="Database"] {
-    background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%) !important;
-  }
-  &[data-parent="OS"] {
-    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%) !important;
-  }
-  &[data-parent="App"] {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  }
-  &:not([data-parent]) {
-    background: linear-gradient(135deg, #17ce69 0%, #8eca0c 100%);
-  }
+.category-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(#000, 0.15);
+  text-decoration: none;
+  color: white;
+}
+
+.category-tag[data-parent="Database"] {
+  background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%) !important;
+}
+.category-tag[data-parent="OS"] {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%) !important;
+}
+.category-tag[data-parent="App"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+.category-tag:not([data-parent]) {
+  background: linear-gradient(135deg, #17ce69 0%, #8eca0c 100%);
 }
 
 // Recent Posts 섹션에서의 크기 조정
