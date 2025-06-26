@@ -2,5 +2,5 @@
 title: "Oracle Backup & Restore"
 layout: category
 permalink: /categories/Database/Oracle/Backup_restore
-taxonomy: Oracle
+taxonomy: Backup_restore
 ---
