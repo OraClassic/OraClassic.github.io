@@ -589,15 +589,15 @@ body {
 
   // 두 번째 디렉토리 기준 배경색
   &[data-parent="database"] {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // 보라색
+    background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%); // 빨간색 그라데이션
   }
 
   &[data-parent="os"] {
-    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); // 주황색
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); // 주황색 그라데이션 (기존과 동일)
   }
 
   &[data-parent="app"] {
-    background: linear-gradient(135deg, #6c757d 0%, #495057 100%); // 회색
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // 보라색 그라데이션 (기존과 동일)
   }
 
   // 기본 색상
@@ -622,17 +622,14 @@ body {
     border-color: rgba(255, 255, 255, 0.1);
     
     &[data-parent="database"] {
-      background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%);
+      background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%);
     }
-
     &[data-parent="os"] {
       background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
     }
-
     &[data-parent="app"] {
-      background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+      background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%);
     }
-
     &:not([data-parent]) {
       background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%);
     }
