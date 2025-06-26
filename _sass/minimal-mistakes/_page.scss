@@ -588,15 +588,15 @@ body {
   }
 
   // 두 번째 디렉토리 기준 배경색
-  &[data-parent="database"] {
+  &[data-parent="Database"] {
     background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%); // 빨간색 그라데이션
   }
 
-  &[data-parent="os"] {
+  &[data-parent="OS"] {
     background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); // 주황색 그라데이션 (기존과 동일)
   }
 
-  &[data-parent="app"] {
+  &[data-parent="App"] {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // 보라색 그라데이션 (기존과 동일)
   }
 
