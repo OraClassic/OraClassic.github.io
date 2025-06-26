@@ -6,7 +6,6 @@ categories: ["Categories","Database", "Oracle","Backup_restore"]
 
 # Oracle LogMiner 매뉴얼 및 복구 테스트 (12c 이상)
 
-#Oracle #CentOS7 #로그마이너 #logminor #백업복구
 
 오라클에서 아카이브 로그가 활성화된 상태라면, 트랜잭션이 일어날 때 리두 로그에 의해 아카이브 로그가 적재된다. 쉽게 설명하자면, 아카이브 로그는 사용자들이 실행한 트랜잭션의 히스토리를 Binary로 저장한 파일이라고 보면 된다. 그리고 해당 트랜잭션의 역실행 로그인 언두 로그도 아카이브 로그에 기록된다.
 
