@@ -1,7 +1,7 @@
 ---
 title: "Install Oracle 11g"
 date: 2025-06-16
-categories: ["Categories","Database", "Oracle", "Oracle_Install"]
+categories: ["Categories","Database", "Oracle", "Install"]
 ---
 
 > **환경:** CentOS 7, RAM 8GB

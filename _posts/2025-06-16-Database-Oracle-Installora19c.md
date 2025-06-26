@@ -1,7 +1,7 @@
 ---
 title: "Install Oracle 19c"
 date: 2025-06-16
-categories: ["Categories","Database", "Oracle", "Oracle_Install"]
+categories: ["Categories","Database", "Oracle", "Install"]
 ---
 
 # Oracle 19c CentOS7 설치 가이드
