@@ -568,9 +568,9 @@ body {
   display: inline-flex;
   align-items: center;
   color: white;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
+  padding: 0.25em 1.1em;
+  border-radius: 9999px;
+  font-size: 0.95em;
   font-weight: 600;
   margin-right: 0.8rem;
   margin-bottom: 0.5rem;
@@ -584,14 +584,16 @@ body {
   white-space: nowrap;
   vertical-align: middle;
   line-height: 1.2;
+  min-height: 2.2em;
+  box-sizing: border-box;
 }
 
 .category-tag img,
 .category-tag svg {
-  height: 1em;
+  height: 1.2em;
   width: auto;
   vertical-align: middle;
-  margin-right: 0.3em;
+  margin-right: 0.4em;
 }
 
 .category-tag:hover {
