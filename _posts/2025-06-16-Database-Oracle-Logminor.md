@@ -103,6 +103,7 @@ SQL> exec dbms_logmnr.start_logmnr(dictfilename=>'/app/logmnr/logmnrdict.ora');
 ```
 
 7. **분석 결과 조회 및 복구**
+
 ```sql
 -- 트랜잭션 조회
 SQL> CREATE TABLE hm_test.logmnr_table AS
@@ -113,8 +114,11 @@ SELECT TO_CHAR(timestamp, 'YYYY-MM-DD:HH24:MI:SS') AS formatted_timestamp,
        sql_undo
 FROM v$logmnr_contents
 WHERE seg_owner = 'HM_TEST';
+```
 
--- 문제를 일으킨 sql_redo를 찾아서 sql_undo를 실행해 복구
+문제를 일으킨 sql_redo를 찾아서 sql_undo를 실행해 복구합니다.
+
+```sql
 SQL> update "HM_TEST"."TEST" set "NAME" = 'test' where "NAME" = 'test99' ;
 SQL> insert into "HM_TEST"."TEST"("NAME") values ('test3');
 SQL> select * from hm_test.test;
