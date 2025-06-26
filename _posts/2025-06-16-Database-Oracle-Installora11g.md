@@ -2,6 +2,7 @@
 title: "Install Oracle 11g"
 date: 2025-06-16
 categories: ["Categories","Database", "Oracle", "Install"]
+taxonomy: Oracle_Install
 ---
 
 > **환경:** CentOS 7, RAM 8GB
@@ -526,55 +527,3 @@ lsnrctl stop
 lsnrctl start
 lsnrctl status
 ```
-
-### Navicat 설정 단계
-
-#### 1단계: 연결 생성
-Navicat에서 "연결" 버튼 클릭
-
-#### 2단계: 데이터베이스 유형 선택
-"Oracle" 선택
-
-#### 3단계: 연결 정보 입력
-다음 정보를 입력:
-- **호스트**: Oracle DB 서버 IP
-- **서비스 이름**: 생성한 인스턴스 이름 (testdb)
-- **사용자 이름**: sys
-- **비밀번호**: 설정한 관리자 비밀번호
-
-#### 4단계: 고급 설정
-"고급" 탭에서 역할을 "SYSDBA"로 변경
-
-#### 5단계: 연결 테스트
-"테스트 연결"로 연결 확인
-
-#### 6단계: 설정 완료
-연결 성공 시 "확인" 클릭
-
-## 주요 명령어 정리
-
-### 환경 확인
-```bash
-echo $ORACLE_BASE    # Oracle Base 경로 확인
-echo $ORACLE_HOME    # Oracle Home 경로 확인  
-echo $ORACLE_SID     # Oracle SID 확인
-```
-
-### 리스너 관리
-```bash
-lsnrctl start        # 리스너 시작
-lsnrctl stop         # 리스너 종료
-lsnrctl status       # 리스너 상태 확인
-```
-
-### 데이터베이스 관리
-```bash
-ss                   # SQLPlus 접속 (별칭)
-sqlplus / as sysdba  # SQLPlus 직접 접속
-shutdown immediate   # DB 종료
-startup             # DB 시작
-```
-
----
-
-**설치 완료!** 이제 CentOS 7에서 Oracle 11g가 정상적으로 설치되고 실행됩니다.

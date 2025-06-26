@@ -2,6 +2,7 @@
 title: "Install Oracle RAC"
 date: 2025-06-16
 categories: ["Categories","Database", "Oracle", "Install"]
+taxonomy: Oracle_Install
 ---
 
 
