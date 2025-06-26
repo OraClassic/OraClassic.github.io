@@ -14,7 +14,7 @@ taxonomy: Backup_restore
 - **Cold Backup**: shutdown immediate 이후, ctl, dbf, log 파일들을 복사(cp)하면 끝.
 - **Hot Backup**: 운영 도중 백업이 필요할 때 사용. Media Hot Backup이나 expdp, exp를 활용.
 
-> expdp/impdp 기술 블로그 참고: [https://blog.naver.com/ricky63/223514278181](https://blog.naver.com/ricky63/223514278181)
+> expdp/impdp 기술 블로그 참고: [Oracle expdp & impdp 사용 매뉴얼](/2025-06-16-Database-Oracle-expdp-impdp)
 
 - 24시간 운영 서버는 Logical Backup(expdp, exp)이나 Media Hot Backup을 많이 사용
 - 트랜잭션이 활발하면 Logical Backup은 시간도 오래 걸리고 제약조건 에러가 발생할 수 있으니, Media Hot Backup을 쉘 스크립트로 자동화하는 것이 좋음
