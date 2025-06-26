@@ -598,7 +598,7 @@ body {
   }
   // 기본 색상
   &:not([data-parent]) {
-    background: linear-gradient(135deg, #17ce69 0%, #8eca0c 100%); // 기본 보라색
+    background: linear-gradient(135deg, #17ce69 0%, #8eca0c 100%); 
   }
 }
 
@@ -618,7 +618,7 @@ body {
     border-color: rgba(255, 255, 255, 0.1);
     
     &[data-parent="Database"], &[data-parent="database"] {
-      background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%);
+      background: linear-gradient(135deg, #f6ff00 0%, #00ffbb 100%);
     }
     &[data-parent="OS"], &[data-parent="os"] {
       background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
