@@ -1,11 +1,11 @@
 ---
-title: "Oracle LogMiner를 활용한 아카이브 로그 분석 및 복구 테스트"
+title: "Oracle Log Miner 사용 매뉴얼"
 date: 2025-06-16 04:00:00 +0900
 categories: ["Categories","Database", "Oracle", "Install"]
 permalink: /categories/Database/Oracle/Install
 ---
 
-# Oracle LogMiner를 활용한 아카이브 로그 분석 및 복구 테스트 (12c 이상)
+# Oracle LogMiner 매뉴얼 및 복구 테스트 (12c 이상)
 
 #Oracle #CentOS7 #로그마이너 #logminor #백업복구
 
