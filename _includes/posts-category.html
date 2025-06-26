@@ -1,4 +1,4 @@
-{% assign filtered_posts = site.posts | where_exp: "post", "post.categories.last == include.taxonomy and post.hidden != true" %}
+{% assign filtered_posts = site.posts | where_exp: "post", "post.categories contains include.taxonomy and post.hidden != true" %}
 {% for post in filtered_posts %}
   {% include archive-single.html %}
 {% endfor %}
