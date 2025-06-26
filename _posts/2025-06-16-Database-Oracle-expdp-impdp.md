@@ -1,7 +1,7 @@
 ---
 title: "Oracle expdp & impdp 사용 매뉴얼"
 date: 2025-06-16 00:00:00 +0900
-categories: ["Categories","Database", "Oracle", "Install","Backup_restore"]
+categories: ["Categories","Database", "Oracle","Backup_restore"]
 ---
 
 # Oracle expdp & impdp 사용 매뉴얼
