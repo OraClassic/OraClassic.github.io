@@ -587,19 +587,15 @@ body {
     color: white;
   }
 
-  // 두 번째 디렉토리 기준 배경색
-  &[data-parent="Database"] {
-    background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%); // 빨간색 그라데이션
+  &[data-parent="Database"], &[data-parent="database"] {
+    background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%); // 빨간색
   }
-
-  &[data-parent="OS"] {
-    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); // 주황색 그라데이션 (기존과 동일)
+  &[data-parent="OS"], &[data-parent="os"] {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); // 주황색
   }
-
-  &[data-parent="App"] {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // 보라색 그라데이션 (기존과 동일)
+  &[data-parent="App"], &[data-parent="app"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // 보라색
   }
-
   // 기본 색상
   &:not([data-parent]) {
     background: linear-gradient(135deg, #17ce69 0%, #8eca0c 100%); // 기본 보라색
@@ -621,13 +617,13 @@ body {
   .category-tag {
     border-color: rgba(255, 255, 255, 0.1);
     
-    &[data-parent="database"] {
+    &[data-parent="Database"], &[data-parent="database"] {
       background: linear-gradient(135deg, #ff5858 0%, #ff0000 100%);
     }
-    &[data-parent="os"] {
+    &[data-parent="OS"], &[data-parent="os"] {
       background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
     }
-    &[data-parent="app"] {
+    &[data-parent="App"], &[data-parent="app"] {
       background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%);
     }
     &:not([data-parent]) {
