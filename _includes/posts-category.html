@@ -1,8 +1,4 @@
-{% if include.taxonomy %}
-  {% assign filtered_posts = site.posts | where_exp: "post", "post.categories contains include.taxonomy and post.hidden != true" %}
-{% else %}
-  {% assign filtered_posts = site.posts | where_exp: "post", "post.hidden != true" %}
-{% endif %}
-{% for post in filtered_posts %}
+{% assign posts = site.categories[include.taxonomy] | where_exp: "post", "post.hidden != true" %}
+{%- for post in posts -%}
   {% include archive-single.html %}
-{% endfor %}
+{%- endfor -%}
