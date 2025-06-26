@@ -15,12 +15,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 let category = pathParts[categoryIndex + 2]; // categories/database/oracle <- 이 부분
                 category = category.charAt(0).toUpperCase() + category.slice(1); // Oracle로 변환
                 
+                // 상위 카테고리 추출 (categories/Database/MySQL/...)
+                let parentCategory = pathParts[categoryIndex + 1];
+                parentCategory = parentCategory.charAt(0).toUpperCase() + parentCategory.slice(1);
+                
                 // 이미 태그가 있는지 확인
                 if (!titleLink.querySelector('.category-tag')) {
                     // 카테고리 태그 생성
                     const categoryTag = document.createElement('span');
                     categoryTag.className = 'category-tag';
                     categoryTag.setAttribute('data-category', category);
+                    categoryTag.setAttribute('data-parent', parentCategory); // 상위 카테고리 추가
                     
                     // 카테고리별 아이콘 설정
                     let icon = getIconForCategory(category.toLowerCase());
@@ -135,12 +140,15 @@ function getIconForCategory(category) {
         if (categoryIndex !== -1 && pathParts.length > categoryIndex + 2) {
             let category = pathParts[categoryIndex + 2]; // categories/database/oracle <- 이 부분
             category = category.charAt(0).toUpperCase() + category.slice(1);
+            let parentCategory = pathParts[categoryIndex + 1];
+            parentCategory = parentCategory.charAt(0).toUpperCase() + parentCategory.slice(1);
             
             // 이미 태그가 있는지 확인
             if (!pageTitle.querySelector('.category-tag')) {
                 const categoryTag = document.createElement('span');
                 categoryTag.className = 'category-tag';
                 categoryTag.setAttribute('data-category', category);
+                categoryTag.setAttribute('data-parent', parentCategory); // 상위 카테고리 추가
                 
                 // 카테고리별 아이콘 설정
                 let icon = getIconForCategory(category.toLowerCase());
