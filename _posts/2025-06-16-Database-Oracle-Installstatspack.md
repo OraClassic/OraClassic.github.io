@@ -1,7 +1,7 @@
 ---
 title: "Install Oracle Statspack"
 date: 2025-06-16
-categories: ["Categories","Database", "Oracle", "Install"]
+categories: ["Categories","Database", "Oracle", "Oracle_Install"]
 ---
 
 # Oracle Statspack 설치 및 사용 가이드

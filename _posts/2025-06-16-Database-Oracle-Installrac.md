@@ -1,7 +1,7 @@
 ---
 title: "Install Oracle RAC"
 date: 2025-06-16
-categories: ["Categories","Database", "Oracle", "Install"]
+categories: ["Categories","Database", "Oracle", "Oracle_Install"]
 ---
 
 
