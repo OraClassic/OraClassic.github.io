@@ -1,8 +1,7 @@
 ---
 title: "Oracle Log Miner 사용 매뉴얼"
 date: 2025-06-16 04:00:00 +0900
-categories: ["Categories","Database", "Oracle", "Install"]
-permalink: /categories/Database/Oracle/Install
+categories: ["Categories","Database", "Oracle", "Install","Backup_restore"]
 ---
 
 # Oracle LogMiner 매뉴얼 및 복구 테스트 (12c 이상)
