@@ -1,5 +1,5 @@
 ---
-title: "Install Oracle Statspack"
+title: "Install Oracle Statspack123"
 date: 2025-06-16
 categories: ["Categories","Database", "Oracle", "Install"]
 ---
