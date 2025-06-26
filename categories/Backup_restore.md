@@ -1,6 +1,6 @@
 ---
 title: "Oracle Backup & Restore"
 layout: category
-permalink: /categories/Database/Oracle/Backup_Restore
+permalink: /categories/Database/Oracle/Backup_restore
 taxonomy: Oracle
 ---
