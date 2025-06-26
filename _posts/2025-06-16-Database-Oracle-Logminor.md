@@ -1,6 +1,6 @@
 ---
 title: "Oracle LogMiner를 활용한 아카이브 로그 분석 및 복구 테스트"
-date: 2025-06-16 01:00:00 +0900
+date: 2025-06-16 04:00:00 +0900
 categories:
   - Database
   - Oracle
