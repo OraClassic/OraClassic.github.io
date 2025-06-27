@@ -1,6 +1,6 @@
 ---
 title: "Oracle 쿼리 결과 줄바꿈 제거 (엔터키 제거)"
-date: 2025-06-17
+date: 2025-06-26
 categories: ["Categories","Database", "Oracle", "Etc"]
 taxonomy: Oracle_Etc
 ---
