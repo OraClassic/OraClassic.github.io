@@ -344,8 +344,11 @@ td code {
   color: #24292e !important;
 }
 
-/* 아카이브/카테고리 리스트 제목 한 줄 전체 표시 */
+/* 아카이브/카테고리 리스트 제목 여러 줄, 최대 600px */
 .archive__item-title {
-  max-width: 100%;
-  white-space: nowrap;
+  max-width: 600px;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  word-break: break-all;
 }
