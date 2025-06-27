@@ -155,3 +155,5 @@ SQL> select * from hm_test.test;
 ---
 
 > Table Level Flashback은 drop 장애 복구에는 강력하지만, truncate 장애는 Database Level Flashback이 필요합니다. 
+
+- Database Level Flashback 링크: [Oracle Flashback 복구 매뉴얼 3편](/categories/database/oracle/backup_restore/Database-Oracle-Flashback-Recovery-3/) 참고 
