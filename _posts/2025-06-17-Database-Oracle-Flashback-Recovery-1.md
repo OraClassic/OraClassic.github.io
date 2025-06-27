@@ -114,5 +114,5 @@ SQL> select * from hm_test.test;
 
 > Flashback 기능은 undo segment가 충분히 남아있을 때만 복구가 가능합니다. 너무 많은 트랜잭션이 일어나면 복구가 불가능할 수 있으니 주의하세요. 
 
-
-- Table Level Flashback [Oracle Flashback 복구 매뉴얼 1편](/categories/database/oracle/backup_restore/Database-Oracle-Flashback-Recovery-1/) 참고
+> DB Link를 활용한 복구 및 추가적인 활용법은 별도 포스트에서 다룹니다. 
+- Table Level Flashback 링크: [Oracle Flashback 복구 매뉴얼 1편](/categories/database/oracle/backup_restore/Database-Oracle-Flashback-Recovery-1/) 참고
