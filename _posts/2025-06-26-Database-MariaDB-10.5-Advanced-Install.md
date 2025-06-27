@@ -1,5 +1,5 @@
 ---
-title: "Advanced Install MariaDB"
+title: "Advanced Install MariaDB 10.5"
 date: 2025-06-26
 categories: ["Categories","Database", "MariaDB", "Install"]
 taxonomy: MariaDB_Install
@@ -52,7 +52,7 @@ SELINUX=disabled
 [root@ic-server1 yum.repos.d]# vi /etc/yum.repos.d/MariaDB.repo
 ```
 
-### 2-2. Repository 설정 내용
+### 2-2. Repository 설정 내용 (MariaDB 버전 변경하고 싶으면 아래 baseurl을 바꿔주면 된다.)
 ```ini
 [mariadb]
 name = MariaDB
