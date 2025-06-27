@@ -357,3 +357,14 @@ td code {
 .page__content, .archive {
   max-width: 1200px !important;
 }
+
+/* 전체 컨테이너 폭 1200px로 확장 */
+body,
+.site,
+.wrapper,
+.page,
+.page__content,
+.archive {
+  max-width: 1200px !important;
+  width: 100% !important;
+}
