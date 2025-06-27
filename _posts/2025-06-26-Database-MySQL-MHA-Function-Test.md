@@ -9,7 +9,7 @@ taxonomy: MySQL_Install
 
 ---
 
-## [Install MySQL MHA 설치 가이드](/categories/database/mysql/install/Database-MySQL-MHA-Install/)
+- MySQL MHA 설치 가이드: [Install MySQL MHA 설치 가이드](/categories/database/mysql/install/Database-MySQL-MHA-Install/)
 
 ---
 
