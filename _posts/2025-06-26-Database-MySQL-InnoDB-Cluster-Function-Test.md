@@ -9,34 +9,110 @@ date: 2025-06-26
 
 ## 클러스터 상태 조회
 
-아무 서버에서 아래 명령어로 클러스터 상태를 확인할 수 있습니다.
+아무 서버 접속해서 실행
 
 ```js
-var cluster = dba.getCluster()
-cluster.status()
+MySQL  ic-server1:3306 ssl  JS > var cluster = dba.getCluster()
+MySQL  ic-server1:3306 ssl  JS > cluster.status()
 ```
 
-상태 예시와 topology, Single-Primary 등 상세 정보가 출력됩니다.
+```json
+{
+    "clusterName": "HmCluster",
+    "defaultReplicaSet": {
+        "name": "default",
+        "primary": "ic-server1:3306",
+        "ssl": "REQUIRED",
+        "status": "OK",
+        "statusText": "Cluster is ONLINE and can tolerate up to ONE failure.",
+        "topology": {
+            "ic-server1:3306": {
+                "address": "ic-server1:3306",
+                "memberRole": "PRIMARY",
+                "mode": "R/W",
+                "readReplicas": {},
+                "replicationLag": "applier_queue_applied",
+                "role": "HA",
+                "status": "ONLINE",
+                "version": "8.0.35"
+            },
+            "ic-server2:3306": {
+                "address": "ic-server2:3306",
+                "memberRole": "SECONDARY",
+                "mode": "R/O",
+                "readReplicas": {},
+                "replicationLag": "applier_queue_applied",
+                "role": "HA",
+                "status": "ONLINE",
+                "version": "8.0.35"
+            },
+            "ic-server3:3306": {
+                "address": "ic-server3:3306",
+                "memberRole": "SECONDARY",
+                "mode": "R/O",
+                "readReplicas": {},
+                "replicationLag": "applier_queue_applied",
+                "role": "HA",
+                "status": "ONLINE",
+                "version": "8.0.35"
+            }
+        },
+        "topologyMode": "Single-Primary"
+    },
+    "groupInformationSourceMember": "ic-server1:3306"
+}
+```
 
 ---
 
-## 1-1. 인스턴스 장애 시나리오
+## 1-1. 인스턴스 장애
 
-### 1-1-1. Primary(Master) 접속 및 정보 확인
+### 1-1-1. Primary(Master, Source) 접속 및 정보 확인
 
-```sql
-\sql select user(), @@hostname, @@read_only;
+```js
+MySQL  ic-router1:6446 ssl  JS > \sql select user(), @@hostname, @@read_only;
 ```
 
-### 1-1-2. Primary 장애(예: ic-server1 MySQL 종료)
+```
++-----------------------+------------+-------------+
+| user()                | @@hostname | @@read_only |
++-----------------------+------------+-------------+
+| clusteradm@ic-router1 | ic-server1 |           0 |
++-----------------------+------------+-------------+
+1 row in set (0.0006 sec)
+```
+
+### 1-1-2. ic-server1의 MySQL을 종료하여 장애가 발생했다고 가정
 
 ```bash
 [root@ic-server1 ~]# systemctl stop mysqld
 ```
 
-장애 발생 시, 다른 서버의 mysqld.log 및 mysqlrouter.log에서 장애 감지, Primary 선출, 상태 변화 로그를 확인할 수 있습니다.
+#### ic-server2의 mysqld.log 확인
 
-### 1-1-3. 장애 후 클러스터 상태 조회
+```
+2023-11-05T00:11:08.911812Z 0 [Warning] [MY-011499] [Repl] Plugin group_replication reported: 'Members removed from the group: ic-server1:3306'
+2023-11-05T00:11:08.911842Z 0 [System] [MY-011500] [Repl] Plugin group_replication reported: 'Primary server with address ic-server1:3306 left the group. Electing new Primary.'
+2023-11-05T00:11:08.911895Z 0 [System] [MY-011507] [Repl] Plugin group_replication reported: 'A new primary with address ic-server3:3306 was elected. The new primary will execute all previous group transactions before allowing writes.'
+2023-11-05T00:11:08.912314Z 0 [System] [MY-011503] [Repl] Plugin group_replication reported: 'Group membership changed to ic-server3:3306, ic-server2:3306 on view 17084748103049284:8.'
+2023-11-05T00:11:08.912688Z 116133 [System] [MY-011565] [Repl] Plugin group_replication reported: 'Setting super_read_only=ON.'
+2023-11-05T00:11:08.912746Z 116133 [System] [MY-011511] [Repl] Plugin group_replication reported: 'This server is working as secondary member with primary member address ic-server3:3306.'
+```
+
+#### ic-router1의 mysqlrouter.log 확인
+
+```
+2024-02-22 11:48:48 metadata_cache WARNING [7ff9b4188700] Failed connecting with Metadata Server ic-server1:3306: Lost connection to MySQL server at 'reading initial communication packet', system error: 104 (2013)
+2024-02-22 11:48:48 metadata_cache WARNING [7ff9b4188700] While updating metadata, could not establish a connection to cluster 'HmCluster' through ic-server1:3306
+2024-02-22 11:48:48 metadata_cache WARNING [7ff9b4188700] Member ic-server1:3306 (9739f695-7f5b-11ee-8ed7-080027755b7a) defined in metadata not found in actual Group Replication
+2024-02-22 11:48:48 metadata_cache INFO [7ff9b4188700] Potential changes detected in cluster after metadata refresh (view_id=0)
+2024-02-22 11:48:48 metadata_cache INFO [7ff9b4188700] Metadata for cluster 'HmCluster' has 3 member(s), single-primary:
+2024-02-22 11:48:48 metadata_cache INFO [7ff9b4188700]     ic-server1:3306 / 33060 - mode=n/a
+2024-02-22 11:48:48 metadata_cache INFO [7ff9b4188700]     ic-server2:3306 / 33060 - mode=RO
+2024-02-22 11:48:48 metadata_cache INFO [7ff9b4188700]     ic-server3:3306 / 33060 - mode=RW
+```
+
+### 1-1-3. 장애 발생 후 클러스터 상태 조회
 
 장애 발생 후, 클러스터 상태를 조회하면 새로운 Primary가 선출되고, 장애 노드는 (MISSING) 상태로 표시됩니다.
 
