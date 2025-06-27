@@ -1,8 +1,8 @@
 ---
 title: "MySQL"
-layout: category
+layout: single
 permalink: /categories/Database/MySQL/
-taxonomy: MySQL
+author_profile: true
 ---
 
 ## MySQL DBMS

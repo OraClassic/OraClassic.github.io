@@ -1,8 +1,8 @@
 ---
 title: "MariaDB"
-layout: category
+layout: single
 permalink: /categories/Database/MariaDB/
-taxonomy: MariaDB
+author_profile: true
 ---
 
 ## MariaDB DBMS
