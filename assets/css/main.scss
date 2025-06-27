@@ -352,3 +352,8 @@ td code {
   text-overflow: unset;
   word-break: break-all;
 }
+
+/* 카테고리/아카이브 리스트 전체 폭 1200px로 확장 */
+.page__content, .archive {
+  max-width: 1200px !important;
+}
