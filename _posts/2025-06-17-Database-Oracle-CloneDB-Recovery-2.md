@@ -11,7 +11,7 @@ taxonomy: Backup_restore
 
 ## 1. 개요 및 참고 자료
 
-- Clone DB 생성 방법 블로그 참고: [Clone DB & DB Link를 이용한 데이터 복구 (1)](https://blog.naver.com/ricky63/223525948222)
+- Clone DB 생성 방법 블로그 참고: [Clone DB & DB Link를 이용한 데이터 복구 (1)](/categories/database/oracle/backup_restore/Database-Oracle-CloneDB-Recovery-1/)
 - 이 문서는 Clone DB 생성 이후, DB Link를 활용한 데이터 복구 실전 예시를 다룹니다.
 
 ---
@@ -118,5 +118,3 @@ SQL> select * from hm_test.test;
 ```
 
 ---
-
-> 이로써 Clone DB와 DB Link를 활용한 데이터 복구가 완료됩니다. 추가적인 DB Link 활용법은 별도 포스트에서 다룹니다. 

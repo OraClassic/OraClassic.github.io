@@ -131,3 +131,4 @@ SQL> select * from hm_test.test;
 ---
 
 > DB Link를 활용한 복구 및 추가적인 활용법은 별도 포스트에서 다룹니다. 
+> DB Link 2편 매뉴얼 참고: [DB Link 매뉴얼](/categories/database/oracle/backup_restore/Database-Oracle-CloneDB-Recovery-2/)
