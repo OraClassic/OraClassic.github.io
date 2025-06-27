@@ -1,6 +1,6 @@
 ---
-title: "Oracle Clone DB를 활용한 시점 복구 매뉴얼"
-date: 2025-06-16
+title: "Oracle Clone DB를 활용한 시점 복구 매뉴얼 1편"
+date: 2025-06-17
 categories: ["Categories","Database", "Oracle", "Backup_restore"]
 taxonomy: Backup_restore
 ---
