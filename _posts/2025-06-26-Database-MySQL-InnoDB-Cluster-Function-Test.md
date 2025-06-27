@@ -1,5 +1,5 @@
 ---
-title: "Install MySQL InnoDB Cluster 기능 테스트"
+title: "MySQL InnoDB Cluster Function Test"
 categories: ["Categories","Database", "MySQL", "Install"]
 taxonomy: MySQL_Install
 date: 2025-06-26

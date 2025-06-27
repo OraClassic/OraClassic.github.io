@@ -1,3 +1,10 @@
+---
+title: "Install MySQL InnoDB Cluster"
+categories: ["Categories","Database", "MySQL", "Install"]
+taxonomy: MySQL_Install
+date: 2025-06-26
+---
+
 > **MySQL InnoDB Cluster는 MySQL의 고가용성(HA) 및 확장성을 위한 공식 솔루션으로, Group Replication과 MySQL Router를 활용해 장애 자동 복구, 확장, 운영 자동화를 제공합니다. 본 포스트는 실전 구축, 설정, 장애/복구, 라우터 다중화 등 모든 주요 작업을 실제 예시와 함께 상세하게 정리합니다.**
 
 ---
