@@ -109,7 +109,44 @@ gpgcheck = 1
 ```
 
 ### 5-2. 상급 노하우가 겸비된 my.cnf 설정
-**참고:** 아래 블로그의 my.cnf 설정을 참고하여 설정
+**참고:** 아래 내용을 my.cnf 설정을 참고하여 설정
+```bash
+[client]
+
+port = 8306
+
+socket = /tmp/mysql.sock
+
+#default-character-set = utf8mb4
+
+[mysqld]
+
+##### Default
+
+user = mysql
+
+port = 8306
+
+socket = /tmp/mysql.sock
+
+#unix_socket=OFF
+
+default_authentication_plugin=mysql_native_password
+
+pid-file = /DATA/DATA/db.pid # replace hostname.pid
+
+​
+
+##proxy
+
+proxy_protocol_networks=*
+
+​
+
+datadir = /DATA/DATA
+
+tmpdir = /DATA/tmpdir
+```
 - datadir, socket 경로가 /var/lib/mysql이 아니라는 점만 주의
 - 상세한 설정은 [밀레니엄 DB 기술집 블로그](https://blog.naver.com/ricky63/223531366389) 참고
 
