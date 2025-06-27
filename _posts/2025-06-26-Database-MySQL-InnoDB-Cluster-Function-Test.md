@@ -5,6 +5,8 @@ taxonomy: MySQL_Install
 date: 2025-06-26
 ---
 
+> **이 포스트는 MySQL InnoDB Cluster 환경에서 장애, 복구, Primary 전환, 멤버 관리, 라우터 다중화 등 실제 운영에서 반드시 알아야 할 모든 기능 테스트와 실전 운영 예시를 상세하게 다룹니다.**
+
 # 1. InnoDB Cluster 구성 변경 및 작업
 
 ## 클러스터 상태 조회
