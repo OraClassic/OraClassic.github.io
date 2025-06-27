@@ -343,3 +343,11 @@ td code {
 .highlight .nx {  /* 이름 기타 */
   color: #24292e !important;
 }
+
+/* 아카이브/카테고리 리스트 제목 한 줄 처리 */
+.archive__item-title {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
