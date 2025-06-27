@@ -115,7 +115,7 @@ SQL> select * from hm_test.test;
 ```
 
 - SCN 번호를 모르면 Flashback Version Query로 SCN을 확인해야 함
-- 자세한 내용은 [Oracle Flashback 복구 매뉴얼 1편](/2025-06-17-Database-Oracle-Flashback-Recovery-1/) 참고
+- 자세한 내용은 [Oracle Flashback 복구 매뉴얼 1편](/categories/database/oracle/backup_restore/Database-Oracle-Flashback-Recovery-1/) 참고
 
 ### 5-2. Timestamp 방식
 ```sql
