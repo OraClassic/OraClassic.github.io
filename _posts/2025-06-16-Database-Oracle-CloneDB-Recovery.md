@@ -1,6 +1,6 @@
 ---
 title: "Oracle Clone DB를 활용한 시점 복구 매뉴얼"
-date: 2025-06-17
+date: 2025-06-16
 categories: ["Categories","Database", "Oracle", "Backup_restore"]
 taxonomy: Backup_restore
 ---
@@ -42,7 +42,7 @@ SQL> select * from hm_test.test;
 ## 3. Hot Backup 및 아카이브 로그 생성
 
 ### 3-1. Hot Backup 진행 (어떤 백업이든 상관 없음)
-> Hot Backup 매뉴얼 참고: [Oracle Hot Backup 매뉴얼](/categories/database/oracle/backup_restore/2025-06-16-Database-Oracle-HotBackup/)
+> Hot Backup 매뉴얼 참고: [Oracle Hot Backup 매뉴얼](/categories/database/oracle/backup_restore/Database-Oracle-HotBackup/)
 
 ### 3-2. 아카이브 로그 발생
 ```sql
